@@ -1,6 +1,6 @@
 # Site wide configuration
 
-title:            Site Title
+title:            Charlie Gerard
 locale:           en_US
 url:
 
@@ -26,7 +26,7 @@ kramdown:
 
 # Site owner
 owner:
-  name: Your Name
+  name: Charlie Gerard
   avatar: bio-photo.jpg
   bio: "Describe your self."
   email:
