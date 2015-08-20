@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://charliegerard.github.iohttp://charliegerard.github.io/Hello-World/</loc>
+    <loc>http://charliegerard.github.iohttp://charliegerard.github.io/blog/Hello-World/</loc>
     <lastmod>2014-03-03T00:00:00+11:00</lastmod>
   </url>
   <url>
-    <loc>http://charliegerard.github.iohttp://charliegerard.github.io/404.html</loc>
+    <loc>http://charliegerard.github.iohttp://charliegerard.github.io/blog/404.html</loc>
   </url>
   <url>
-    <loc>http://charliegerard.github.iohttp://charliegerard.github.io/about/</loc>
+    <loc>http://charliegerard.github.iohttp://charliegerard.github.io/blog/about/</loc>
   </url>
   <url>
-    <loc>http://charliegerard.github.iohttp://charliegerard.github.io/</loc>
+    <loc>http://charliegerard.github.iohttp://charliegerard.github.io/blog/</loc>
   </url>
 </urlset>

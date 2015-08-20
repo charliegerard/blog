@@ -10,7 +10,7 @@
         <title>You&#39;re up and running!</title>
         <description>&lt;p&gt;Next you can update your site name, avatar and other options using the _config.yml file in the root of your repository (shown below).&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;http://charliegerard.github.io/images/config.png&quot; alt=&quot;_config.yml&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;http://charliegerard.github.io/blog/images/config.png&quot; alt=&quot;_config.yml&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;The easiest way to make your first post is to edit this one. Go into /_posts/ and update the Hello World markdown file. For more instructions head over to the &lt;a href=&quot;https://github.com/barryclark/jekyll-now&quot;&gt;Jekyll Now repository&lt;/a&gt; on GitHub.&lt;/p&gt;
 </description>
