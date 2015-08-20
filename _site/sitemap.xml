@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://charliegerard.github.iohttp://charliegerard.github.io/blog/Test/</loc>
+    <loc>/Test/</loc>
     <lastmod>2015-08-20T00:00:00+10:00</lastmod>
   </url>
   <url>
-    <loc>http://charliegerard.github.iohttp://charliegerard.github.io/blog/Hello-World/</loc>
+    <loc>/Hello-World/</loc>
     <lastmod>2014-03-03T00:00:00+11:00</lastmod>
   </url>
   <url>
-    <loc>http://charliegerard.github.iohttp://charliegerard.github.io/blog/404.html</loc>
+    <loc>/</loc>
+    <lastmod>2015-08-21T07:31:55+10:00</lastmod>
   </url>
   <url>
-    <loc>http://charliegerard.github.iohttp://charliegerard.github.io/blog/about/</loc>
+    <loc>/theme-setup/</loc>
+    <lastmod>2015-08-21T07:31:55+10:00</lastmod>
   </url>
   <url>
-    <loc>http://charliegerard.github.iohttp://charliegerard.github.io/blog/</loc>
+    <loc>/posts/</loc>
+    <lastmod>2015-08-21T07:31:55+10:00</lastmod>
+  </url>
+  <url>
+    <loc>/about/</loc>
+    <lastmod>2015-08-21T07:31:55+10:00</lastmod>
   </url>
 </urlset>
