@@ -1,7 +1,7 @@
 ---
 layout: page
-title: About the Theme
-tags: [about, Jekyll, theme, responsive]
+title: About Me
+tags: [about, charlie gerard]
 modified: 2014-08-08T20:53:07.573882-04:00
 comments: true
 image:
@@ -10,16 +10,9 @@ image:
   creditlink: http://wegraphics.net/downloads/free-ultimate-blurred-background-pack/
 ---
 
-Minimal Mistakes is responsive Jekyll theme with large featured images and solid typography. As the name implies the styling is fairly minimal to make it easier for you to build on top of.
+Hey I'm Charlie, currently Software Developer @ ThoughtWorks in Sydney.
+I am passionate about Creative Technologies, Creative Coding, Hardware and IoT.
 
-## Minimal Mistakes is all about:
+When I'm not coding for a client's project, I am mentoring at General Assembly, building projects using Arduino and other devices, writing tutorials to share what I learn or reading news.
 
-* Responsive templates. Looking good on mobile, tablet, and desktop.
-* Gracefully degrading in older browsers. Compatible with Internet Explorer 8+ and all modern browsers.
-* Minimal embellishments -- content first.
-* Optional large feature images for posts and pages.
-* Simple and clear permalink structure.
-* [Custom 404 page](http://mmistakes.github.io/minimal-mistakes/404.html) to get you started.
-* Support for Disqus Comments
-
-<a markdown="0" href="{{ site.url }}/theme-setup" class="btn">Install Minimal Mistakes Theme</a>
+You can also check my <a href="http://charliegerard.github.io">portfolio</a> if you'd like to know more about me :).
