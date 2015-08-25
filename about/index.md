@@ -15,4 +15,4 @@ I am passionate about Creative Technologies, Creative Coding, Hardware and IoT.
 
 When I'm not coding for a client's project, I am mentoring at General Assembly, building projects using Arduino and other devices, writing tutorials to share what I learn or reading news.
 
-You can also check my <a href="http://charliegerard.github.io">portfolio</a> if you'd like to know more about me :).
+You can also check my <a href="http://charliegerard.github.io" target="blank">portfolio</a> if you'd like to know more about me :).
