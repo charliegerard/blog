@@ -1,13 +1,10 @@
 {
-  "name": "minimal-mistakes-theme",
-  "author": "Michael Rose <michael@mademistakes.com>",
-  "homepage": "http://mmistakes.github.io/minimal-mistakes/",
+  "name": "Charlie Gerard's Blog",
+  "author": "Charlie Gerard <charlie.a.gerard@gmail.com>",
+  "homepage": "http://charliegerard.github.io/blog",
   "repository": {
     "type": "git",
-    "url": "git://github.com/mmistakes/minimal-mistakes.git"
-  },
-  "bugs": {
-    "url": "https://github.com/mmistakes/minimal-mistakes/issues"
+    "url": "git://github.com/charliegerard/blog.git"
   },
   "engines": {
     "node": ">= 0.10.0"
