@@ -12,7 +12,7 @@ markdown:    kramdown
 highlighter: pygments
 sass:
   sass_dir: _sass
-  style: compressed
+  # style: compressed
 gems:
   - jekyll-sitemap
 
