@@ -4,7 +4,7 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://charliegerard.github.io/blog/feed.xml" />
 <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog" />
-<updated>2015-09-06T19:09:57+10:00</updated>
+<updated>2015-09-15T19:59:08+10:00</updated>
 <id>http://charliegerard.github.io/blog/</id>
 <author>
   <name>Charlie Gerard</name>
@@ -17,14 +17,14 @@
 
 <entry>
   <title type="html"><![CDATA[Controlling the Sphero using the Leap Motion]]></title>
-  <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Test/" />
-  <id>http://charliegerard.github.io/blog/Test</id>
+  <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Controlling-Sphero-Leap-Motion/" />
+  <id>http://charliegerard.github.io/blog/Controlling-Sphero-Leap-Motion</id>
   <published>2015-08-20T00:00:00+10:00</published>
   <updated>2015-08-20T00:00:00+10:00</updated>
   <author>
-    <name>Charlie Gerard</name>
+    <name></name>
     <uri>http://charliegerard.github.io/blog</uri>
-    <email>charlie.a.gerard@gmail.com</email>
+    
   </author>
   <content type="html">
     &lt;p&gt;&lt;a href=&quot;https://charliegerard.files.wordpress.com/2015/01/cylonjs-sphero.png&quot;&gt;&lt;img class=&quot;aligncenter size-large wp-image-61&quot; src=&quot;https://charliegerard.files.wordpress.com/2015/01/cylonjs-sphero.png?w=660&quot; alt=&quot;cylonjs-sphero-leap-motion&quot; width=&quot;660&quot; height=&quot;152&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
@@ -53,31 +53,32 @@
 
 &lt;p&gt;To start using Cylon, you need to require it and specify which devices you are working with.&lt;/p&gt;
 
-&lt;p&gt;```
-var Cylon = require(‘cylon’);&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;code&quot;&gt;
+var Cylon = require(&#39;cylon&#39;);
 
-&lt;p&gt;Cylon.robot({
+Cylon.robot({
   connections: {
-    leapmotion: {adaptor: ‘leapmotion’},
-    sphero: {adaptor: ‘sphero’, port: ‘/dev/rfcomm0’}
-  },&lt;/p&gt;
+    leapmotion: {adaptor: &#39;leapmotion&#39;},
+    sphero: {adaptor: &#39;sphero&#39;, port: &#39;/dev/rfcomm0&#39;}
+  },
 
-&lt;p&gt;devices: {
-    leapmotion: {driver: ‘leapmotion’, connection: ‘leapmotion’},
-    sphero: {driver: ‘sphero’, connection: ‘sphero’}
-  },&lt;/p&gt;
+  devices: {
+    leapmotion: {driver: &#39;leapmotion&#39;, connection: &#39;leapmotion&#39;},
+    sphero: {driver: &#39;sphero&#39;, connection: &#39;sphero&#39;}
+  },
 
-&lt;p&gt;work: function(f){
+  work: function(f){
   }
 }).start();
-```&lt;/p&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;At the moment, this code is not really doing anything but you can see how to specify which devices you are going to use.&lt;/p&gt;
 
 &lt;p&gt;You have to specify a port for the Sphero because it connects to your computer via Bluetooth. To find the port for your own Sphero, run ‘ls /dev/tty.Sphero*’ in your console and replace the port in this code with the result you get.&lt;/p&gt;
 
 &lt;p&gt;The rest of the code goes inside the ‘work’ function as below:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;```
+&lt;pre&gt;&lt;code class=&quot;code&quot;&gt;
 work: function(my){
   my.leapmotion.on(&#39;frame&#39;, function(frame){
    if(frame.valid &amp;amp;&amp;amp; frame.gestures.length &amp;gt; 0{
@@ -85,15 +86,14 @@ work: function(my){
    }
   }
 }
-
- ``` &lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The code above makes the Sphero go forward if the Leap Motion detects any kind of gesture.&lt;/p&gt;
 
 &lt;p&gt;For the full code, have a look at &lt;a href=&quot;https://github.com/charliegerard/cylon-projects/tree/master/cylon-leapmotion-sphero&quot; target=&quot;_blank&quot;&gt;my github repo&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;I’ll probably write another tutorial soon once I have a chance to rewrite another project but in the meantime let me know if you have any question!&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;http://charliegerard.github.io/blog/Test/&quot;&gt;Controlling the Sphero using the Leap Motion&lt;/a&gt; was originally published by Charlie Gerard at &lt;a href=&quot;http://charliegerard.github.io/blog&quot;&gt;Charlie Gerard&lt;/a&gt; on August 20, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;http://charliegerard.github.io/blog/Controlling-Sphero-Leap-Motion/&quot;&gt;Controlling the Sphero using the Leap Motion&lt;/a&gt; was originally published by Charlie Gerard at &lt;a href=&quot;http://charliegerard.github.io/blog&quot;&gt;Charlie Gerard&lt;/a&gt; on August 20, 2015.&lt;/p&gt;
   </content>
 </entry>
 
