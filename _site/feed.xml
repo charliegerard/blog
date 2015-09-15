@@ -4,13 +4,101 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://charliegerard.github.io/blog/feed.xml" />
 <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog" />
-<updated>2015-09-15T20:08:37+10:00</updated>
+<updated>2015-09-16T09:20:17+10:00</updated>
 <id>http://charliegerard.github.io/blog/</id>
 <author>
   <name>Charlie Gerard</name>
   <uri>http://charliegerard.github.io/blog/</uri>
   <email>charlie.a.gerard@gmail.com</email>
 </author>
+
+
+  
+
+<entry>
+  <title type="html"><![CDATA[Controlling the Parrot AR Drone with the Leap Motion in Cylon.js]]></title>
+  <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/" />
+  <id>http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon</id>
+  <published>2015-09-16T00:00:00+10:00</published>
+  <updated>2015-09-16T00:00:00+10:00</updated>
+  <author>
+    <name></name>
+    <uri>http://charliegerard.github.io/blog</uri>
+    
+  </author>
+  <content type="html">
+    &lt;p&gt;&lt;a href=&quot;https://charliegerard.files.wordpress.com/2015/01/cylonjs-drone-leapmotion.png&quot;&gt;&lt;img class=&quot;aligncenter size-large wp-image-85&quot; src=&quot;https://charliegerard.files.wordpress.com/2015/01/cylonjs-drone-leapmotion.png?w=660&quot; alt=&quot;cylon-drone-leapmotion&quot; width=&quot;660&quot; height=&quot;152&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Following my tutorial on &lt;a href=&quot;https://charliegerard.wordpress.com/2015/01/12/sphero-leap-motion-cylon-js/&quot; target=&quot;_blank&quot;&gt;controlling the Sphero using the Leap Motion&lt;/a&gt;, I thought I would keep on converting my Node.js projects to Cylon.js and work on controlling the Drone with the Leap Motion.&lt;/p&gt;
+
+&lt;p&gt;If you’ve had a look at my last tutorial, you probably noticed that using Cylon.js makes it really easy to program for hardware and connect multiple devices together.&lt;/p&gt;
+
+&lt;p&gt;Below is the usual setup of any Cylon project:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+var Cylon = require(&#39;cylon&#39;);
+
+Cylon.robot({
+  connections:{
+    leapmotion: {adaptor: &#39;leapmotion&#39;},
+    ardrone: {adaptor: &#39;ardrone&#39;, port: &#39;192.168.1.1&#39;}
+  },
+
+  devices: {
+    leapmotion: {driver: &#39;leapmotion&#39;, connection: &#39;leapmotion&#39;},
+    drone: {driver: &#39;ardrone&#39;, connection: &#39;ardrone&#39;}
+  },
+ &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As you can see, you simply need to specify which devices you are using, the more interesting bit comes in the rest of the code…&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;work: function(my){
+   my.leapmotion.on(&#39;hand&#39;, function(hand){
+     my.drone.takeoff();
+     after((5).seconds(), function(){
+       my.drone.land();
+     })
+   })
+ }
+}).start();&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This code only makes the Drone take off when the Leap Motion senses a hand over it and land after 5 seconds (just in case it decides to go crazy…).&lt;/p&gt;
+
+&lt;p&gt;Then, if you want to make it do more interesting things, you will have to play around with what the Leap Motion has to offer; different types of gestures, distance, hands, fingers, etc… The Drone actions themselves are pretty straightforward:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;my.drone.up();&lt;/li&gt;
+  &lt;li&gt;my.drone.down();&lt;/li&gt;
+  &lt;li&gt;my.drone.forward();&lt;/li&gt;
+  &lt;li&gt;my.drone.back();&lt;/li&gt;
+  &lt;li&gt;my.drone.left();&lt;/li&gt;
+  &lt;li&gt;my.drone.right();&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can also make the drone rotate clockwise or counterclockwise but what I found the most awesome thing is that the cylon-ardrone module makes the ‘flip’ movement really easy to execute. On a ‘keyTap’ for example, your drone could do a backflip!!&lt;/p&gt;
+
+&lt;p&gt;The code for that would look like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; work: function(my){
+   my.leapmotion.on(&#39;gesture&#39;, function(gesture){
+     if(gesture){
+       my.drone.takeoff();
+       if(gesture.type === &#39;keyTap&#39;){
+         my.drone.backFlip();
+         after((6).seconds(), function(){
+          my.drone.land();
+         }
+       }
+     } else {
+       my.drone.stop();
+     };
+   };
+ }
+}).start();&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you wanna see the difference with Node.js, you can find my original Github repo &lt;a href=&quot;https://github.com/charliegerard/leap_drone&quot; target=&quot;_blank&quot;&gt;here&lt;/a&gt;, otherwise &lt;a href=&quot;https://github.com/charliegerard/cylon-projects/tree/master/cylon-drone-leapmotion&quot; target=&quot;_blank&quot;&gt;here is the repo&lt;/a&gt; with more commands!&lt;/p&gt;
+
+&lt;p&gt;If you have any question, don’t hesitate!&lt;/p&gt;
+
+    &lt;p&gt;&lt;a href=&quot;http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/&quot;&gt;Controlling the Parrot AR Drone with the Leap Motion in Cylon.js&lt;/a&gt; was originally published by Charlie Gerard at &lt;a href=&quot;http://charliegerard.github.io/blog&quot;&gt;Charlie Gerard&lt;/a&gt; on September 16, 2015.&lt;/p&gt;
+  </content>
+</entry>
 
 
   

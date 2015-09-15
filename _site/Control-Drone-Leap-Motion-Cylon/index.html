@@ -5,23 +5,17 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Setting up new blog &#8211; Charlie Gerard</title>
-<meta name="description" content="Recently decided to migrate my blog from Wordpress to Github pages using Jekyll.
-I’m not sure when it will be finished but hopefully soon!
-
-">
+<title>Controlling the Parrot AR Drone with the Leap Motion in Cylon.js &#8211; Charlie Gerard</title>
+<meta name="description" content="A tutorial to learn how to program the Leap Motion to control the Parrot AR Drone using Cylon.js">
 <meta name="keywords" content="">
 
-
+  
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="Setting up new blog">
-<meta name="twitter:description" content="Recently decided to migrate my blog from Wordpress to Github pages using Jekyll.
-I’m not sure when it will be finished but hopefully soon!
-
-">
+<meta name="twitter:title" content="Controlling the Parrot AR Drone with the Leap Motion in Cylon.js">
+<meta name="twitter:description" content="A tutorial to learn how to program the Leap Motion to control the Parrot AR Drone using Cylon.js">
 <meta name="twitter:site" content="@charlie__gerard">
-<meta name="twitter:creator" content="@charlie__gerard">
+
 
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://charliegerard.github.io/blog/images/default-thumb.png">
@@ -29,12 +23,9 @@ I’m not sure when it will be finished but hopefully soon!
 <!-- Open Graph -->
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Setting up new blog">
-<meta property="og:description" content="Recently decided to migrate my blog from Wordpress to Github pages using Jekyll.
-I’m not sure when it will be finished but hopefully soon!
-
-">
-<meta property="og:url" content="http://charliegerard.github.io/blog/Hello-World/">
+<meta property="og:title" content="Controlling the Parrot AR Drone with the Leap Motion in Cylon.js">
+<meta property="og:description" content="A tutorial to learn how to program the Leap Motion to control the Parrot AR Drone using Cylon.js">
+<meta property="og:url" content="http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/">
 <meta property="og:site_name" content="Charlie Gerard">
 
 <meta property="og:image" content="http://charliegerard.github.io/blog/images/default-thumb.png">
@@ -44,7 +35,7 @@ I’m not sure when it will be finished but hopefully soon!
 
 
 
-<link rel="canonical" href="http://charliegerard.github.io/blog/Hello-World/">
+<link rel="canonical" href="http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/">
 <link href="http://charliegerard.github.io/blog/feed.xml" type="application/atom+xml" rel="alternate" title="Charlie Gerard Feed">
 
 <!-- http://t.co/dKP3o1e -->
@@ -116,25 +107,25 @@ I’m not sure when it will be finished but hopefully soon!
 <div id="main" role="main">
   <div class="article-author-side">
     
-
+  
 
 <div itemscope itemtype="http://schema.org/Person">
 
 
-	<img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/4/005/048/342/17f9554.jpg" class="bio-photo" alt="Charlie Gerard bio photo">
+	<img src="http://charliegerard.github.io/blog/images/" class="bio-photo" alt=" bio photo">
 
 
-  <h3 itemprop="name">Charlie Gerard</h3>
-  <p>Software Developer @ ThoughtWorks. Passionate about Innovations, Creative Coding and Hardware.</p>
-  <a href="mailto:charlie.a.gerard@gmail.com" class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
-  <a href="http://twitter.com/charlie__gerard" class="author-social" target="_blank"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a>
+  <h3 itemprop="name"></h3>
+  <p></p>
   
   
   
   
   
   
-  <a href="http://github.com/charliegerard" class="author-social" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+  
+  
+  
   
   
   
@@ -152,12 +143,78 @@ I’m not sure when it will be finished but hopefully soon!
   <article class="post">
     <div class="headline-wrap">
       
-        <h1><a href="http://charliegerard.github.io/blog/Hello-World/" rel="bookmark" title="Setting up new blog">Setting up new blog</a></h1>
+        <h1><a href="http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/" rel="bookmark" title="Controlling the Parrot AR Drone with the Leap Motion in Cylon.js">Controlling the Parrot AR Drone with the Leap Motion in Cylon.js</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <p>Recently decided to migrate my blog from Wordpress to Github pages using Jekyll.
-I’m not sure when it will be finished but hopefully soon!</p>
+      <p><a href="https://charliegerard.files.wordpress.com/2015/01/cylonjs-drone-leapmotion.png"><img class="aligncenter size-large wp-image-85" src="https://charliegerard.files.wordpress.com/2015/01/cylonjs-drone-leapmotion.png?w=660" alt="cylon-drone-leapmotion" width="660" height="152" /></a></p>
+
+<p>Following my tutorial on <a href="https://charliegerard.wordpress.com/2015/01/12/sphero-leap-motion-cylon-js/" target="_blank">controlling the Sphero using the Leap Motion</a>, I thought I would keep on converting my Node.js projects to Cylon.js and work on controlling the Drone with the Leap Motion.</p>
+
+<p>If you’ve had a look at my last tutorial, you probably noticed that using Cylon.js makes it really easy to program for hardware and connect multiple devices together.</p>
+
+<p>Below is the usual setup of any Cylon project:</p>
+
+<pre><code>
+var Cylon = require('cylon');
+
+Cylon.robot({
+  connections:{
+    leapmotion: {adaptor: 'leapmotion'},
+    ardrone: {adaptor: 'ardrone', port: '192.168.1.1'}
+  },
+
+  devices: {
+    leapmotion: {driver: 'leapmotion', connection: 'leapmotion'},
+    drone: {driver: 'ardrone', connection: 'ardrone'}
+  },
+ </code></pre>
+<p>As you can see, you simply need to specify which devices you are using, the more interesting bit comes in the rest of the code…</p>
+<pre><code>work: function(my){
+   my.leapmotion.on('hand', function(hand){
+     my.drone.takeoff();
+     after((5).seconds(), function(){
+       my.drone.land();
+     })
+   })
+ }
+}).start();</code></pre>
+
+<p>This code only makes the Drone take off when the Leap Motion senses a hand over it and land after 5 seconds (just in case it decides to go crazy…).</p>
+
+<p>Then, if you want to make it do more interesting things, you will have to play around with what the Leap Motion has to offer; different types of gestures, distance, hands, fingers, etc… The Drone actions themselves are pretty straightforward:</p>
+<ul>
+  <li>my.drone.up();</li>
+  <li>my.drone.down();</li>
+  <li>my.drone.forward();</li>
+  <li>my.drone.back();</li>
+  <li>my.drone.left();</li>
+  <li>my.drone.right();</li>
+</ul>
+<p>You can also make the drone rotate clockwise or counterclockwise but what I found the most awesome thing is that the cylon-ardrone module makes the ‘flip’ movement really easy to execute. On a ‘keyTap’ for example, your drone could do a backflip!!</p>
+
+<p>The code for that would look like this:</p>
+
+<pre><code> work: function(my){
+   my.leapmotion.on('gesture', function(gesture){
+     if(gesture){
+       my.drone.takeoff();
+       if(gesture.type === 'keyTap'){
+         my.drone.backFlip();
+         after((6).seconds(), function(){
+          my.drone.land();
+         }
+       }
+     } else {
+       my.drone.stop();
+     };
+   };
+ }
+}).start();</code></pre>
+
+<p>If you wanna see the difference with Node.js, you can find my original Github repo <a href="https://github.com/charliegerard/leap_drone" target="_blank">here</a>, otherwise <a href="https://github.com/charliegerard/cylon-projects/tree/master/cylon-drone-leapmotion" target="_blank">here is the repo</a> with more commands!</p>
+
+<p>If you have any question, don’t hesitate!</p>
 
       <hr />
       <footer role="contentinfo">
@@ -165,17 +222,17 @@ I’m not sure when it will be finished but hopefully soon!</p>
   <h4>Share on</h4>
   <ul>
     <li>
-      <a href="https://twitter.com/intent/tweet?text=http://charliegerard.github.io/blog/Hello-World/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+      <a href="https://twitter.com/intent/tweet?text=http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
     </li>
     <li>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=http://charliegerard.github.io/blog/Hello-World/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
     </li>
     <li>
-      <a href="https://plus.google.com/share?url=http://charliegerard.github.io/blog/Hello-World/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+      <a href="https://plus.google.com/share?url=http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
     </li>
   </ul>
 </div><!-- /.social-share -->
-        <p class="byline"><strong>Setting up new blog</strong> was published on <time datetime="2014-03-03T00:00:00+11:00">March 03, 2014</time>.</p>
+        <p class="byline"><strong>Controlling the Parrot AR Drone with the Leap Motion in Cylon.js</strong> was published on <time datetime="2015-09-16T00:00:00+10:00">September 16, 2015</time>.</p>
       </footer>
     </div><!-- /.article-wrap -->
   
@@ -188,11 +245,11 @@ I’m not sure when it will be finished but hopefully soon!</p>
   <h4>You might also enjoy <small class="pull-right">(<a href="http://charliegerard.github.io/blog/posts/">View all posts</a>)</small></h4>
     <ul>
     
-      <li><a href="http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/" title="Controlling the Parrot AR Drone with the Leap Motion in Cylon.js">Controlling the Parrot AR Drone with the Leap Motion in Cylon.js</a></li>
-    
       <li><a href="http://charliegerard.github.io/blog/Control-Sphero-Leap-Motion-Cylon/" title="Controlling the Sphero using the Leap Motion in Cylon.js">Controlling the Sphero using the Leap Motion in Cylon.js</a></li>
     
       <li><a href="http://charliegerard.github.io/blog/Controlling-Sphero-Leap-Motion/" title="Controlling the Sphero using the Leap Motion">Controlling the Sphero using the Leap Motion</a></li>
+    
+      <li><a href="http://charliegerard.github.io/blog/Hello-World/" title="Setting up new blog">Setting up new blog</a></li>
     
     </ul>
     <hr />
