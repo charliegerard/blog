@@ -5,15 +5,15 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Controlling the Parrot AR Drone with the Leap Motion in Cylon.js &#8211; Charlie Gerard</title>
-<meta name="description" content="A tutorial to learn how to program the Leap Motion to control the Parrot AR Drone using Cylon.js">
+<title>Controlling the Parrot AR Drone with the Myo Armband in Node.js &#8211; Charlie Gerard</title>
+<meta name="description" content="A tutorial to learn how to program the Myo armband to control the Parrot AR Drone using Node.js">
 <meta name="keywords" content="">
 
   
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="Controlling the Parrot AR Drone with the Leap Motion in Cylon.js">
-<meta name="twitter:description" content="A tutorial to learn how to program the Leap Motion to control the Parrot AR Drone using Cylon.js">
+<meta name="twitter:title" content="Controlling the Parrot AR Drone with the Myo Armband in Node.js">
+<meta name="twitter:description" content="A tutorial to learn how to program the Myo armband to control the Parrot AR Drone using Node.js">
 <meta name="twitter:site" content="@charlie__gerard">
 
 
@@ -23,9 +23,9 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Controlling the Parrot AR Drone with the Leap Motion in Cylon.js">
-<meta property="og:description" content="A tutorial to learn how to program the Leap Motion to control the Parrot AR Drone using Cylon.js">
-<meta property="og:url" content="http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/">
+<meta property="og:title" content="Controlling the Parrot AR Drone with the Myo Armband in Node.js">
+<meta property="og:description" content="A tutorial to learn how to program the Myo armband to control the Parrot AR Drone using Node.js">
+<meta property="og:url" content="http://charliegerard.github.io/blog/Control-Drone-Myo-Node/">
 <meta property="og:site_name" content="Charlie Gerard">
 
 <meta property="og:image" content="http://charliegerard.github.io/blog/images/default-thumb.png">
@@ -35,7 +35,7 @@
 
 
 
-<link rel="canonical" href="http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/">
+<link rel="canonical" href="http://charliegerard.github.io/blog/Control-Drone-Myo-Node/">
 <link href="http://charliegerard.github.io/blog/feed.xml" type="application/atom+xml" rel="alternate" title="Charlie Gerard Feed">
 
 <!-- http://t.co/dKP3o1e -->
@@ -143,78 +143,94 @@
   <article class="post">
     <div class="headline-wrap">
       
-        <h1><a href="http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/" rel="bookmark" title="Controlling the Parrot AR Drone with the Leap Motion in Cylon.js">Controlling the Parrot AR Drone with the Leap Motion in Cylon.js</a></h1>
+        <h1><a href="http://charliegerard.github.io/blog/Control-Drone-Myo-Node/" rel="bookmark" title="Controlling the Parrot AR Drone with the Myo Armband in Node.js">Controlling the Parrot AR Drone with the Myo Armband in Node.js</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <p><a href="https://charliegerard.files.wordpress.com/2015/01/cylonjs-drone-leapmotion.png"><img class="aligncenter size-large wp-image-85" src="https://charliegerard.files.wordpress.com/2015/01/cylonjs-drone-leapmotion.png?w=660" alt="cylon-drone-leapmotion" width="660" height="152" /></a></p>
+      <p><a href="https://charliegerard.files.wordpress.com/2015/02/myo-drone-node.png"><img class="aligncenter size-full wp-image-136" src="https://charliegerard.files.wordpress.com/2015/02/myo-drone-node.png" alt="myo-drone-nodjs-tutorial" width="660" height="152" /></a></p>
 
-<p>Following my tutorial on <a href="https://charliegerard.wordpress.com/2015/01/12/sphero-leap-motion-cylon-js/" target="_blank">controlling the Sphero using the Leap Motion</a>, I thought I would keep on converting my Node.js projects to Cylon.js and work on controlling the Drone with the Leap Motion.</p>
+<p>Following the last tutorial I wrote on how to control the <a href="http://www.gosphero.com/" target="_blank">Sphero</a> with the <a href="https://www.thalmic.com/en/myo/" target="_blank">Myo armband</a>, here is another one on how to control the <a href="http://ardrone2.parrot.com/" target="_blank">Parrot AR Drone</a> with the Myo using Node.js.</p>
 
-<p>If you’ve had a look at my last tutorial, you probably noticed that using Cylon.js makes it really easy to program for hardware and connect multiple devices together.</p>
+<p>If you want to follow along, you can find the <a title="Myo Drone" href="https://github.com/charliegerard/myo_drone" target="_blank">repo on my github</a>.</p>
 
-<p>Below is the usual setup of any Cylon project:</p>
-
+<p>To begin with, we need to setup the server configuration. After requiring the necessary modules, here is what we need to write:</p>
 <pre><code>
-var Cylon = require('cylon');
+  var env = process.env.NODE_ENV || 'development';
+if('development' == env){
+  app.set('port', process.env.PORT || 3000);
+  app.use(express.static(__dirname + '/public'));
+  app.use("/node_modules", express.static(path.join(__dirname, 'node_modules')))
+}
 
-Cylon.robot({
-  connections:{
-    leapmotion: {adaptor: 'leapmotion'},
-    ardrone: {adaptor: 'ardrone', port: '192.168.1.1'}
-  },
+server = require('http').createServer(app);
 
-  devices: {
-    leapmotion: {driver: 'leapmotion', connection: 'leapmotion'},
-    drone: {driver: 'ardrone', connection: 'ardrone'}
-  },
- </code></pre>
-<p>As you can see, you simply need to specify which devices you are using, the more interesting bit comes in the rest of the code…</p>
-<pre><code>work: function(my){
-   my.leapmotion.on('hand', function(hand){
-     my.drone.takeoff();
-     after((5).seconds(), function(){
-       my.drone.land();
-     })
-   })
- }
-}).start();</code></pre>
+var bayeux = new faye.NodeAdapter({
+    mount: '/faye',
+    timeout: 50
+  });
 
-<p>This code only makes the Drone take off when the Leap Motion senses a hand over it and land after 5 seconds (just in case it decides to go crazy…).</p>
+  bayeux.attach(server);
 
-<p>Then, if you want to make it do more interesting things, you will have to play around with what the Leap Motion has to offer; different types of gestures, distance, hands, fingers, etc… The Drone actions themselves are pretty straightforward:</p>
-<ul>
-  <li>my.drone.up();</li>
-  <li>my.drone.down();</li>
-  <li>my.drone.forward();</li>
-  <li>my.drone.back();</li>
-  <li>my.drone.left();</li>
-  <li>my.drone.right();</li>
-</ul>
-<p>You can also make the drone rotate clockwise or counterclockwise but what I found the most awesome thing is that the cylon-ardrone module makes the ‘flip’ movement really easy to execute. On a ‘keyTap’ for example, your drone could do a backflip!!</p>
+  client = new faye.Client("http://localhost:" + (app.get("port")) + "/faye", {});
 
-<p>The code for that would look like this:</p>
+  client.subscribe("/drone/move", function (d) {
+    console.log(d);
+    console.log("drone move?")
+    return drone[d.action](d.speed);
+  });
 
-<pre><code> work: function(my){
-   my.leapmotion.on('gesture', function(gesture){
-     if(gesture){
-       my.drone.takeoff();
-       if(gesture.type === 'keyTap'){
-         my.drone.backFlip();
-         after((6).seconds(), function(){
-          my.drone.land();
-         }
-       }
-     } else {
-       my.drone.stop();
-     };
-   };
- }
-}).start();</code></pre>
+  client.subscribe("/drone/drone", function (d) {
+    console.log(d);
+    console.log("drone stuff")
+      return drone[d.action]();
+  });
 
-<p>If you wanna see the difference with Node.js, you can find my original Github repo <a href="https://github.com/charliegerard/leap_drone" target="_blank">here</a>, otherwise <a href="https://github.com/charliegerard/cylon-projects/tree/master/cylon-drone-leapmotion" target="_blank">here is the repo</a> with more commands!</p>
+  server.listen(app.get('port'), function () {
+    console.log("Express server listening on port " + app.get("port"));
+  })
+</code></pre>
+<p>We use express to set up the server and Faye &amp; Bayeux for the communications between the Drone and your app.</p>
 
-<p>If you have any question, don’t hesitate!</p>
+<p>We also use the module ‘dronestream’ to be able to stream video from the drone to the browser that is listening on port 3001.</p>
+
+<p>The rest of the code deals with the commands sent from the Myo to the drone. First of all, we need to create an instance of the Myo and then define some commands.</p>
+<pre><code>
+  myo = Myo.create();
+
+myo.unlock();
+
+myo.on('fingers_spread', function(){
+    takeoff();
+});
+
+myo.on('wave_in', function(){
+    goLeft();
+})
+
+var takeoff = function () {
+    flying = true;
+    return faye.publish("/drone/drone", {
+      action: 'takeoff'
+    });
+};
+
+var goLeft = function(){
+    stopped = false;
+    setTimeout(function (){
+      return faye.publish("/drone/move", {
+        action: 'left'
+        // speed: adjustXspeed
+      })
+    }, timeout);
+  };
+</code></pre>
+<p>Once the instance of the Myo is created, it can detect certain types of movements and run functions accordingly.</p>
+
+<p>The ‘myo.unlock()’ command should allow the Myo to be unlocked while you use the app. However, I noticed I still needed to execute the unlock gesture ‘double tap’ between each command… Then the ‘faye.publish’ allows to send the commands and make the drone move. You can adjust the action and speed as you like.</p>
+
+<p>This is just a snippet so once again, if you wanna have a look at the rest of the code or if you want to play around with it, everything is available on my <a title="Github repository for Myo Drone" href="https://github.com/charliegerard/myo_drone" target="_blank">Github</a> :)</p>
+
+<p>Hope it helps and enjoy!</p>
 
       <hr />
       <footer role="contentinfo">
@@ -222,17 +238,17 @@ Cylon.robot({
   <h4>Share on</h4>
   <ul>
     <li>
-      <a href="https://twitter.com/intent/tweet?text=http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+      <a href="https://twitter.com/intent/tweet?text=http://charliegerard.github.io/blog/Control-Drone-Myo-Node/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
     </li>
     <li>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://charliegerard.github.io/blog/Control-Drone-Myo-Node/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
     </li>
     <li>
-      <a href="https://plus.google.com/share?url=http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+      <a href="https://plus.google.com/share?url=http://charliegerard.github.io/blog/Control-Drone-Myo-Node/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
     </li>
   </ul>
 </div><!-- /.social-share -->
-        <p class="byline"><strong>Controlling the Parrot AR Drone with the Leap Motion in Cylon.js</strong> was published on <time datetime="2015-09-16T00:00:00+10:00">September 16, 2015</time>.</p>
+        <p class="byline"><strong>Controlling the Parrot AR Drone with the Myo Armband in Node.js</strong> was published on <time datetime="2015-09-17T00:00:00+10:00">September 17, 2015</time>.</p>
       </footer>
     </div><!-- /.article-wrap -->
   
@@ -245,7 +261,7 @@ Cylon.robot({
   <h4>You might also enjoy <small class="pull-right">(<a href="http://charliegerard.github.io/blog/posts/">View all posts</a>)</small></h4>
     <ul>
     
-      <li><a href="http://charliegerard.github.io/blog/Control-Drone-Myo-Node/" title="Controlling the Parrot AR Drone with the Myo Armband in Node.js">Controlling the Parrot AR Drone with the Myo Armband in Node.js</a></li>
+      <li><a href="http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/" title="Controlling the Parrot AR Drone with the Leap Motion in Cylon.js">Controlling the Parrot AR Drone with the Leap Motion in Cylon.js</a></li>
     
       <li><a href="http://charliegerard.github.io/blog/Control-Sphero-Leap-Motion-Cylon/" title="Controlling the Sphero using the Leap Motion in Cylon.js">Controlling the Sphero using the Leap Motion in Cylon.js</a></li>
     
