@@ -5,15 +5,15 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Controlling the Parrot AR Drone with the Myo Armband in Node.js &#8211; Charlie Gerard</title>
-<meta name="description" content="A tutorial to learn how to program the Myo armband to control the Parrot AR Drone using Node.js">
+<title>Control the Sphero with the Myo Armband in Node.js &#8211; Charlie Gerard</title>
+<meta name="description" content="Learn how to program the Myo armband to control the Sphero using Node.js">
 <meta name="keywords" content="">
 
   
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="Controlling the Parrot AR Drone with the Myo Armband in Node.js">
-<meta name="twitter:description" content="A tutorial to learn how to program the Myo armband to control the Parrot AR Drone using Node.js">
+<meta name="twitter:title" content="Control the Sphero with the Myo Armband in Node.js">
+<meta name="twitter:description" content="Learn how to program the Myo armband to control the Sphero using Node.js">
 <meta name="twitter:site" content="@charlie__gerard">
 
 
@@ -23,9 +23,9 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Controlling the Parrot AR Drone with the Myo Armband in Node.js">
-<meta property="og:description" content="A tutorial to learn how to program the Myo armband to control the Parrot AR Drone using Node.js">
-<meta property="og:url" content="http://charliegerard.github.io/blog/Control-Drone-Myo-Node/">
+<meta property="og:title" content="Control the Sphero with the Myo Armband in Node.js">
+<meta property="og:description" content="Learn how to program the Myo armband to control the Sphero using Node.js">
+<meta property="og:url" content="http://charliegerard.github.io/blog/Control-Sphero-Myo-Node/">
 <meta property="og:site_name" content="Charlie Gerard">
 
 <meta property="og:image" content="http://charliegerard.github.io/blog/images/default-thumb.png">
@@ -35,7 +35,7 @@
 
 
 
-<link rel="canonical" href="http://charliegerard.github.io/blog/Control-Drone-Myo-Node/">
+<link rel="canonical" href="http://charliegerard.github.io/blog/Control-Sphero-Myo-Node/">
 <link href="http://charliegerard.github.io/blog/feed.xml" type="application/atom+xml" rel="alternate" title="Charlie Gerard Feed">
 
 <!-- http://t.co/dKP3o1e -->
@@ -143,94 +143,84 @@
   <article class="post">
     <div class="headline-wrap">
       
-        <h1><a href="http://charliegerard.github.io/blog/Control-Drone-Myo-Node/" rel="bookmark" title="Controlling the Parrot AR Drone with the Myo Armband in Node.js">Controlling the Parrot AR Drone with the Myo Armband in Node.js</a></h1>
+        <h1><a href="http://charliegerard.github.io/blog/Control-Sphero-Myo-Node/" rel="bookmark" title="Control the Sphero with the Myo Armband in Node.js">Control the Sphero with the Myo Armband in Node.js</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <p><a href="https://charliegerard.files.wordpress.com/2015/02/myo-drone-node.png"><img class="aligncenter size-full wp-image-136" src="https://charliegerard.files.wordpress.com/2015/02/myo-drone-node.png" alt="myo-drone-nodjs-tutorial" width="660" height="152" /></a></p>
+      <p><a href="https://charliegerard.files.wordpress.com/2015/01/myo-sphero-node.png"><img class="aligncenter size-full wp-image-118" src="https://charliegerard.files.wordpress.com/2015/01/myo-sphero-node.png" alt="myo-sphero-node" width="660" height="152" /></a></p>
 
-<p>Following the last tutorial I wrote on how to control the <a href="http://www.gosphero.com/" target="_blank">Sphero</a> with the <a href="https://www.thalmic.com/en/myo/" target="_blank">Myo armband</a>, here is another one on how to control the <a href="http://ardrone2.parrot.com/" target="_blank">Parrot AR Drone</a> with the Myo using Node.js.</p>
+<p>I received my<strong> <a title="Myo armband" href="https://www.thalmic.com/en/myo/" target="_blank">Myo armband</a></strong> a few months ago and I have been working on a few projects to control my other devices with it. To start with, I thought I would explain how I managed to control the<strong> <a title="Sphero" href="http://www.gosphero.com/" target="_blank">Sphero</a></strong> ball using the movements of my arms and <a title="Node.js" href="http://nodejs.org/" target="_blank"><strong>Node.js</strong></a>.</p>
 
-<p>If you want to follow along, you can find the <a title="Myo Drone" href="https://github.com/charliegerard/myo_drone" target="_blank">repo on my github</a>.</p>
+<p>To follow along, you can view all the code on my <strong><a href="https://github.com/charliegerard/myo_sphero" target="_blank">github repo</a></strong>.</p>
 
-<p>To begin with, we need to setup the server configuration. After requiring the necessary modules, here is what we need to write:</p>
+<p>The setup of the server side is pretty straight-forward, here’s what is in my app.js file:</p>
 <pre><code>
-  var env = process.env.NODE_ENV || 'development';
-if('development' == env){
-  app.set('port', process.env.PORT || 3000);
-  app.use(express.static(__dirname + '/public'));
-  app.use("/node_modules", express.static(path.join(__dirname, 'node_modules')))
-}
+  var express = require('express'),
+    path = require('path');
 
-server = require('http').createServer(app);
+var app = express();
 
-var bayeux = new faye.NodeAdapter({
-    mount: '/faye',
-    timeout: 50
-  });
+var lab = require('./my_modules/myo_sphero');
+lab();
 
-  bayeux.attach(server);
+// app.use(express.static(path.join(__dirname, 'views')));
 
-  client = new faye.Client("http://localhost:" + (app.get("port")) + "/faye", {});
+//.all('*', function(req, res){
+// res.sendfile('views/index.html');
+//});
 
-  client.subscribe("/drone/move", function (d) {
-    console.log(d);
-    console.log("drone move?")
-    return drone[d.action](d.speed);
-  });
+app.listen(3001);
+console.log("Server running on port 3001");
 
-  client.subscribe("/drone/drone", function (d) {
-    console.log(d);
-    console.log("drone stuff")
-      return drone[d.action]();
-  });
-
-  server.listen(app.get('port'), function () {
-    console.log("Express server listening on port " + app.get("port"));
-  })
 </code></pre>
-<p>We use express to set up the server and Faye &amp; Bayeux for the communications between the Drone and your app.</p>
 
-<p>We also use the module ‘dronestream’ to be able to stream video from the drone to the browser that is listening on port 3001.</p>
+<p>As you can see, you start by <strong>requiring ‘express’ and ‘path’</strong> to be able to start your server and serve your different files.</p>
 
-<p>The rest of the code deals with the commands sent from the Myo to the drone. First of all, we need to create an instance of the Myo and then define some commands.</p>
+<p>You then <strong>require the module</strong> you created and you call it so it can be executed when you start your app.</p>
+
+<p>The commented part of the code gives you the ability to serve something in your browser as well by calling the files in your ‘views’ folder but I am not using it at the moment as I just make the connection between the Myo and the Sphero without building anything in the front-end. The first part calls all the files in your folder whereas the second part allows you to serve a single file.</p>
+
+<p>Finally, the app uses the port 3001 that you can check in your browser by visiting http://localhost:3001.</p>
+
+<p>Then, you can write your commands in your module; here’s a snippet of my index.js:</p>
 <pre><code>
+  module.exports = function() {
+
+  var spheron = require('spheron');
+  var myo = require('myo');
+
   myo = Myo.create();
 
-myo.unlock();
+  // Set this to the device Sphero connects as on your computer.
+  var device = '/dev/tty.Sphero-RBR-AMP-SPP';
 
-myo.on('fingers_spread', function(){
-    takeoff();
-});
+  var safeMode = true;
 
-myo.on('wave_in', function(){
-    goLeft();
-})
+  var controlSphero = function(sphero) {
+    myo.on('wave_out', function(){
+      myo.setLockingPolicy();
+      console.log('RIGHT');
+      sphero.heading = 90;
+      sphero.roll(70, 90, 1);
+    })
+  }
+}</code></pre>
 
-var takeoff = function () {
-    flying = true;
-    return faye.publish("/drone/drone", {
-      action: 'takeoff'
-    });
-};
+<p><strong>Wrap your code</strong> into a ‘module.exports’ function to access it from other files.</p>
 
-var goLeft = function(){
-    stopped = false;
-    setTimeout(function (){
-      return faye.publish("/drone/move", {
-        action: 'left'
-        // speed: adjustXspeed
-      })
-    }, timeout);
-  };
-</code></pre>
-<p>Once the instance of the Myo is created, it can detect certain types of movements and run functions accordingly.</p>
+<p>Then, <strong>require the modules</strong> you need, create an instance of the Myo and find the reference of the Sphero on your computer by entering ‘ls /dev/tty.Sphero*’ in your command line once your Sphero and your bluetooth connection are on.</p>
 
-<p>The ‘myo.unlock()’ command should allow the Myo to be unlocked while you use the app. However, I noticed I still needed to execute the unlock gesture ‘double tap’ between each command… Then the ‘faye.publish’ allows to send the commands and make the drone move. You can adjust the action and speed as you like.</p>
+<p>The controlSphero function checks if you are doing the <strong>‘wave out’ movement</strong> with the Myo and if so, makes the Sphero roll to the right.</p>
 
-<p>This is just a snippet so once again, if you wanna have a look at the rest of the code or if you want to play around with it, everything is available on my <a title="Github repository for Myo Drone" href="https://github.com/charliegerard/myo_drone" target="_blank">Github</a> :)</p>
+<p>The <strong>myo.setLockingPolicy()</strong> command stops your Myo from being locked after a few seconds so you can keep on making movements and tracking them.</p>
 
-<p>Hope it helps and enjoy!</p>
+<p>Myo updated their firmware and API recently and introduced an automatic locking of the armband to avoid accidental tracking of gesture but for this app, we need it to be turned off. You can usually pass in the value ‘none’ or ‘standard’ but I made it default to none. If you want to change this, you can find the myo.js file inside the myo module and find the function ‘setLockingPolicy’. You can learn more about this command on the <a href="https://developer.thalmic.com/docs/api_reference/platform/script-reference.html#script-api-setLockingPolicy" target="_blank">API reference</a>.</p>
+
+<p>With the update of the firmware, new gestures have been added such as ‘index to thumb’ or ‘click’ and the ‘thumb to pinky’ has been removed so there is a little bit more you can play with.</p>
+
+<p>Once again, if you’re interested, you can find the full code on my<a title="Controlling the Sphero with the Myo armband in Node.js" href="http://charliegerard.github.io/myo-sphero" target="_blank"> github.</a></p>
+
+<p>Let me know if you have any question :) Good luck!</p>
 
       <hr />
       <footer role="contentinfo">
@@ -238,17 +228,17 @@ var goLeft = function(){
   <h4>Share on</h4>
   <ul>
     <li>
-      <a href="https://twitter.com/intent/tweet?text=http://charliegerard.github.io/blog/Control-Drone-Myo-Node/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+      <a href="https://twitter.com/intent/tweet?text=http://charliegerard.github.io/blog/Control-Sphero-Myo-Node/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
     </li>
     <li>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=http://charliegerard.github.io/blog/Control-Drone-Myo-Node/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://charliegerard.github.io/blog/Control-Sphero-Myo-Node/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
     </li>
     <li>
-      <a href="https://plus.google.com/share?url=http://charliegerard.github.io/blog/Control-Drone-Myo-Node/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+      <a href="https://plus.google.com/share?url=http://charliegerard.github.io/blog/Control-Sphero-Myo-Node/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
     </li>
   </ul>
 </div><!-- /.social-share -->
-        <p class="byline"><strong>Controlling the Parrot AR Drone with the Myo Armband in Node.js</strong> was published on <time datetime="2015-09-17T00:00:00+10:00">September 17, 2015</time>.</p>
+        <p class="byline"><strong>Control the Sphero with the Myo Armband in Node.js</strong> was published on <time datetime="2015-09-21T00:00:00+10:00">September 21, 2015</time>.</p>
       </footer>
     </div><!-- /.article-wrap -->
   
@@ -263,7 +253,7 @@ var goLeft = function(){
   <h4>You might also enjoy <small class="pull-right">(<a href="http://charliegerard.github.io/blog/posts/">View all posts</a>)</small></h4>
     <ul>
     
-      <li><a href="http://charliegerard.github.io/blog/Control-Sphero-Myo-Node/" title="Control the Sphero with the Myo Armband in Node.js">Control the Sphero with the Myo Armband in Node.js</a></li>
+      <li><a href="http://charliegerard.github.io/blog/Control-Drone-Myo-Node/" title="Controlling the Parrot AR Drone with the Myo Armband in Node.js">Controlling the Parrot AR Drone with the Myo Armband in Node.js</a></li>
     
       <li><a href="http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/" title="Controlling the Parrot AR Drone with the Leap Motion in Cylon.js">Controlling the Parrot AR Drone with the Leap Motion in Cylon.js</a></li>
     

@@ -4,13 +4,107 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://charliegerard.github.io/blog/feed.xml" />
 <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog" />
-<updated>2015-09-18T15:28:16+10:00</updated>
+<updated>2015-09-21T16:55:12+10:00</updated>
 <id>http://charliegerard.github.io/blog/</id>
 <author>
   <name>Charlie Gerard</name>
   <uri>http://charliegerard.github.io/blog/</uri>
   <email>charlie.a.gerard@gmail.com</email>
 </author>
+
+
+  
+
+<entry>
+  <title type="html"><![CDATA[Control the Sphero with the Myo Armband in Node.js]]></title>
+  <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Control-Sphero-Myo-Node/" />
+  <id>http://charliegerard.github.io/blog/Control-Sphero-Myo-Node</id>
+  <published>2015-09-21T00:00:00+10:00</published>
+  <updated>2015-09-21T00:00:00+10:00</updated>
+  <author>
+    <name></name>
+    <uri>http://charliegerard.github.io/blog</uri>
+    
+  </author>
+  <content type="html">
+    &lt;p&gt;&lt;a href=&quot;https://charliegerard.files.wordpress.com/2015/01/myo-sphero-node.png&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-118&quot; src=&quot;https://charliegerard.files.wordpress.com/2015/01/myo-sphero-node.png&quot; alt=&quot;myo-sphero-node&quot; width=&quot;660&quot; height=&quot;152&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I received my&lt;strong&gt; &lt;a title=&quot;Myo armband&quot; href=&quot;https://www.thalmic.com/en/myo/&quot; target=&quot;_blank&quot;&gt;Myo armband&lt;/a&gt;&lt;/strong&gt; a few months ago and I have been working on a few projects to control my other devices with it. To start with, I thought I would explain how I managed to control the&lt;strong&gt; &lt;a title=&quot;Sphero&quot; href=&quot;http://www.gosphero.com/&quot; target=&quot;_blank&quot;&gt;Sphero&lt;/a&gt;&lt;/strong&gt; ball using the movements of my arms and &lt;a title=&quot;Node.js&quot; href=&quot;http://nodejs.org/&quot; target=&quot;_blank&quot;&gt;&lt;strong&gt;Node.js&lt;/strong&gt;&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To follow along, you can view all the code on my &lt;strong&gt;&lt;a href=&quot;https://github.com/charliegerard/myo_sphero&quot; target=&quot;_blank&quot;&gt;github repo&lt;/a&gt;&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;The setup of the server side is pretty straight-forward, here’s what is in my app.js file:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+  var express = require(&#39;express&#39;),
+    path = require(&#39;path&#39;);
+
+var app = express();
+
+var lab = require(&#39;./my_modules/myo_sphero&#39;);
+lab();
+
+// app.use(express.static(path.join(__dirname, &#39;views&#39;)));
+
+//.all(&#39;*&#39;, function(req, res){
+// res.sendfile(&#39;views/index.html&#39;);
+//});
+
+app.listen(3001);
+console.log(&quot;Server running on port 3001&quot;);
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see, you start by &lt;strong&gt;requiring ‘express’ and ‘path’&lt;/strong&gt; to be able to start your server and serve your different files.&lt;/p&gt;
+
+&lt;p&gt;You then &lt;strong&gt;require the module&lt;/strong&gt; you created and you call it so it can be executed when you start your app.&lt;/p&gt;
+
+&lt;p&gt;The commented part of the code gives you the ability to serve something in your browser as well by calling the files in your ‘views’ folder but I am not using it at the moment as I just make the connection between the Myo and the Sphero without building anything in the front-end. The first part calls all the files in your folder whereas the second part allows you to serve a single file.&lt;/p&gt;
+
+&lt;p&gt;Finally, the app uses the port 3001 that you can check in your browser by visiting http://localhost:3001.&lt;/p&gt;
+
+&lt;p&gt;Then, you can write your commands in your module; here’s a snippet of my index.js:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;
+  module.exports = function() {
+
+  var spheron = require(&#39;spheron&#39;);
+  var myo = require(&#39;myo&#39;);
+
+  myo = Myo.create();
+
+  // Set this to the device Sphero connects as on your computer.
+  var device = &#39;/dev/tty.Sphero-RBR-AMP-SPP&#39;;
+
+  var safeMode = true;
+
+  var controlSphero = function(sphero) {
+    myo.on(&#39;wave_out&#39;, function(){
+      myo.setLockingPolicy();
+      console.log(&#39;RIGHT&#39;);
+      sphero.heading = 90;
+      sphero.roll(70, 90, 1);
+    })
+  }
+}&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Wrap your code&lt;/strong&gt; into a ‘module.exports’ function to access it from other files.&lt;/p&gt;
+
+&lt;p&gt;Then, &lt;strong&gt;require the modules&lt;/strong&gt; you need, create an instance of the Myo and find the reference of the Sphero on your computer by entering ‘ls /dev/tty.Sphero*’ in your command line once your Sphero and your bluetooth connection are on.&lt;/p&gt;
+
+&lt;p&gt;The controlSphero function checks if you are doing the &lt;strong&gt;‘wave out’ movement&lt;/strong&gt; with the Myo and if so, makes the Sphero roll to the right.&lt;/p&gt;
+
+&lt;p&gt;The &lt;strong&gt;myo.setLockingPolicy()&lt;/strong&gt; command stops your Myo from being locked after a few seconds so you can keep on making movements and tracking them.&lt;/p&gt;
+
+&lt;p&gt;Myo updated their firmware and API recently and introduced an automatic locking of the armband to avoid accidental tracking of gesture but for this app, we need it to be turned off. You can usually pass in the value ‘none’ or ‘standard’ but I made it default to none. If you want to change this, you can find the myo.js file inside the myo module and find the function ‘setLockingPolicy’. You can learn more about this command on the &lt;a href=&quot;https://developer.thalmic.com/docs/api_reference/platform/script-reference.html#script-api-setLockingPolicy&quot; target=&quot;_blank&quot;&gt;API reference&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;With the update of the firmware, new gestures have been added such as ‘index to thumb’ or ‘click’ and the ‘thumb to pinky’ has been removed so there is a little bit more you can play with.&lt;/p&gt;
+
+&lt;p&gt;Once again, if you’re interested, you can find the full code on my&lt;a title=&quot;Controlling the Sphero with the Myo armband in Node.js&quot; href=&quot;http://charliegerard.github.io/myo-sphero&quot; target=&quot;_blank&quot;&gt; github.&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Let me know if you have any question :) Good luck!&lt;/p&gt;
+
+    &lt;p&gt;&lt;a href=&quot;http://charliegerard.github.io/blog/Control-Sphero-Myo-Node/&quot;&gt;Control the Sphero with the Myo Armband in Node.js&lt;/a&gt; was originally published by Charlie Gerard at &lt;a href=&quot;http://charliegerard.github.io/blog&quot;&gt;Charlie Gerard&lt;/a&gt; on September 21, 2015.&lt;/p&gt;
+  </content>
+</entry>
 
 
   
