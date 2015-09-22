@@ -30,12 +30,11 @@ owner:
   avatar: https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/4/005/048/342/17f9554.jpg
   bio: "Software Developer @ ThoughtWorks. Passionate about Innovations, Creative Coding and Hardware."
   email: charlie.a.gerard@gmail.com
-  disqus-shortname: 'charlie_gerard'
-  disqus-url: 'http://charliegerard.github.io/blog'
+  disqus-shortname: charliegerardblog
   twitter: charlie__gerard
   facebook: #username
   google:
-    plus: #username
+    plus: CharlieGerard
     analytics:
     verify:
     ad-client:
@@ -43,7 +42,7 @@ owner:
   bing-verify:
   github: charliegerard
   stackoverflow: #123456/username   from a "http://stackoverflow.com/users/123456/username" link
-  linkedin: #username
+  linkedin: charliegerard
   xing: #username
   instagram: #username
   lastfm: #username
@@ -56,7 +55,7 @@ owner:
   soundcloud: #username
   weibo: #username
   flickr: #username
-  codepen: #username
+  codepen: charliegerard
 
 include: [".htaccess"]
 exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules", "Gemfile", "Gemfile.lock", "LICENSE", "README.md"]
