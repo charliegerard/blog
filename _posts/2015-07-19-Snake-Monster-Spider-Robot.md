@@ -6,7 +6,7 @@ excerpt: "I found spiderlike robots fascinating. So fascinating that I am consid
 comments: true
 ---
 
-<a href="https://charliegerard.files.wordpress.com/2014/12/snakebot.jpg"><img class="aligncenter size-large wp-image-47" src="https://charliegerard.files.wordpress.com/2014/12/snakebot.jpg?w=660" alt="snakebot" width="660" height="471" /></a>
+![](https://charliegerard.files.wordpress.com/2014/12/snakebot.jpg?w=660)
 
 I found spiderlike robots fascinating. So fascinating that I am considering building my own. The way they mimic real movements is really impressive and complex to execute.
 
@@ -20,6 +20,6 @@ This robot funded by DARPA, is able to respond to different obstacles like being
 
 Watch the video below to see the robot in action:
 
-[youtube https://www.youtube.com/watch?v=AMVO6rI5mL4&w=560&h=315]
+[Youtube](https://www.youtube.com/watch?v=AMVO6rI5mL4&w=560&h=315)
 
 At the moment, this kind of robots are more experimental or at a prototype stage but I can't wait to see them being developed to help rescue victims of earthquakes for instance.
