@@ -4,7 +4,7 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://charliegerard.github.io/blog/feed.xml" />
 <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog" />
-<updated>2015-09-22T16:08:50+10:00</updated>
+<updated>2015-09-23T16:34:56+10:00</updated>
 <id>http://charliegerard.github.io/blog/</id>
 <author>
   <name>Charlie Gerard</name>
@@ -389,6 +389,43 @@ work: function(my){
   
 
 <entry>
+  <title type="html"><![CDATA[The future of interaction is touch-free with ultrasound tech]]></title>
+  <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Future-Interaction/" />
+  <id>http://charliegerard.github.io/blog/Future-Interaction</id>
+  <published>2015-08-23T00:00:00+10:00</published>
+  <updated>2015-08-23T00:00:00+10:00</updated>
+  <author>
+    <name></name>
+    <uri>http://charliegerard.github.io/blog</uri>
+    
+  </author>
+  <content type="html">
+    &lt;p&gt;&lt;img class=&quot; aligncenter&quot; src=&quot;http://www.ellipticlabs.com/wp-content/uploads/2014/11/Apple_920_3501-920x351.jpg&quot; alt=&quot;Elliptic_Labs&quot; width=&quot;920&quot; height=&quot;351&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;More and more devices seem to use gesture tracking to allow touch-free interaction such as the Leap Motion and Kinect but also the recent and innovative onecue (&lt;a href=&quot;https://charliegerard.wordpress.com/2014/12/17/onecue-single-device-to-control-your-connected-home/&quot; target=&quot;_blank&quot;&gt;see related article&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;However, Elliptic Labs have introduced a new tool called the “Multi Layer Interaction” (MLI). It is not a new device but rather a new technology that can be implemented in already existing devices like your smartphone.&lt;/p&gt;
+
+&lt;p&gt;Tracking the position and distance of your hand, the device can ‘wake up’ when it senses movement, and execute other commands depending on the distance threshold the hand reaches. It can then improve the user’s interaction and experience with their smartphone.&lt;/p&gt;
+
+&lt;p&gt;On the technical side, it uses a minute transducer and a small ultrasound speaker to detect the movements around and it can be easily adapted to computers, smartphones, tablets and wearables. It can also use the built-in microphone to echo-locate the user’s hand so most manufacturers simply need to add the ultrasound speakers and the software to their device.&lt;/p&gt;
+
+&lt;p&gt;One of the most exciting thing is that it can detect the location of a hand with a 180 degrees interaction space with a maximum range of 50cm while using a small amount of power.&lt;/p&gt;
+
+&lt;p&gt;Watch the video below to learn more:&lt;/p&gt;
+
+&lt;p&gt;[vimeo 108103227 w=500 h=281]&lt;/p&gt;
+
+&lt;p&gt;If you’re interested in playing around with it, you can get a dev kit on the website, &lt;a href=&quot;http://www.ellipticlabs.com/?page_id=3107&quot; target=&quot;_blank&quot;&gt;Elliptic Labs&lt;/a&gt;.&lt;/p&gt;
+
+    &lt;p&gt;&lt;a href=&quot;http://charliegerard.github.io/blog/Future-Interaction/&quot;&gt;The future of interaction is touch-free with ultrasound tech&lt;/a&gt; was originally published by Charlie Gerard at &lt;a href=&quot;http://charliegerard.github.io/blog&quot;&gt;Charlie Gerard&lt;/a&gt; on August 23, 2015.&lt;/p&gt;
+  </content>
+</entry>
+
+
+  
+
+<entry>
   <title type="html"><![CDATA[Controlling the Sphero using the Leap Motion]]></title>
   <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Controlling-Sphero-Leap-Motion/" />
   <id>http://charliegerard.github.io/blog/Controlling-Sphero-Leap-Motion</id>
@@ -467,6 +504,43 @@ work: function(my){
 &lt;p&gt;I’ll probably write another tutorial soon once I have a chance to rewrite another project but in the meantime let me know if you have any question!&lt;/p&gt;
 
     &lt;p&gt;&lt;a href=&quot;http://charliegerard.github.io/blog/Controlling-Sphero-Leap-Motion/&quot;&gt;Controlling the Sphero using the Leap Motion&lt;/a&gt; was originally published by Charlie Gerard at &lt;a href=&quot;http://charliegerard.github.io/blog&quot;&gt;Charlie Gerard&lt;/a&gt; on August 20, 2015.&lt;/p&gt;
+  </content>
+</entry>
+
+
+  
+
+<entry>
+  <title type="html"><![CDATA['Snake Monster': A Spiderlike Robot Responding To Stimuli In Its Environment]]></title>
+  <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Snake-Monster-Spider-Robot/" />
+  <id>http://charliegerard.github.io/blog/Snake-Monster-Spider-Robot</id>
+  <published>2015-07-19T00:00:00+10:00</published>
+  <updated>2015-07-19T00:00:00+10:00</updated>
+  <author>
+    <name></name>
+    <uri>http://charliegerard.github.io/blog</uri>
+    
+  </author>
+  <content type="html">
+    &lt;p&gt;&lt;a href=&quot;https://charliegerard.files.wordpress.com/2014/12/snakebot.jpg&quot;&gt;&lt;img class=&quot;aligncenter size-large wp-image-47&quot; src=&quot;https://charliegerard.files.wordpress.com/2014/12/snakebot.jpg?w=660&quot; alt=&quot;snakebot&quot; width=&quot;660&quot; height=&quot;471&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I found spiderlike robots fascinating. So fascinating that I am considering building my own. The way they mimic real movements is really impressive and complex to execute.&lt;/p&gt;
+
+&lt;p&gt;The way each ‘leg’ moves has to be done considering the position of the other ones. The balance has to be calculated so the robot can actually walk.&lt;/p&gt;
+
+&lt;p&gt;Besides this, more and more robots are able to adapt to their environment and any obstacle that may come in front of them.&lt;/p&gt;
+
+&lt;p&gt;One example is the ‘Snake Monster’, a robot developed by the Biorobotics Lab at the Carnegie Mellon University, using 6 snakelike legs.&lt;/p&gt;
+
+&lt;p&gt;This robot funded by DARPA, is able to respond to different obstacles like being kicked, or having to walk over a bunch of objects placed on the floor.&lt;/p&gt;
+
+&lt;p&gt;Watch the video below to see the robot in action:&lt;/p&gt;
+
+&lt;p&gt;[youtube https://www.youtube.com/watch?v=AMVO6rI5mL4&amp;amp;w=560&amp;amp;h=315]&lt;/p&gt;
+
+&lt;p&gt;At the moment, this kind of robots are more experimental or at a prototype stage but I can’t wait to see them being developed to help rescue victims of earthquakes for instance.&lt;/p&gt;
+
+    &lt;p&gt;&lt;a href=&quot;http://charliegerard.github.io/blog/Snake-Monster-Spider-Robot/&quot;&gt;&#39;Snake Monster&#39;: A Spiderlike Robot Responding To Stimuli In Its Environment&lt;/a&gt; was originally published by Charlie Gerard at &lt;a href=&quot;http://charliegerard.github.io/blog&quot;&gt;Charlie Gerard&lt;/a&gt; on July 19, 2015.&lt;/p&gt;
   </content>
 </entry>
 
