@@ -1736,7 +1736,7 @@ body {
 .navigation-wrapper {
   margin: 0 auto;
   width: 100%;
-  padding: 2em 0 1em;
+  /*padding: 2em 0 1em;*/
   font-family: "PT Sans Narrow", sans-serif;
   font-weight: 700;
   text-transform: uppercase;
@@ -1807,6 +1807,7 @@ body {
     list-style-type: none; }
   .top-navigation li {
     display: block;
+    background-color: blue;
     list-style-type: none;
     border-bottom: 1px solid #dddddd;
     border-bottom: 1px solid fade(#111, 10);

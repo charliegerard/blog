@@ -4,7 +4,7 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://charliegerard.github.io/blog/feed.xml" />
 <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog" />
-<updated>2015-09-24T12:00:31+10:00</updated>
+<updated>2015-09-24T12:17:13+10:00</updated>
 <id>http://charliegerard.github.io/blog/</id>
 <author>
   <name>Charlie Gerard</name>
@@ -511,6 +511,37 @@ work: function(my){
   
 
 <entry>
+  <title type="html"><![CDATA[Clouds: An Interactive Documentary About The Creative Coding Culture]]></title>
+  <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Clouds-Interactive-Documentary-Creative-Coding-Culture/" />
+  <id>http://charliegerard.github.io/blog/Clouds-Interactive-Documentary-Creative-Coding-Culture</id>
+  <published>2015-07-20T00:00:00+10:00</published>
+  <updated>2015-07-20T00:00:00+10:00</updated>
+  <author>
+    <name></name>
+    <uri>http://charliegerard.github.io/blog</uri>
+    
+  </author>
+  <content type="html">
+    &lt;p&gt;&lt;a href=&quot;https://charliegerard.files.wordpress.com/2015/06/thumb.jpg&quot;&gt;&lt;img class=&quot;aligncenter size-full wp-image-198&quot; src=&quot;https://charliegerard.files.wordpress.com/2015/06/thumb.jpg&quot; alt=&quot;clouds-documentary&quot; width=&quot;574&quot; height=&quot;165&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I am sharing this as I am reading it: I just discovered a new documentary called &lt;a href=&quot;http://www.cloudsdocumentary.com/&quot; target=&quot;_blank&quot;&gt;Clouds&lt;/a&gt; about the Creative Coding culture. :D&lt;/p&gt;
+
+&lt;p&gt;I haven’t had time to watch it yet so I don’t even know if it’s any good but just the fact that we’re talking more and more about the Creative Coding culture makes me so happy!&lt;/p&gt;
+
+&lt;p&gt;I love generative art. I discovered that when I started programming but I realise that so many developers are not even aware of what it is (or don’t give a shit)!&lt;/p&gt;
+
+&lt;p&gt;Also, if you’re into this or not, they released an Oculus Rift version so anyway, maybe you should give it a try. ;)&lt;/p&gt;
+
+&lt;p&gt;Link: &lt;a href=&quot;http://www.cloudsdocumentary.com/&quot; target=&quot;_blank&quot;&gt;http://www.cloudsdocumentary.com/&lt;/a&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;a href=&quot;http://charliegerard.github.io/blog/Clouds-Interactive-Documentary-Creative-Coding-Culture/&quot;&gt;Clouds: An Interactive Documentary About The Creative Coding Culture&lt;/a&gt; was originally published by Charlie Gerard at &lt;a href=&quot;http://charliegerard.github.io/blog&quot;&gt;Charlie Gerard&lt;/a&gt; on July 20, 2015.&lt;/p&gt;
+  </content>
+</entry>
+
+
+  
+
+<entry>
   <title type="html"><![CDATA['Snake Monster': A Spiderlike Robot Responding To Stimuli In Its Environment]]></title>
   <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Snake-Monster-Spider-Robot/" />
   <id>http://charliegerard.github.io/blog/Snake-Monster-Spider-Robot</id>
@@ -541,49 +572,6 @@ work: function(my){
 &lt;p&gt;At the moment, this kind of robots are more experimental or at a prototype stage but I can’t wait to see them being developed to help rescue victims of earthquakes for instance.&lt;/p&gt;
 
     &lt;p&gt;&lt;a href=&quot;http://charliegerard.github.io/blog/Snake-Monster-Spider-Robot/&quot;&gt;&#39;Snake Monster&#39;: A Spiderlike Robot Responding To Stimuli In Its Environment&lt;/a&gt; was originally published by Charlie Gerard at &lt;a href=&quot;http://charliegerard.github.io/blog&quot;&gt;Charlie Gerard&lt;/a&gt; on July 19, 2015.&lt;/p&gt;
-  </content>
-</entry>
-
-
-  
-
-<entry>
-  <title type="html"><![CDATA[Teenage creates Mind-Control Bionic Arm]]></title>
-  <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Teenage-Creates-Mind-Control-Bionic-Arm/" />
-  <id>http://charliegerard.github.io/blog/Teenage-Creates-Mind-Control-Bionic-Arm</id>
-  <published>2015-06-15T00:00:00+10:00</published>
-  <updated>2015-06-15T00:00:00+10:00</updated>
-  <author>
-    <name></name>
-    <uri>http://charliegerard.github.io/blog</uri>
-    
-  </author>
-  <content type="html">
-    &lt;p&gt;This is just amazing… Definitely worth watching!&lt;/p&gt;
-
-    &lt;p&gt;&lt;a href=&quot;http://charliegerard.github.io/blog/Teenage-Creates-Mind-Control-Bionic-Arm/&quot;&gt;Teenage creates Mind-Control Bionic Arm&lt;/a&gt; was originally published by Charlie Gerard at &lt;a href=&quot;http://charliegerard.github.io/blog&quot;&gt;Charlie Gerard&lt;/a&gt; on June 15, 2015.&lt;/p&gt;
-  </content>
-</entry>
-
-
-  
-
-<entry>
-  <title type="html"><![CDATA[Setting up new blog]]></title>
-  <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Hello-World/" />
-  <id>http://charliegerard.github.io/blog/Hello-World</id>
-  <published>2014-03-03T00:00:00+11:00</published>
-  <updated>2014-03-03T00:00:00+11:00</updated>
-  <author>
-    <name>Charlie Gerard</name>
-    <uri>http://charliegerard.github.io/blog</uri>
-    <email>charlie.a.gerard@gmail.com</email>
-  </author>
-  <content type="html">
-    &lt;p&gt;Recently decided to migrate my blog from Wordpress to Github pages using Jekyll.
-I’m not sure when it will be finished but hopefully soon!&lt;/p&gt;
-
-    &lt;p&gt;&lt;a href=&quot;http://charliegerard.github.io/blog/Hello-World/&quot;&gt;Setting up new blog&lt;/a&gt; was originally published by Charlie Gerard at &lt;a href=&quot;http://charliegerard.github.io/blog&quot;&gt;Charlie Gerard&lt;/a&gt; on March 03, 2014.&lt;/p&gt;
   </content>
 </entry>
 
