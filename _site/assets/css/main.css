@@ -1807,8 +1807,7 @@ body {
     margin: 0;
     padding: 0;
     clear: both;
-    list-style-type: none;
-    color: white; }
+    list-style-type: none; }
   .top-navigation li {
     display: block;
     list-style-type: none;
@@ -1827,6 +1826,7 @@ body {
     .top-navigation li a {
       display: block;
       padding: 10px 0;
+      color: white;
       decoration: none;
       border-bottom: 0 solid transparent;
       -webkit-transition: all 0.2s;
