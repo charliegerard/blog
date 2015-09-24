@@ -1736,7 +1736,8 @@ body {
 .navigation-wrapper {
   margin: 0 auto;
   width: 100%;
-  /*padding: 2em 0 1em;*/
+  padding: 2em 0 1em;
+  background-color: black;
   font-family: "PT Sans Narrow", sans-serif;
   font-weight: 700;
   text-transform: uppercase;
@@ -1777,6 +1778,8 @@ body {
       float: left;
       width: 12.5%;
       margin-left: 16.66667%; } }
+  .site-name a {
+    color: white; }
 
 /* Top navigation links */
 .top-navigation {
@@ -1804,10 +1807,10 @@ body {
     margin: 0;
     padding: 0;
     clear: both;
-    list-style-type: none; }
+    list-style-type: none;
+    color: white; }
   .top-navigation li {
     display: block;
-    background-color: blue;
     list-style-type: none;
     border-bottom: 1px solid #dddddd;
     border-bottom: 1px solid fade(#111, 10);
