@@ -35,6 +35,7 @@ To start using Cylon, you need to require it and specify which devices you are w
 
 
 <pre><code class="code">
+{% highlight javascript linenos %}
 var Cylon = require('cylon');
 
 Cylon.robot({
@@ -52,6 +53,8 @@ Cylon.robot({
   }
 }).start();
 
+{% endhighlight %}
+
 </code></pre>
 
 
@@ -61,6 +64,7 @@ You have to specify a port for the Sphero because it connects to your computer v
 
 The rest of the code goes inside the 'work' function as below:
 <pre><code class="code">
+{% highlight javascript linenos %}
 work: function(my){
   my.leapmotion.on('frame', function(frame){
    if(frame.valid &amp;&amp; frame.gestures.length &gt; 0{
@@ -68,6 +72,7 @@ work: function(my){
    }
   }
 }
+{% endhighlight %}
 </code></pre>
 The code above makes the Sphero go forward if the Leap Motion detects any kind of gesture.
 

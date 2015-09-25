@@ -15,6 +15,7 @@ If you've had a look at my last tutorial, you probably noticed that using Cylon.
 Below is the usual setup of any Cylon project:
 
 <pre><code>
+{% highlight javascript linenos %}
 var Cylon = require('cylon');
 
 Cylon.robot({
@@ -27,9 +28,13 @@ Cylon.robot({
     leapmotion: {driver: 'leapmotion', connection: 'leapmotion'},
     drone: {driver: 'ardrone', connection: 'ardrone'}
   },
+{% endhighlight %}
  </code></pre>
 As you can see, you simply need to specify which devices you are using, the more interesting bit comes in the rest of the code...
-<pre><code>work: function(my){
+<pre><code>
+{% highlight javascript linenos %}
+
+  work: function(my){
    my.leapmotion.on('hand', function(hand){
      my.drone.takeoff();
      after((5).seconds(), function(){
@@ -37,7 +42,9 @@ As you can see, you simply need to specify which devices you are using, the more
      })
    })
  }
-}).start();</code></pre>
+}).start();
+{% endhighlight %}
+</code></pre>
 
 This code only makes the Drone take off when the Leap Motion senses a hand over it and land after 5 seconds (just in case it decides to go crazy...).
 
@@ -54,7 +61,9 @@ You can also make the drone rotate clockwise or counterclockwise but what I foun
 
 The code for that would look like this:
 
-<pre><code> work: function(my){
+<pre><code>
+{% highlight javascript linenos %}
+  work: function(my){
    my.leapmotion.on('gesture', function(gesture){
      if(gesture){
        my.drone.takeoff();
@@ -69,7 +78,9 @@ The code for that would look like this:
      };
    };
  }
-}).start();</code></pre>
+}).start();
+{% endhighlight %}
+</code></pre>
 
 If you wanna see the difference with Node.js, you can find my original Github repo <a href="https://github.com/charliegerard/leap_drone" target="_blank">here</a>, otherwise <a href="https://github.com/charliegerard/cylon-projects/tree/master/cylon-drone-leapmotion" target="_blank">here is the repo</a> with more commands!
 

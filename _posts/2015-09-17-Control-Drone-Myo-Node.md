@@ -14,6 +14,7 @@ If you want to follow along, you can find the <a title="Myo Drone" href="https:/
 
 To begin with, we need to setup the server configuration. After requiring the necessary modules, here is what we need to write:
 <pre><code>
+  {% highlight javascript linenos %}
   var env = process.env.NODE_ENV || 'development';
 if('development' == env){
   app.set('port', process.env.PORT || 3000);
@@ -47,6 +48,7 @@ var bayeux = new faye.NodeAdapter({
   server.listen(app.get('port'), function () {
     console.log("Express server listening on port " + app.get("port"));
   })
+  {% endhighlight %}
 </code></pre>
 We use express to set up the server and Faye &amp; Bayeux for the communications between the Drone and your app.
 
@@ -54,6 +56,7 @@ We also use the module 'dronestream' to be able to stream video from the drone t
 
 The rest of the code deals with the commands sent from the Myo to the drone. First of all, we need to create an instance of the Myo and then define some commands.
 <pre><code>
+  {% highlight javascript linenos %}
   myo = Myo.create();
 
 myo.unlock();
@@ -82,6 +85,7 @@ var goLeft = function(){
       })
     }, timeout);
   };
+  {% endhighlight %}
 </code></pre>
 Once the instance of the Myo is created, it can detect certain types of movements and run functions accordingly.
 

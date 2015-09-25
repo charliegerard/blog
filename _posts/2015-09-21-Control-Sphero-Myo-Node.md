@@ -14,6 +14,7 @@ To follow along, you can view all the code on my <strong><a href="https://github
 
 The setup of the server side is pretty straight-forward, here's what is in my app.js file:
 <pre><code>
+  {% highlight javascript linenos %}
   var express = require('express'),
     path = require('path');
 
@@ -31,6 +32,7 @@ lab();
 app.listen(3001);
 console.log("Server running on port 3001");
 
+{% endhighlight %}
 </code></pre>
 
 As you can see, you start by <strong>requiring 'express' and 'path'</strong> to be able to start your server and serve your different files.
@@ -43,6 +45,7 @@ Finally, the app uses the port 3001 that you can check in your browser by visiti
 
 Then, you can write your commands in your module; here's a snippet of my index.js:
 <pre><code>
+  {% highlight javascript linenos %}
   module.exports = function() {
 
   var spheron = require('spheron');
@@ -63,7 +66,9 @@ Then, you can write your commands in your module; here's a snippet of my index.
       sphero.roll(70, 90, 1);
     })
   }
-}</code></pre>
+}
+{% highlight javascript linenos %}
+</code></pre>
 
 <strong>Wrap your code</strong> into a 'module.exports' function to access it from other files.
 
