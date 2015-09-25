@@ -161,29 +161,35 @@
 <p>Below is the usual setup of any Cylon project:</p>
 
 <pre><code>
-var Cylon = require('cylon');
 
-Cylon.robot({
-  connections:{
-    leapmotion: {adaptor: 'leapmotion'},
-    ardrone: {adaptor: 'ardrone', port: '192.168.1.1'}
-  },
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno"> 1</span> <span class="kd">var</span> <span class="nx">Cylon</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cylon&#39;</span><span class="p">);</span>
+<span class="lineno"> 2</span> 
+<span class="lineno"> 3</span> <span class="nx">Cylon</span><span class="p">.</span><span class="nx">robot</span><span class="p">({</span>
+<span class="lineno"> 4</span>   <span class="nx">connections</span><span class="o">:</span><span class="p">{</span>
+<span class="lineno"> 5</span>     <span class="nx">leapmotion</span><span class="o">:</span> <span class="p">{</span><span class="nx">adaptor</span><span class="o">:</span> <span class="s1">&#39;leapmotion&#39;</span><span class="p">},</span>
+<span class="lineno"> 6</span>     <span class="nx">ardrone</span><span class="o">:</span> <span class="p">{</span><span class="nx">adaptor</span><span class="o">:</span> <span class="s1">&#39;ardrone&#39;</span><span class="p">,</span> <span class="nx">port</span><span class="o">:</span> <span class="s1">&#39;192.168.1.1&#39;</span><span class="p">}</span>
+<span class="lineno"> 7</span>   <span class="p">},</span>
+<span class="lineno"> 8</span> 
+<span class="lineno"> 9</span>   <span class="nx">devices</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">10</span>     <span class="nx">leapmotion</span><span class="o">:</span> <span class="p">{</span><span class="nx">driver</span><span class="o">:</span> <span class="s1">&#39;leapmotion&#39;</span><span class="p">,</span> <span class="nx">connection</span><span class="o">:</span> <span class="s1">&#39;leapmotion&#39;</span><span class="p">},</span>
+<span class="lineno">11</span>     <span class="nx">drone</span><span class="o">:</span> <span class="p">{</span><span class="nx">driver</span><span class="o">:</span> <span class="s1">&#39;ardrone&#39;</span><span class="p">,</span> <span class="nx">connection</span><span class="o">:</span> <span class="s1">&#39;ardrone&#39;</span><span class="p">}</span>
+<span class="lineno">12</span>   <span class="p">},</span></code></pre></div>
 
-  devices: {
-    leapmotion: {driver: 'leapmotion', connection: 'leapmotion'},
-    drone: {driver: 'ardrone', connection: 'ardrone'}
-  },
  </code></pre>
 <p>As you can see, you simply need to specify which devices you are using, the more interesting bit comes in the rest of the code…</p>
-<pre><code>work: function(my){
-   my.leapmotion.on('hand', function(hand){
-     my.drone.takeoff();
-     after((5).seconds(), function(){
-       my.drone.land();
-     })
-   })
- }
-}).start();</code></pre>
+<pre><code>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno">1</span> <span class="nx">work</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">my</span><span class="p">){</span>
+<span class="lineno">2</span>    <span class="nx">my</span><span class="p">.</span><span class="nx">leapmotion</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;hand&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">hand</span><span class="p">){</span>
+<span class="lineno">3</span>      <span class="nx">my</span><span class="p">.</span><span class="nx">drone</span><span class="p">.</span><span class="nx">takeoff</span><span class="p">();</span>
+<span class="lineno">4</span>      <span class="nx">after</span><span class="p">((</span><span class="mi">5</span><span class="p">).</span><span class="nx">seconds</span><span class="p">(),</span> <span class="kd">function</span><span class="p">(){</span>
+<span class="lineno">5</span>        <span class="nx">my</span><span class="p">.</span><span class="nx">drone</span><span class="p">.</span><span class="nx">land</span><span class="p">();</span>
+<span class="lineno">6</span>      <span class="p">})</span>
+<span class="lineno">7</span>    <span class="p">})</span>
+<span class="lineno">8</span>  <span class="p">}</span>
+<span class="lineno">9</span> <span class="p">}).</span><span class="nx">start</span><span class="p">();</span></code></pre></div>
+
+</code></pre>
 
 <p>This code only makes the Drone take off when the Leap Motion senses a hand over it and land after 5 seconds (just in case it decides to go crazy…).</p>
 
@@ -200,22 +206,26 @@ Cylon.robot({
 
 <p>The code for that would look like this:</p>
 
-<pre><code> work: function(my){
-   my.leapmotion.on('gesture', function(gesture){
-     if(gesture){
-       my.drone.takeoff();
-       if(gesture.type === 'keyTap'){
-         my.drone.backFlip();
-         after((6).seconds(), function(){
-          my.drone.land();
-         }
-       }
-     } else {
-       my.drone.stop();
-     };
-   };
- }
-}).start();</code></pre>
+<pre><code>
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno"> 1</span> <span class="nx">work</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">my</span><span class="p">){</span>
+<span class="lineno"> 2</span>    <span class="nx">my</span><span class="p">.</span><span class="nx">leapmotion</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gesture&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gesture</span><span class="p">){</span>
+<span class="lineno"> 3</span>      <span class="k">if</span><span class="p">(</span><span class="nx">gesture</span><span class="p">){</span>
+<span class="lineno"> 4</span>        <span class="nx">my</span><span class="p">.</span><span class="nx">drone</span><span class="p">.</span><span class="nx">takeoff</span><span class="p">();</span>
+<span class="lineno"> 5</span>        <span class="k">if</span><span class="p">(</span><span class="nx">gesture</span><span class="p">.</span><span class="nx">type</span> <span class="o">===</span> <span class="s1">&#39;keyTap&#39;</span><span class="p">){</span>
+<span class="lineno"> 6</span>          <span class="nx">my</span><span class="p">.</span><span class="nx">drone</span><span class="p">.</span><span class="nx">backFlip</span><span class="p">();</span>
+<span class="lineno"> 7</span>          <span class="nx">after</span><span class="p">((</span><span class="mi">6</span><span class="p">).</span><span class="nx">seconds</span><span class="p">(),</span> <span class="kd">function</span><span class="p">(){</span>
+<span class="lineno"> 8</span>           <span class="nx">my</span><span class="p">.</span><span class="nx">drone</span><span class="p">.</span><span class="nx">land</span><span class="p">();</span>
+<span class="lineno"> 9</span>          <span class="p">}</span>
+<span class="lineno">10</span>        <span class="p">}</span>
+<span class="lineno">11</span>      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="lineno">12</span>        <span class="nx">my</span><span class="p">.</span><span class="nx">drone</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+<span class="lineno">13</span>      <span class="p">};</span>
+<span class="lineno">14</span>    <span class="p">};</span>
+<span class="lineno">15</span>  <span class="p">}</span>
+<span class="lineno">16</span> <span class="p">}).</span><span class="nx">start</span><span class="p">();</span></code></pre></div>
+
+</code></pre>
 
 <p>If you wanna see the difference with Node.js, you can find my original Github repo <a href="https://github.com/charliegerard/leap_drone" target="_blank">here</a>, otherwise <a href="https://github.com/charliegerard/cylon-projects/tree/master/cylon-drone-leapmotion" target="_blank">here is the repo</a> with more commands!</p>
 

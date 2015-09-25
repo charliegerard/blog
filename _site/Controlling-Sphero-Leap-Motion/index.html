@@ -179,22 +179,24 @@
 <p>To start using Cylon, you need to require it and specify which devices you are working with.</p>
 
 <pre><code class="code">
-var Cylon = require('cylon');
 
-Cylon.robot({
-  connections: {
-    leapmotion: {adaptor: 'leapmotion'},
-    sphero: {adaptor: 'sphero', port: '/dev/rfcomm0'}
-  },
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno"> 1</span> <span class="kd">var</span> <span class="nx">Cylon</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;cylon&#39;</span><span class="p">);</span>
+<span class="lineno"> 2</span> 
+<span class="lineno"> 3</span> <span class="nx">Cylon</span><span class="p">.</span><span class="nx">robot</span><span class="p">({</span>
+<span class="lineno"> 4</span>   <span class="nx">connections</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno"> 5</span>     <span class="nx">leapmotion</span><span class="o">:</span> <span class="p">{</span><span class="nx">adaptor</span><span class="o">:</span> <span class="s1">&#39;leapmotion&#39;</span><span class="p">},</span>
+<span class="lineno"> 6</span>     <span class="nx">sphero</span><span class="o">:</span> <span class="p">{</span><span class="nx">adaptor</span><span class="o">:</span> <span class="s1">&#39;sphero&#39;</span><span class="p">,</span> <span class="nx">port</span><span class="o">:</span> <span class="s1">&#39;/dev/rfcomm0&#39;</span><span class="p">}</span>
+<span class="lineno"> 7</span>   <span class="p">},</span>
+<span class="lineno"> 8</span> 
+<span class="lineno"> 9</span>   <span class="nx">devices</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">10</span>     <span class="nx">leapmotion</span><span class="o">:</span> <span class="p">{</span><span class="nx">driver</span><span class="o">:</span> <span class="s1">&#39;leapmotion&#39;</span><span class="p">,</span> <span class="nx">connection</span><span class="o">:</span> <span class="s1">&#39;leapmotion&#39;</span><span class="p">},</span>
+<span class="lineno">11</span>     <span class="nx">sphero</span><span class="o">:</span> <span class="p">{</span><span class="nx">driver</span><span class="o">:</span> <span class="s1">&#39;sphero&#39;</span><span class="p">,</span> <span class="nx">connection</span><span class="o">:</span> <span class="s1">&#39;sphero&#39;</span><span class="p">}</span>
+<span class="lineno">12</span>   <span class="p">},</span>
+<span class="lineno">13</span> 
+<span class="lineno">14</span>   <span class="nx">work</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">f</span><span class="p">){</span>
+<span class="lineno">15</span>   <span class="p">}</span>
+<span class="lineno">16</span> <span class="p">}).</span><span class="nx">start</span><span class="p">();</span></code></pre></div>
 
-  devices: {
-    leapmotion: {driver: 'leapmotion', connection: 'leapmotion'},
-    sphero: {driver: 'sphero', connection: 'sphero'}
-  },
-
-  work: function(f){
-  }
-}).start();
 
 </code></pre>
 
@@ -204,13 +206,15 @@ Cylon.robot({
 
 <p>The rest of the code goes inside the ‘work’ function as below:</p>
 <pre><code class="code">
-work: function(my){
-  my.leapmotion.on('frame', function(frame){
-   if(frame.valid &amp;&amp; frame.gestures.length &gt; 0{
-     my.sphero.roll(70,0,1);
-   }
-  }
-}
+
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno">1</span> <span class="nx">work</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">my</span><span class="p">){</span>
+<span class="lineno">2</span>   <span class="nx">my</span><span class="p">.</span><span class="nx">leapmotion</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;frame&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">frame</span><span class="p">){</span>
+<span class="lineno">3</span>    <span class="k">if</span><span class="p">(</span><span class="nx">frame</span><span class="p">.</span><span class="nx">valid</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="nx">frame</span><span class="p">.</span><span class="nx">gestures</span><span class="p">.</span><span class="nx">length</span> <span class="o">&amp;</span><span class="nx">gt</span><span class="p">;</span> <span class="mi">0</span><span class="p">{</span>
+<span class="lineno">4</span>      <span class="nx">my</span><span class="p">.</span><span class="nx">sphero</span><span class="p">.</span><span class="nx">roll</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="lineno">5</span>    <span class="p">}</span>
+<span class="lineno">6</span>   <span class="p">}</span>
+<span class="lineno">7</span> <span class="p">}</span></code></pre></div>
+
 </code></pre>
 <p>The code above makes the Sphero go forward if the Leap Motion detects any kind of gesture.</p>
 

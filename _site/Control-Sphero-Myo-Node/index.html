@@ -160,22 +160,23 @@
 
 <p>The setup of the server side is pretty straight-forward, here’s what is in my app.js file:</p>
 <pre><code>
-  var express = require('express'),
-    path = require('path');
-
-var app = express();
-
-var lab = require('./my_modules/myo_sphero');
-lab();
-
-// app.use(express.static(path.join(__dirname, 'views')));
-
-//.all('*', function(req, res){
-// res.sendfile('views/index.html');
-//});
-
-app.listen(3001);
-console.log("Server running on port 3001");
+  
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno"> 1</span> <span class="kd">var</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">),</span>
+<span class="lineno"> 2</span>     <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="kd">var</span> <span class="nx">lab</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./my_modules/myo_sphero&#39;</span><span class="p">);</span>
+<span class="lineno"> 7</span> <span class="nx">lab</span><span class="p">();</span>
+<span class="lineno"> 8</span> 
+<span class="lineno"> 9</span> <span class="c1">// app.use(express.static(path.join(__dirname, &#39;views&#39;)));</span>
+<span class="lineno">10</span> 
+<span class="lineno">11</span> <span class="c1">//.all(&#39;*&#39;, function(req, res){</span>
+<span class="lineno">12</span> <span class="c1">// res.sendfile(&#39;views/index.html&#39;);</span>
+<span class="lineno">13</span> <span class="c1">//});</span>
+<span class="lineno">14</span> 
+<span class="lineno">15</span> <span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3001</span><span class="p">);</span>
+<span class="lineno">16</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Server running on port 3001&quot;</span><span class="p">);</span></code></pre></div>
 
 </code></pre>
 
@@ -189,27 +190,30 @@ console.log("Server running on port 3001");
 
 <p>Then, you can write your commands in your module; here’s a snippet of my index.js:</p>
 <pre><code>
-  module.exports = function() {
+  
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno"> 1</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno"> 2</span> 
+<span class="lineno"> 3</span>   <span class="kd">var</span> <span class="nx">spheron</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;spheron&#39;</span><span class="p">);</span>
+<span class="lineno"> 4</span>   <span class="kd">var</span> <span class="nx">myo</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;myo&#39;</span><span class="p">);</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span>   <span class="nx">myo</span> <span class="o">=</span> <span class="nx">Myo</span><span class="p">.</span><span class="nx">create</span><span class="p">();</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span>   <span class="c1">// Set this to the device Sphero connects as on your computer.</span>
+<span class="lineno"> 9</span>   <span class="kd">var</span> <span class="nx">device</span> <span class="o">=</span> <span class="s1">&#39;/dev/tty.Sphero-RBR-AMP-SPP&#39;</span><span class="p">;</span>
+<span class="lineno">10</span> 
+<span class="lineno">11</span>   <span class="kd">var</span> <span class="nx">safeMode</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="lineno">12</span> 
+<span class="lineno">13</span>   <span class="kd">var</span> <span class="nx">controlSphero</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">sphero</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">14</span>     <span class="nx">myo</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wave_out&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){</span>
+<span class="lineno">15</span>       <span class="nx">myo</span><span class="p">.</span><span class="nx">setLockingPolicy</span><span class="p">();</span>
+<span class="lineno">16</span>       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;RIGHT&#39;</span><span class="p">);</span>
+<span class="lineno">17</span>       <span class="nx">sphero</span><span class="p">.</span><span class="nx">heading</span> <span class="o">=</span> <span class="mi">90</span><span class="p">;</span>
+<span class="lineno">18</span>       <span class="nx">sphero</span><span class="p">.</span><span class="nx">roll</span><span class="p">(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="lineno">19</span>     <span class="p">})</span>
+<span class="lineno">20</span>   <span class="p">}</span>
+<span class="lineno">21</span> <span class="p">}</span></code></pre></div>
 
-  var spheron = require('spheron');
-  var myo = require('myo');
-
-  myo = Myo.create();
-
-  // Set this to the device Sphero connects as on your computer.
-  var device = '/dev/tty.Sphero-RBR-AMP-SPP';
-
-  var safeMode = true;
-
-  var controlSphero = function(sphero) {
-    myo.on('wave_out', function(){
-      myo.setLockingPolicy();
-      console.log('RIGHT');
-      sphero.heading = 90;
-      sphero.roll(70, 90, 1);
-    })
-  }
-}</code></pre>
+</code></pre>
 
 <p><strong>Wrap your code</strong> into a ‘module.exports’ function to access it from other files.</p>
 

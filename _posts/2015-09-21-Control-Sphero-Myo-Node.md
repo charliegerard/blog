@@ -67,7 +67,7 @@ Then, you can write your commands in your module; here's a snippet of my index.
     })
   }
 }
-{% highlight javascript linenos %}
+{% endhighlight %}
 </code></pre>
 
 <strong>Wrap your code</strong> into a 'module.exports' function to access it from other files.
