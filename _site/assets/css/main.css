@@ -734,6 +734,9 @@ pre {
   font-size: 12px;
   font-size: 0.75rem;
   line-height: 1.5;
+  border: 1px solid grey;
+  padding: 2em;
+  border-radius: 1em;
   overflow-x: auto; }
 
 /* ==========================================================================

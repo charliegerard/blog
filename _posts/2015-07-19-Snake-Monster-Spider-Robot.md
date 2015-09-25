@@ -3,6 +3,7 @@ layout: post
 title: "'Snake Monster': A Spiderlike Robot Responding To Stimuli In Its Environment"
 author: charlie_gerard
 excerpt: "I found spiderlike robots fascinating. So fascinating that I am considering building my own..."
+tags: [technology, innovation, electronics, robots, robotics, hardware]
 comments: true
 ---
 

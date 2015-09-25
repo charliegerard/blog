@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://charliegerard.github.io/blog/Turning-MakeyMakey-Capacitive-Sensor/</loc>
+    <lastmod>2015-09-25T00:00:00+10:00</lastmod>
+  </url>
+  <url>
     <loc>http://charliegerard.github.io/blog/Control-Sphero-Myo-Node/</loc>
     <lastmod>2015-09-21T00:00:00+10:00</lastmod>
   </url>
@@ -33,19 +37,23 @@
     <lastmod>2015-07-19T00:00:00+10:00</lastmod>
   </url>
   <url>
+    <loc>http://charliegerard.github.io/blog/Brain-Computer-Interface-Lasts-2-Weeks/</loc>
+    <lastmod>2015-05-10T00:00:00+10:00</lastmod>
+  </url>
+  <url>
     <loc>http://charliegerard.github.io/blog/</loc>
-    <lastmod>2015-09-24T13:51:16+10:00</lastmod>
+    <lastmod>2015-09-25T10:33:33+10:00</lastmod>
   </url>
   <url>
     <loc>http://charliegerard.github.io/blog/theme-setup/</loc>
-    <lastmod>2015-09-24T13:51:16+10:00</lastmod>
+    <lastmod>2015-09-25T10:33:33+10:00</lastmod>
   </url>
   <url>
     <loc>http://charliegerard.github.io/blog/posts/</loc>
-    <lastmod>2015-09-24T13:51:16+10:00</lastmod>
+    <lastmod>2015-09-25T10:33:33+10:00</lastmod>
   </url>
   <url>
     <loc>http://charliegerard.github.io/blog/about/</loc>
-    <lastmod>2015-09-24T13:51:16+10:00</lastmod>
+    <lastmod>2015-09-25T10:33:33+10:00</lastmod>
   </url>
 </urlset>

@@ -5,15 +5,15 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
 <head>
 <meta charset="utf-8">
-<title>Controlling the Parrot AR Drone with the Leap Motion in Cylon.js &#8211; Charlie Gerard</title>
-<meta name="description" content="A tutorial to learn how to program the Leap Motion to control the Parrot AR Drone using Cylon.js">
-<meta name="keywords" content="">
+<title>A Brain Computer Interface That Lasts For 2 Weeks &#8211; Charlie Gerard</title>
+<meta name="description" content="The evolution of research around brain activity has led scientists to a new invention. They managed to create a wearable conductive gel...">
+<meta name="keywords" content="brain, technology, innovation, electronics, wearables, science">
 
   
 
 <!-- Twitter Cards -->
-<meta name="twitter:title" content="Controlling the Parrot AR Drone with the Leap Motion in Cylon.js">
-<meta name="twitter:description" content="A tutorial to learn how to program the Leap Motion to control the Parrot AR Drone using Cylon.js">
+<meta name="twitter:title" content="A Brain Computer Interface That Lasts For 2 Weeks">
+<meta name="twitter:description" content="The evolution of research around brain activity has led scientists to a new invention. They managed to create a wearable conductive gel...">
 <meta name="twitter:site" content="@charlie__gerard">
 
 
@@ -23,9 +23,9 @@
 <!-- Open Graph -->
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Controlling the Parrot AR Drone with the Leap Motion in Cylon.js">
-<meta property="og:description" content="A tutorial to learn how to program the Leap Motion to control the Parrot AR Drone using Cylon.js">
-<meta property="og:url" content="http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/">
+<meta property="og:title" content="A Brain Computer Interface That Lasts For 2 Weeks">
+<meta property="og:description" content="The evolution of research around brain activity has led scientists to a new invention. They managed to create a wearable conductive gel...">
+<meta property="og:url" content="http://charliegerard.github.io/blog/Brain-Computer-Interface-Lasts-2-Weeks/">
 <meta property="og:site_name" content="Charlie Gerard">
 
 <meta property="og:image" content="http://charliegerard.github.io/blog/images/default-thumb.png">
@@ -35,7 +35,7 @@
 
 
 
-<link rel="canonical" href="http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/">
+<link rel="canonical" href="http://charliegerard.github.io/blog/Brain-Computer-Interface-Lasts-2-Weeks/">
 <link href="http://charliegerard.github.io/blog/feed.xml" type="application/atom+xml" rel="alternate" title="Charlie Gerard Feed">
 
 <!-- http://t.co/dKP3o1e -->
@@ -148,78 +148,25 @@
   <article class="post">
     <div class="headline-wrap">
       
-        <h1><a href="http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/" rel="bookmark" title="Controlling the Parrot AR Drone with the Leap Motion in Cylon.js">Controlling the Parrot AR Drone with the Leap Motion in Cylon.js</a></h1>
+        <h1><a href="http://charliegerard.github.io/blog/Brain-Computer-Interface-Lasts-2-Weeks/" rel="bookmark" title="A Brain Computer Interface That Lasts For 2 Weeks">A Brain Computer Interface That Lasts For 2 Weeks</a></h1>
       
     </div><!--/ .headline-wrap -->
     <div class="article-wrap">
-      <p><a href="https://charliegerard.files.wordpress.com/2015/01/cylonjs-drone-leapmotion.png"><img class="aligncenter size-large wp-image-85" src="https://charliegerard.files.wordpress.com/2015/01/cylonjs-drone-leapmotion.png?w=660" alt="cylon-drone-leapmotion" width="660" height="152" /></a></p>
+      <p><a href="https://charliegerard.files.wordpress.com/2015/03/6e50b56a-e63a-44ae-9331-f5e81f9eb8be-1426530858261.jpg"><img class="aligncenter size-full wp-image-169" src="https://charliegerard.files.wordpress.com/2015/03/6e50b56a-e63a-44ae-9331-f5e81f9eb8be-1426530858261.jpg" alt="wearable-brain-computer-interface" width="300" height="350" /></a></p>
 
-<p>Following my tutorial on <a href="https://charliegerard.wordpress.com/2015/01/12/sphero-leap-motion-cylon-js/" target="_blank">controlling the Sphero using the Leap Motion</a>, I thought I would keep on converting my Node.js projects to Cylon.js and work on controlling the Drone with the Leap Motion.</p>
+<p>The evolution of research around brain activity has led scientists to a new invention. They managed to create a wearable conductive gel that sticks on the skin without irritating it and that allows to track and collect brain signals.</p>
 
-<p>If you’ve had a look at my last tutorial, you probably noticed that using Cylon.js makes it really easy to program for hardware and connect multiple devices together.</p>
+<p>These wearable electrodes stick onto and near the ear like a temporary tattoo and can be used for more than 2 weeks without being damaged by normal activity.</p>
 
-<p>Below is the usual setup of any Cylon project:</p>
+<p>This invention could allow a better collection and analysis of brain waves and be the beginning of better prosthetics and interfaces for people with disabilities by being able to control devices with your brain.</p>
 
-<pre><code>
-var Cylon = require('cylon');
+<p>Before this, brain signals were analysed using Electroencephalograms with electrodes stuck onto the head with conductive gel. This technique only allowed short-term collection as the gel would deteriorate and the electrodes would have to be changed.</p>
 
-Cylon.robot({
-  connections:{
-    leapmotion: {adaptor: 'leapmotion'},
-    ardrone: {adaptor: 'ardrone', port: '192.168.1.1'}
-  },
+<p>This new method proved to be working for more than 14 days despite showering and exercising. It consists of a flexible collection of gold electrodes on a soft plastic film and sticks to the skin using electric forces better known as van der Walls interaction.</p>
 
-  devices: {
-    leapmotion: {driver: 'leapmotion', connection: 'leapmotion'},
-    drone: {driver: 'ardrone', connection: 'ardrone'}
-  },
- </code></pre>
-<p>As you can see, you simply need to specify which devices you are using, the more interesting bit comes in the rest of the code…</p>
-<pre><code>work: function(my){
-   my.leapmotion.on('hand', function(hand){
-     my.drone.takeoff();
-     after((5).seconds(), function(){
-       my.drone.land();
-     })
-   })
- }
-}).start();</code></pre>
+<p>To record the brain activity, the sensors were connected to a monitoring device using stretchable wires. This device recorded well enough to enable patients to spell words using their thought.</p>
 
-<p>This code only makes the Drone take off when the Leap Motion senses a hand over it and land after 5 seconds (just in case it decides to go crazy…).</p>
-
-<p>Then, if you want to make it do more interesting things, you will have to play around with what the Leap Motion has to offer; different types of gestures, distance, hands, fingers, etc… The Drone actions themselves are pretty straightforward:</p>
-<ul>
-  <li>my.drone.up();</li>
-  <li>my.drone.down();</li>
-  <li>my.drone.forward();</li>
-  <li>my.drone.back();</li>
-  <li>my.drone.left();</li>
-  <li>my.drone.right();</li>
-</ul>
-<p>You can also make the drone rotate clockwise or counterclockwise but what I found the most awesome thing is that the cylon-ardrone module makes the ‘flip’ movement really easy to execute. On a ‘keyTap’ for example, your drone could do a backflip!!</p>
-
-<p>The code for that would look like this:</p>
-
-<pre><code> work: function(my){
-   my.leapmotion.on('gesture', function(gesture){
-     if(gesture){
-       my.drone.takeoff();
-       if(gesture.type === 'keyTap'){
-         my.drone.backFlip();
-         after((6).seconds(), function(){
-          my.drone.land();
-         }
-       }
-     } else {
-       my.drone.stop();
-     };
-   };
- }
-}).start();</code></pre>
-
-<p>If you wanna see the difference with Node.js, you can find my original Github repo <a href="https://github.com/charliegerard/leap_drone" target="_blank">here</a>, otherwise <a href="https://github.com/charliegerard/cylon-projects/tree/master/cylon-drone-leapmotion" target="_blank">here is the repo</a> with more commands!</p>
-
-<p>If you have any question, don’t hesitate!</p>
+<p>This type of invention could revolutionise the life of people with disabilities for whom mind-controlled devices would considerably change their life.</p>
 
       <hr />
       <footer role="contentinfo">
@@ -227,17 +174,17 @@ Cylon.robot({
   <h4>Share on</h4>
   <ul>
     <li>
-      <a href="https://twitter.com/intent/tweet?text=http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+      <a href="https://twitter.com/intent/tweet?text=http://charliegerard.github.io/blog/Brain-Computer-Interface-Lasts-2-Weeks/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
     </li>
     <li>
-      <a href="https://www.facebook.com/sharer/sharer.php?u=http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://charliegerard.github.io/blog/Brain-Computer-Interface-Lasts-2-Weeks/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
     </li>
     <li>
-      <a href="https://plus.google.com/share?url=http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+      <a href="https://plus.google.com/share?url=http://charliegerard.github.io/blog/Brain-Computer-Interface-Lasts-2-Weeks/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
     </li>
   </ul>
 </div><!-- /.social-share -->
-        <p class="byline"><strong>Controlling the Parrot AR Drone with the Leap Motion in Cylon.js</strong> was published on <time datetime="2015-09-16T00:00:00+10:00">September 16, 2015</time>.</p>
+        <p class="byline"><strong>A Brain Computer Interface That Lasts For 2 Weeks</strong> was published on <time datetime="2015-05-10T00:00:00+10:00">May 10, 2015</time>.</p>
       </footer>
     </div><!-- /.article-wrap -->
   
