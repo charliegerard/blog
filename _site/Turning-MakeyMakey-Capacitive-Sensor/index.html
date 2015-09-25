@@ -179,77 +179,79 @@ At first I thought it would not be possible but, after looking for a few days, I
 </ul>
 
 <pre><code>
-int capSensePin = 5;
+    
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="lineno"> 1</span> <span class="kt">int</span> <span class="n">capSensePin</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="lineno"> 2</span> 
+<span class="lineno"> 3</span> <span class="c1">// This value may be different.</span>
+<span class="lineno"> 4</span> <span class="kt">int</span> <span class="n">touchedCutoff</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="kt">void</span> <span class="nf">setup</span><span class="p">(){</span>
+<span class="lineno"> 7</span>   <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
+<span class="lineno"> 8</span> <span class="p">}</span>
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span> <span class="kt">void</span> <span class="nf">loop</span><span class="p">(){</span>
+<span class="lineno">11</span> 
+<span class="lineno">12</span>   <span class="k">if</span> <span class="p">(</span><span class="n">readCapacitivePin</span><span class="p">(</span><span class="n">capSensePin</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">touchedCutoff</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">13</span>     <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">readCapacitivePin</span><span class="p">(</span><span class="n">capSensePin</span><span class="p">));</span>
+<span class="lineno">14</span>   <span class="p">}</span>
+<span class="lineno">15</span> 
+<span class="lineno">16</span> <span class="p">}</span>
+<span class="lineno">17</span> 
+<span class="lineno">18</span> <span class="kt">uint8_t</span> <span class="nf">readCapacitivePin</span><span class="p">(</span><span class="kt">int</span> <span class="n">pinToMeasure</span><span class="p">){</span>
+<span class="lineno">19</span>   <span class="c1">// This is how you declare a variable which</span>
+<span class="lineno">20</span>   <span class="c1">// will hold the PORT, PIN, and DDR registers</span>
+<span class="lineno">21</span>   <span class="c1">// on an AVR</span>
+<span class="lineno">22</span>   <span class="k">volatile</span> <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">port</span><span class="p">;</span>
+<span class="lineno">23</span>   <span class="k">volatile</span> <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">ddr</span><span class="p">;</span>
+<span class="lineno">24</span>   <span class="k">volatile</span> <span class="kt">uint8_t</span><span class="o">*</span> <span class="n">pin</span><span class="p">;</span>
+<span class="lineno">25</span>   <span class="c1">// Here we translate the input pin number from</span>
+<span class="lineno">26</span>   <span class="c1">// Arduino pin number to the AVR PORT, PIN, DDR,</span>
+<span class="lineno">27</span>   <span class="c1">// and which bit of those registers we care about.</span>
+<span class="lineno">28</span>   <span class="n">byte</span> <span class="n">bitmask</span><span class="p">;</span>
+<span class="lineno">29</span>   <span class="k">if</span> <span class="p">((</span><span class="n">pinToMeasure</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="p">(</span><span class="n">pinToMeasure</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span> <span class="mi">7</span><span class="p">)){</span>
+<span class="lineno">30</span>     <span class="n">port</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">PORTD</span><span class="p">;</span>
+<span class="lineno">31</span>     <span class="n">ddr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">DDRD</span><span class="p">;</span>
+<span class="lineno">32</span>     <span class="n">bitmask</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">pinToMeasure</span><span class="p">;</span>
+<span class="lineno">33</span>     <span class="n">pin</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">PIND</span><span class="p">;</span>
+<span class="lineno">34</span>   <span class="p">}</span>
+<span class="lineno">35</span>   <span class="k">if</span> <span class="p">((</span><span class="n">pinToMeasure</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mi">7</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="p">(</span><span class="n">pinToMeasure</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span> <span class="mi">13</span><span class="p">)){</span>
+<span class="lineno">36</span>     <span class="n">port</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">PORTB</span><span class="p">;</span>
+<span class="lineno">37</span>     <span class="n">ddr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">DDRB</span><span class="p">;</span>
+<span class="lineno">38</span>     <span class="n">bitmask</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="p">(</span><span class="n">pinToMeasure</span> <span class="o">-</span> <span class="mi">8</span><span class="p">);</span>
+<span class="lineno">39</span>     <span class="n">pin</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">PINB</span><span class="p">;</span>
+<span class="lineno">40</span>   <span class="p">}</span>
+<span class="lineno">41</span>   <span class="k">if</span> <span class="p">((</span><span class="n">pinToMeasure</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mi">13</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="p">(</span><span class="n">pinToMeasure</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span> <span class="mi">19</span><span class="p">)){</span>
+<span class="lineno">42</span>     <span class="n">port</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">PORTC</span><span class="p">;</span>
+<span class="lineno">43</span>     <span class="n">ddr</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">DDRC</span><span class="p">;</span>
+<span class="lineno">44</span>     <span class="n">bitmask</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="p">(</span><span class="n">pinToMeasure</span> <span class="o">-</span> <span class="mi">13</span><span class="p">);</span>
+<span class="lineno">45</span>     <span class="n">pin</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="n">PINC</span><span class="p">;</span>
+<span class="lineno">46</span>   <span class="p">}</span>
+<span class="lineno">47</span>   <span class="c1">// Discharge the pin first by setting it low and output</span>
+<span class="lineno">48</span>   <span class="o">*</span><span class="n">port</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="n">bitmask</span><span class="p">);</span>
+<span class="lineno">49</span>   <span class="o">*</span><span class="n">ddr</span> <span class="o">|=</span> <span class="n">bitmask</span><span class="p">;</span>
+<span class="lineno">50</span>   <span class="n">delay</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="lineno">51</span>   <span class="c1">// Make the pin an input WITHOUT the internal pull-up on</span>
+<span class="lineno">52</span>   <span class="o">*</span><span class="n">ddr</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="n">bitmask</span><span class="p">);</span>
+<span class="lineno">53</span>   <span class="c1">// Now see how long the pin to get pulled up</span>
+<span class="lineno">54</span>   <span class="kt">int</span> <span class="n">cycles</span> <span class="o">=</span> <span class="mi">16000</span><span class="p">;</span>
+<span class="lineno">55</span>   <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">cycles</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+<span class="lineno">56</span>     <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">pin</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">bitmask</span><span class="p">){</span>
+<span class="lineno">57</span>     <span class="n">cycles</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+<span class="lineno">58</span>     <span class="k">break</span><span class="p">;</span>
+<span class="lineno">59</span>   <span class="p">}</span>
+<span class="lineno">60</span> <span class="p">}</span>
+<span class="lineno">61</span> <span class="c1">// Discharge the pin again by setting it low and output</span>
+<span class="lineno">62</span> <span class="c1">// It&#39;s important to leave the pins low if you want to</span>
+<span class="lineno">63</span> <span class="c1">// be able to touch more than 1 sensor at a time - if</span>
+<span class="lineno">64</span> <span class="c1">// the sensor is left pulled high, when you touch</span>
+<span class="lineno">65</span> <span class="c1">// two sensors, your body will transfer the charge between</span>
+<span class="lineno">66</span> <span class="c1">// sensors.</span>
+<span class="lineno">67</span> <span class="o">*</span><span class="n">port</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="n">bitmask</span><span class="p">);</span>
+<span class="lineno">68</span> <span class="o">*</span><span class="n">ddr</span> <span class="o">|=</span> <span class="n">bitmask</span><span class="p">;</span>
+<span class="lineno">69</span> 
+<span class="lineno">70</span> <span class="k">return</span> <span class="n">cycles</span><span class="p">;</span>
+<span class="lineno">71</span> <span class="p">}</span></code></pre></div>
 
-// This value may be different.
-int touchedCutoff = 0;
-
-void setup(){
-  Serial.begin(9600);
-}
-
-void loop(){
-
-  if (readCapacitivePin(capSensePin) &gt; touchedCutoff) {
-    Serial.println(readCapacitivePin(capSensePin));
-  }
-
-}
-
-uint8_t readCapacitivePin(int pinToMeasure){
-  // This is how you declare a variable which
-  // will hold the PORT, PIN, and DDR registers
-  // on an AVR
-  volatile uint8_t* port;
-  volatile uint8_t* ddr;
-  volatile uint8_t* pin;
-  // Here we translate the input pin number from
-  // Arduino pin number to the AVR PORT, PIN, DDR,
-  // and which bit of those registers we care about.
-  byte bitmask;
-  if ((pinToMeasure &gt;= 0) &amp;&amp; (pinToMeasure &lt;= 7)){
-    port = &amp;PORTD;
-    ddr = &amp;DDRD;
-    bitmask = 1 &lt;&lt; pinToMeasure;
-    pin = &amp;PIND;
-  }
-  if ((pinToMeasure &gt; 7) &amp;&amp; (pinToMeasure &lt;= 13)){
-    port = &amp;PORTB;
-    ddr = &amp;DDRB;
-    bitmask = 1 &lt;&lt; (pinToMeasure - 8);
-    pin = &amp;PINB;
-  }
-  if ((pinToMeasure &gt; 13) &amp;&amp; (pinToMeasure &lt;= 19)){
-    port = &amp;PORTC;
-    ddr = &amp;DDRC;
-    bitmask = 1 &lt;&lt; (pinToMeasure - 13);
-    pin = &amp;PINC;
-  }
-  // Discharge the pin first by setting it low and output
-  *port &amp;= ~(bitmask);
-  *ddr |= bitmask;
-  delay(1);
-  // Make the pin an input WITHOUT the internal pull-up on
-  *ddr &amp;= ~(bitmask);
-  // Now see how long the pin to get pulled up
-  int cycles = 16000;
-  for(int i = 0; i &lt; cycles; i++){
-    if (*pin &amp; bitmask){
-    cycles = i;
-    break;
-  }
-}
-// Discharge the pin again by setting it low and output
-// It's important to leave the pins low if you want to
-// be able to touch more than 1 sensor at a time - if
-// the sensor is left pulled high, when you touch
-// two sensors, your body will transfer the charge between
-// sensors.
-*port &amp;= ~(bitmask);
-*ddr |= bitmask;
-
-return cycles;
-}
 
 </code></pre>
 

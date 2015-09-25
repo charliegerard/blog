@@ -27,6 +27,7 @@ So, if like me, you'd like to make your board do something different, follow the
 - Copy and paste the following code:
 
 <pre><code>
+    {% highlight c linenos %}
 int capSensePin = 5;
 
 // This value may be different.
@@ -98,6 +99,7 @@ uint8_t readCapacitivePin(int pinToMeasure){
 
 return cycles;
 }
+{% endhighlight %}
 
 </code></pre>
 
