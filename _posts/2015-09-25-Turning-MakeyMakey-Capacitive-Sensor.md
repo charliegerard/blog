@@ -3,7 +3,7 @@ layout: post
 title: "Turning the Makey Makey Into a Capacitive Sensor"
 author: charlie_gerard
 excerpt: "I bought a Makey Makey a few months ago and when I started playing with it, I realised quickly that having to attach one of the alligator clip to your wrist or finger to be able to use the device properly made the experience a bit less exciting for me..."
-tags: [technology, innovation, electronics, wearables, hacking, makey makey, ]
+tags: [technology, innovation, electronics, wearables, hacking, makey makey]
 comments: true
 ---
 
