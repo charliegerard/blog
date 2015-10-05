@@ -4,6 +4,7 @@ title: Controlling the Sphero using the Leap Motion in Cylon.js
 author: charlie_gerard
 excerpt: "A tutorial to learn how to program the Leap Motion to control the Sphero using Cylon.js"
 comments: true
+intro_image: https://charliegerard.files.wordpress.com/2015/01/cylonjs-sphero.png
 ---
 
 <a href="https://charliegerard.files.wordpress.com/2015/01/cylonjs-sphero.png"><img class="aligncenter size-large wp-image-61" src="https://charliegerard.files.wordpress.com/2015/01/cylonjs-sphero.png?w=660" alt="cylonjs-sphero-leap-motion" width="660" height="152" /></a>

@@ -4,6 +4,7 @@ title: Controlling the Parrot AR Drone with the Myo Armband in Node.js
 author: charlie_gerard
 excerpt: "A tutorial to learn how to program the Myo armband to control the Parrot AR Drone using Node.js"
 comments: true
+intro_image: https://charliegerard.files.wordpress.com/2015/02/myo-drone-node.png?w=614&h=141
 ---
 
 <a href="https://charliegerard.files.wordpress.com/2015/02/myo-drone-node.png"><img class="aligncenter size-full wp-image-136" src="https://charliegerard.files.wordpress.com/2015/02/myo-drone-node.png" alt="myo-drone-nodjs-tutorial" width="660" height="152" /></a>

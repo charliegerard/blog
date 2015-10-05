@@ -4,6 +4,7 @@ title: Control the Sphero with the Myo Armband in Node.js
 author: charlie_gerard
 excerpt: "Learn how to program the Myo armband to control the Sphero using Node.js"
 comments: true
+intro_image: https://charliegerard.files.wordpress.com/2015/01/myo-sphero-node.png
 ---
 
 <a href="https://charliegerard.files.wordpress.com/2015/01/myo-sphero-node.png"><img class="aligncenter size-full wp-image-118" src="https://charliegerard.files.wordpress.com/2015/01/myo-sphero-node.png" alt="myo-sphero-node" width="660" height="152" /></a>

@@ -271,6 +271,7 @@ $button-size: 1.5rem;
 		border-bottom: 1px solid lighten($black,70);
 	}
 	article {
+		margin-top: 100px;
 		h2 {
 			margin-bottom: 4px;
 			@include font-rem(20);

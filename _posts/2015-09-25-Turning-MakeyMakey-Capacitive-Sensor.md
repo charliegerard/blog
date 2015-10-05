@@ -5,6 +5,7 @@ author: charlie_gerard
 excerpt: "I bought a Makey Makey a few months ago and when I started playing with it, I realised quickly that having to attach one of the alligator clip to your wrist or finger to be able to use the device properly made the experience a bit less exciting for me..."
 tags: [technology, innovation, electronics, wearables, hacking, makey makey]
 comments: true
+intro_image: https://photos-5.dropbox.com/t/2/AAAw04BTeKhpJBcJrpCn1Uue82ymNvaixZp1kjti1ldnzA/12/41049144/jpeg/32x32/1/_/1/2/makey%20makey_03.jpg/EPboqx8Y5hcgAigC/HdWbucnn66fa8Bn6D0ctGDpUuNwzMrUky-vVpXQ7tic?size=1024x768&size_mode=2
 ---
 
 <a href="https://charliegerard.files.wordpress.com/2015/04/11511-01b.jpg"><img class="aligncenter size-full wp-image-176" src="https://charliegerard.files.wordpress.com/2015/04/11511-01b.jpg" alt="makey-makey" width="600" height="600" /></a>

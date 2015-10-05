@@ -710,7 +710,7 @@ blockquote {
    Paragraphs
    ========================================================================== */
 p {
-  margin: 0 0 1.625rem; }
+  margin: 0 0 1rem; }
 
 /*
    Code snippets
@@ -1592,7 +1592,7 @@ svg:not(:root) {
 
 /* 2 images of equal dimensions in a row */
 .half {
-  margin: 0 auto;
+  margin: 0 auto 50px auto;
   width: 100%;
   *zoom: 1; }
   .half:before, .half:after {
@@ -1615,7 +1615,7 @@ svg:not(:root) {
 
 /* 3 images of equal dimensions in a row */
 .third {
-  margin: 0 auto;
+  margin: 0 auto 50px auto;
   width: 100%;
   *zoom: 1; }
   .third:before, .third:after {
@@ -2002,7 +2002,7 @@ body {
    Header
    ========================================================================== */
 .navigation-wrapper {
-  margin: 0 auto;
+  margin: 0 auto 50px auto;
   width: 100%;
   padding: 2em 0 1em;
   background-color: black;
@@ -2219,7 +2219,7 @@ body {
 /* Main content */
 #main {
   counter-reset: captions;
-  margin: 0 auto;
+  margin: 0 auto 50px auto;
   width: 100%;
   *zoom: 1;
   clear: both;
@@ -2236,7 +2236,7 @@ body {
     margin-top: 0; }
   #main .post,
   #main .page {
-    margin: 0 auto;
+    margin: 0 auto 50px auto;
     width: 100%;
     display: inline;
     float: left;
@@ -2261,7 +2261,7 @@ body {
 
 /* Index listing specific styling */
 #index {
-  margin: 0 auto;
+  margin: 0 auto 50px auto;
   width: 100%;
   display: inline;
   float: left;
@@ -2288,6 +2288,7 @@ body {
     font-size: 1.75rem;
     border-bottom: 1px solid #c4c4c4; }
   #index article {
+    margin-top: 100px;
     /*		p+p {
     			text-indent: 0;
     		}*/ }
@@ -2640,7 +2641,7 @@ body {
 
 /* Footer wrapper */
 .footer-wrap {
-  margin: 0 auto;
+  margin: 0 auto 50px auto;
   width: 100%;
   *zoom: 1;
   clear: both;

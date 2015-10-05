@@ -4,6 +4,7 @@ title: Controlling the Parrot AR Drone with the Leap Motion in Cylon.js
 author: charlie_gerard
 excerpt: "A tutorial to learn how to program the Leap Motion to control the Parrot AR Drone using Cylon.js"
 comments: true
+intro_image: https://charliegerard.files.wordpress.com/2015/01/cylonjs-drone-leapmotion.png
 ---
 
 <a href="https://charliegerard.files.wordpress.com/2015/01/cylonjs-drone-leapmotion.png"><img class="aligncenter size-large wp-image-85" src="https://charliegerard.files.wordpress.com/2015/01/cylonjs-drone-leapmotion.png?w=660" alt="cylon-drone-leapmotion" width="660" height="152" /></a>
