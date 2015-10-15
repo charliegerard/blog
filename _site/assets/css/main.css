@@ -710,7 +710,7 @@ blockquote {
    Paragraphs
    ========================================================================== */
 p {
-  margin: 0 0 1rem; }
+  margin: 0 0 1.625rem; }
 
 /*
    Code snippets
@@ -2288,20 +2288,24 @@ body {
     font-size: 1.75rem;
     border-bottom: 1px solid #c4c4c4; }
   #index article {
-    margin-top: 100px;
+    margin-top: 1em;
+    border-top: 1px solid lightgrey;
+    padding-top: 2em;
     /*		p+p {
     			text-indent: 0;
     		}*/ }
     #index article h2 {
       margin-bottom: 4px;
+      font-size: 35px;
       font-size: 20px;
       font-size: 1.25rem; }
       #index article h2.link-post {
         margin-bottom: 26px;
         margin-bottom: 1.625rem; }
     #index article p {
-      font-size: 14px;
-      font-size: 0.875rem; }
+      font-size: 1em;
+      margin-top: 1em;
+      font-family: Georgia; }
 
 /* Large feature header image */
 .image-wrap {
