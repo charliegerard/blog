@@ -2283,14 +2283,14 @@ body {
       width: 37.5%; } }
   #index h3 {
     margin: 0;
-    padding-bottom: .5em;
+    padding-bottom: 0;
     font-size: 28px;
     font-size: 1.75rem;
-    border-bottom: 1px solid #c4c4c4; }
+    /*border-bottom: 1px solid lighten($black,70);*/ }
   #index article {
     margin-top: 1em;
     border-top: 1px solid lightgrey;
-    padding-top: 2em;
+    padding-top: 1em;
     /*		p+p {
     			text-indent: 0;
     		}*/ }
