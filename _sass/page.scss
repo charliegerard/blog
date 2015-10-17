@@ -15,10 +15,10 @@ body {
 .navigation-wrapper {
 	@include container;
 	padding: 2em 0 1em;
-	background-color: black;
 	font-family: $heading-font;
-	font-weight: 700;
+	font-weight: 100;
 	text-transform: uppercase;
+	border-bottom: 0.1em solid lightgrey;
 	@include clearfix;
 }
 
@@ -40,9 +40,6 @@ body {
 	@media #{$x-large} {
 		@include grid(12,1.5);
 		@include prefix(12,2);
-	}
-	a{
-		color: white;
 	}
 }
 
@@ -86,7 +83,6 @@ body {
 		a {
 			display: block;
 			padding: 10px 0;
-			color: white;
 			decoration: none;
 			border-bottom: 0 solid transparent;
 			@include transition(all .2s);
@@ -267,6 +263,7 @@ $button-size: 1.5rem;
 	h3 {
 		margin: 0;
 		padding-bottom: 0;
+		font-weight: 200;
 		@include font-rem(28);
 		/*border-bottom: 1px solid lighten($black,70);*/
 	}
