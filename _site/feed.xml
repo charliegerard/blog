@@ -4,13 +4,127 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://charliegerard.github.io/blog/feed.xml" />
 <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog" />
-<updated>2015-10-18T10:19:19+11:00</updated>
+<updated>2015-10-20T20:13:17+11:00</updated>
 <id>http://charliegerard.github.io/blog/</id>
 <author>
   <name>Charlie Gerard</name>
   <uri>http://charliegerard.github.io/blog/</uri>
   <email>charlie.a.gerard@gmail.com</email>
 </author>
+
+
+  
+
+<entry>
+  <title type="html"><![CDATA[How to install OpenCV 3 on Mac]]></title>
+  <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Installing-OpenCV/" />
+  <id>http://charliegerard.github.io/blog/Installing-OpenCV</id>
+  <published>2015-10-20T00:00:00+11:00</published>
+  <updated>2015-10-20T00:00:00+11:00</updated>
+  <author>
+    <name></name>
+    <uri>http://charliegerard.github.io/blog</uri>
+    
+  </author>
+  <content type="html">
+    &lt;p&gt;I’m planning on starting a project involving computer vision using the OpenCV framework.
+As I’ve had some troubles getting everything installed and running a basic project, I’m writing this tutorial to help anyone who’s going through the same process, hoping it will make it easier :)&lt;/p&gt;
+
+&lt;h2 id=&quot;installing-opencv&quot;&gt;Installing OpenCV&lt;/h2&gt;
+
+&lt;p&gt;To get started, visit the &lt;a href=&quot;http://opencv.org/&quot;&gt;OpenCV website&lt;/a&gt; and download the correct version for your OS.
+Then, go to the &lt;a href=&quot;https://www.macports.org/install.php&quot;&gt;MacPorts project&lt;/a&gt;, download it and install it.&lt;/p&gt;
+
+&lt;p&gt;Once this is done, open a new terminal window, write ‘&lt;strong&gt;port&lt;/strong&gt;’ and press enter. If you see the following, you’re good.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://lh3.googleusercontent.com/i9tMY8UlzN0esEE7P9St7xrTJlMFh2K3ZGvqofV0VpePJeAhNiOuSoKsxRyUOkKUD7BoHTXDXpK48JC51TlruDuW35qc64WNozTXscGKt9L7Q7g5_HWEzigu-97O-aOxAE7h0h1wicOmNrDyNwLn61PypZJA2EySSDrtGKpOXYu1thS_mNt01QEcEmYNnuqsAY5D5hkhv8SQI2rT5kdEqEaEuTzS2TIVZ53nvz4H1yc6kbqjGh12z1c9a7DHzK9qU4yi4SgEfjOR9ioC-ALWKwuCK00trPER9u8-8jRY0u9hBkW3oH3pIXECa0P9E-UCYmnyTlyyUcCh_UAE4vhZCE1KQ_pBS7xvSzLibUa0It-hrXE66WpXB0dwb7MStkk-51J5iRM6xSp8-2q9I4Zga09pzF5Y9P0H1ne9lx7R3pgZetUC3xVT6hdGWcXFPOmYRUz17CMbjc3F-QtZvPPLD20Lzg0sk4DByVxX_7a4okXLUn1gNqXvmwo7PidSqiNCwVDNyAUOgU07BoerX4ctrmEVomwj_XlzSzbi=w1144-h264-no&quot; width=&quot;640&quot; height=&quot;480&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Find where you downloaded OpenCV and drag it to where you want it to live. Make sure you’re not going to change the location often because it could break projects.&lt;/p&gt;
+
+&lt;p&gt;Once you moved OpenCV to a directory you’re happy with, &lt;strong&gt;cd into this directory&lt;/strong&gt; and &lt;strong&gt;create a folder called ‘build’&lt;/strong&gt; with the mkdir command.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Cd into this new folder&lt;/strong&gt; and run ‘&lt;strong&gt;cmake -G “Unix Makefiles” ..&lt;/strong&gt;’&lt;/p&gt;
+
+&lt;p&gt;This command will start installing what OpenCV needs to run.&lt;/p&gt;
+
+&lt;p&gt;Once it’s done, run “&lt;strong&gt;make -j8&lt;/strong&gt;” in your Terminal and ‘&lt;strong&gt;sudo make install&lt;/strong&gt;’.&lt;/p&gt;
+
+&lt;p&gt;Everything should now be installed. If you check inside your build &amp;gt; lib folder, you should see all the frameworks that have been installed.&lt;/p&gt;
+
+&lt;h2 id=&quot;now-lets-setup-a-basic-project-in-xcode&quot;&gt;Now, let’s setup a basic project in Xcode.&lt;/h2&gt;
+
+&lt;p&gt;Open Xcode and create a new project by clicking on File &amp;gt; New &amp;gt; Project.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://lh3.googleusercontent.com/x28BVcVztmhAdrjmkmAbrHIA-gJ7OB7jvz8Wkzx0PqOdUGQn-5LxkiEqifznoe8iL7PaiOvldYVlO3SAluPVLn-emP0id2D_Mm57gLMf8CJh-oiTREdKgT2n4FRQfk25ClK-ovC7O_9mt5v2gtfDb-LLh7Q9wDxQXNpjGS_7ShM7TxKXiLGOWZCNgWT_WJ1xXMU_2gygbg2cBPtJzqEUIZj7FUrlpW8a5CYRBZuqqe4Fskl17c2Ul5iVaQSdJPPZ9BildpZtPxSITYSVbkaW_ud3c6kQ08aCmxov2Ka6Dyf1BvtBkPCqizspQ1aTWeWk0KmRaECqs81GN-ZAW7OEiUMwNGDw09fYBWlzLSuDZOZ761veOi2oYJOImLoIy_s9YVHddyk39a08ZmaQsyDxC_aTWL6EkS9kEK9gmoY8y-bFXyKP6F637lhIgzCZCfMWdYX4yt3M56kIaI2FkkopbE5xzfiE9qbvlHDCpohUSJJbLF9hSZvosIxFePP7ePP4jv88rXPE2PlByNgcfBZYwmGlfAMdRb9ZGhkN=w1541-h1002-no&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Go to OSX &amp;gt; Application and select ‘Command Line Tool’.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://lh3.googleusercontent.com/zw-Xaj0AvxcNxe-ErR8mWCcLQY_Zqs2nucwcscKJhC7bTkifPg-z-1zda-G6Rs7SBfSn0Jjb6vyyUzAMWM2-vOYLRo401E37nvYp9oplwbc7EASF1x624jHoZet4qRSCCAlTJWIFyBPI39dCjz76l3LUR8A1VZ5JWO_NKj-rFwj-1lJkR5TsaHX1prjxpBQ1UckAMBbDj6BzHPETBS4-_CThHGXDfRJ3jGqH13UDP1VLAuVPxl1NEMhOzUWoeezmF7q-6lksSYLKQnk-uWgY2xkpw4b7Yc2twV62izoco3cNY46Qm0NP6WoJobKP4pc2V9v5vBkLma4uxUzo2PnlAJ7lmA7M-6JtUYWpCGPJybWK9scd41U2hJW1GgUrLwvdu7mGwQl_Wcy8MjsOZr8VivLjo24V_wOckR6DyJi6vx3vnXA2kkrDZqgEYEVzdkyphZw-uw_xVNzLaqzWyj3CR-RTIlhhZGb0VrQkTwqMF_FgcysHjC2Lx9WA_VkNk4x1-MOXBG6N2o21Dhky5En5f_tak8eqPgQYnnbF=w1464-h1042-no&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In the next window, make sure the language selected is C++ and enter the project name you’d like. For example ‘OpenCV Tutorial’.&lt;/p&gt;
+
+&lt;p&gt;Your project window will then open, select the project file (the file at the top of your project), and follow these steps:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;At the top, select &lt;strong&gt;Build Settings&lt;/strong&gt; and search for &lt;strong&gt;Search Paths&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;Change the &lt;strong&gt;Always Search User Paths&lt;/strong&gt; to true.&lt;/li&gt;
+  &lt;li&gt;Change the &lt;strong&gt;Header Search Paths&lt;/strong&gt; to usr/local/include.&lt;/li&gt;
+  &lt;li&gt;Change &lt;strong&gt;Library Search Paths&lt;/strong&gt; to usr/local/lib.&lt;/li&gt;
+  &lt;li&gt;In the search field, remove your previous search and scroll down until you find the &lt;strong&gt;Linking&lt;/strong&gt; section.&lt;/li&gt;
+  &lt;li&gt;Double click on &lt;strong&gt;Other Linker Flags&lt;/strong&gt;, click on the + button and add:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code&gt;
+  
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lopencv_calib3d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lopencv_core&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lopencv_features2d&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lopencv_flann&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lopencv_highgui&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lopencv_imgcodecs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lopencv_imgproc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lopencv_ml&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lopencv_objdetect&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lopencv_photo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lopencv_shape&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lopencv_stitching&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lopencv_superres&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lopencv_ts&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lopencv_video&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lopencv_videoio&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;lopencv_videostab&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://lh3.googleusercontent.com/OCAoOs9NCwdy3kT-4EgkwVA7deLehMCZE2M_a3-tIqQjD6_fCpAfDQjozghRaC4HiN-IFh2RRQMswyHy8bfkp8NouIByLEBhpGT45A32ynPcSstcrguZP0ZqHbLLSK64bTX1n-fNAr9e4yW0shgclFeGPEVPF0e7IhWeYer_uk79d-TVPqQ_PzMbZClhR5-Qy-SQG7r0lyrd9QOzYqA9OXV9kQCcI79_qdHgPRWadCJPvAHsB_ImiqVdkT4cxSHNbg9e2U0gdLFP46sotryRLse-Joo0yhOH_To2wWtARohUf4oAjexPlGSfGhqXQtiMgYaZCBFTmprtlbtwmkOvRabtgmYaGQVKcKq5f5YAPgNQirLNNgvuZvhjiSdkjy679uxK1uKpHnRMLosVZg_8D3RMHhO6dzx4Fz2iFLqf8mHfN36WHIUYqz60o7EkKsWrVJhPQ1U_GurMs7AqzqFKrjIJAcDPoSqSebWb0FArL650VZSlcgQVWtrP9I6OGL5Txuk3dhPZDZbHtJG2OYsTeW3RFhop1BMVxujV=w2558-h1510-no&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;All of the previous steps will allow Xcode to know where to look for when you import a library in your code.&lt;/p&gt;
+
+&lt;p&gt;Finally, go to your Xcode preferences, select &lt;strong&gt;Locations Tab&lt;/strong&gt;, click &lt;strong&gt;Advanced&lt;/strong&gt; and change the location button from &lt;strong&gt;&lt;em&gt;Unique&lt;/em&gt;&lt;/strong&gt; to &lt;strong&gt;&lt;em&gt;Legacy&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;writing-our-first-program&quot;&gt;Writing our first program.&lt;/h2&gt;
+
+&lt;p&gt;Click on ‘File &amp;gt; Add Files to …’ and select the image processing library &lt;em&gt;(libopencv_imgproc.3.0.0.dylib)&lt;/em&gt;, the core library &lt;em&gt;(libopencv_core.3.0.0.dylib)&lt;/em&gt; and the gui library &lt;em&gt;(libopencv_highgui.3.0.0.dylib)&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now we need to import them in our main.cpp file and write the rest of the code to open a basic webcam window.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;
+    
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c--&quot; data-lang=&quot;c++&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#include &amp;lt;iostream&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#include &amp;quot;opencv2/imgproc.hpp&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#include &amp;quot;opencv2/core.hpp&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#include &amp;quot;opencv2/highgui.hpp&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;VideoCapture&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;){&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;Mat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Webcam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;cap&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Webcam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Webcam&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Webcam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt; 
+&lt;span class=&quot;lineno&quot;&gt;18&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://lh3.googleusercontent.com/d9ml--5VqHfjyX1OhIO8FuR_6q3ScQDdPqrhh9yqDjeDimNXv3AzYKvTGLsUxB2FMtbwIguSlEd1AlFGnA1JfBwTDN2-A72JImwuw1VfOGqwPlo10H0i63ghFE7zfR2QJhSaaWl7T-s28PtMUGNJ3yJE677SfnqRcsEuRXJO1BMqAS6_W6Ytvh_UfYHXfpuTuuJJw3EFNhYZAUSpIdXeLBQC5PjwyFORQ1giH80h8b3_4sjJR6ek_wYUK_lp9mGuaYGvk5JobSdECpC3I7MgEujCcy11h15ocl5OK7iE7nErGsQvGb5qubkwd2XtwQUVOOUzKLrvGgVW3c850w2iS8QXuiSFFxl6exFvPUlpW6istJMtNFQIMPL2iXFxZDPQW1C8b-Us9bAgub5VRvMN4GumvfNJofmw7vpl8iOCHM2tVfvGuI9tXHHvqGTphp-iZraWjc10ujPxp3vPEeg8h_alfa6AWNmCsh5LsVhr6-PpvSke72XnCe06PWUtgTPIpw5syK86yFW-Nhbqc6rH4o7G3NPJ3XNpCbuO=w1480-h676-no&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You project should build successfully and a webcam window should open.&lt;/p&gt;
+
+&lt;p&gt;You’re done!&lt;/p&gt;
+
+
+    &lt;p&gt;&lt;a href=&quot;http://charliegerard.github.io/blog/Installing-OpenCV/&quot;&gt;How to install OpenCV 3 on Mac&lt;/a&gt; was originally published by Charlie Gerard at &lt;a href=&quot;http://charliegerard.github.io/blog&quot;&gt;Charlie Gerard&lt;/a&gt; on October 20, 2015.&lt;/p&gt;
+  </content>
+</entry>
 
 
   

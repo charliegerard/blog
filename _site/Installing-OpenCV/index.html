@@ -1,0 +1,344 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>How to install OpenCV 3 on Mac &#8211; Charlie Gerard</title>
+<meta name="description" content="I'm planning on starting a project involving computer vision using the OpenCV framework. As I've had some troubles getting everything installed and running a basic project, I'm writing this tutorial to help anyone who's going through the same process, hoping it will make it easier ...">
+<meta name="keywords" content="technology, computer vision, openCV">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="How to install OpenCV 3 on Mac">
+<meta name="twitter:description" content="I'm planning on starting a project involving computer vision using the OpenCV framework. As I've had some troubles getting everything installed and running a basic project, I'm writing this tutorial to help anyone who's going through the same process, hoping it will make it easier ...">
+<meta name="twitter:site" content="@charlie__gerard">
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://charliegerard.github.io/blog/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to install OpenCV 3 on Mac">
+<meta property="og:description" content="I'm planning on starting a project involving computer vision using the OpenCV framework. As I've had some troubles getting everything installed and running a basic project, I'm writing this tutorial to help anyone who's going through the same process, hoping it will make it easier ...">
+<meta property="og:url" content="http://charliegerard.github.io/blog/Installing-OpenCV/">
+<meta property="og:site_name" content="Charlie Gerard">
+
+<meta property="og:image" content="http://charliegerard.github.io/blog/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="http://charliegerard.github.io/blog/Installing-OpenCV/">
+<link href="http://charliegerard.github.io/blog/feed.xml" type="application/atom+xml" rel="alternate" title="Charlie Gerard Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://charliegerard.github.io/blog/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="http://charliegerard.github.io/blog/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="http://charliegerard.github.io/blog/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://charliegerard.github.io/blog/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://charliegerard.github.io/blog/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://charliegerard.github.io/blog/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://charliegerard.github.io/blog/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://charliegerard.github.io/blog/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://charliegerard.github.io/blog/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://charliegerard.github.io/blog/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="http://charliegerard.github.io/blog/">Charlie Gerard</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="http://charliegerard.github.io/blog/about" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="http://charliegerard.github.io/blog/posts" >All Posts</a></li>
+				
+				    
+				        
+				        
+				    <li><a href="http://charliegerard.github.io" target="_blank">Portfolio</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="http://charliegerard.github.io/blog/blog/images/" class="bio-photo" alt=" bio photo">
+
+
+  <h3 itemprop="name"></h3>
+  <p></p>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="http://charliegerard.github.io/blog/Installing-OpenCV/" rel="bookmark" title="How to install OpenCV 3 on Mac">How to install OpenCV 3 on Mac</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>I’m planning on starting a project involving computer vision using the OpenCV framework.
+As I’ve had some troubles getting everything installed and running a basic project, I’m writing this tutorial to help anyone who’s going through the same process, hoping it will make it easier :)</p>
+
+<h2 id="installing-opencv">Installing OpenCV</h2>
+
+<p>To get started, visit the <a href="http://opencv.org/">OpenCV website</a> and download the correct version for your OS.
+Then, go to the <a href="https://www.macports.org/install.php">MacPorts project</a>, download it and install it.</p>
+
+<p>Once this is done, open a new terminal window, write ‘<strong>port</strong>’ and press enter. If you see the following, you’re good.</p>
+
+<p><img src="https://lh3.googleusercontent.com/i9tMY8UlzN0esEE7P9St7xrTJlMFh2K3ZGvqofV0VpePJeAhNiOuSoKsxRyUOkKUD7BoHTXDXpK48JC51TlruDuW35qc64WNozTXscGKt9L7Q7g5_HWEzigu-97O-aOxAE7h0h1wicOmNrDyNwLn61PypZJA2EySSDrtGKpOXYu1thS_mNt01QEcEmYNnuqsAY5D5hkhv8SQI2rT5kdEqEaEuTzS2TIVZ53nvz4H1yc6kbqjGh12z1c9a7DHzK9qU4yi4SgEfjOR9ioC-ALWKwuCK00trPER9u8-8jRY0u9hBkW3oH3pIXECa0P9E-UCYmnyTlyyUcCh_UAE4vhZCE1KQ_pBS7xvSzLibUa0It-hrXE66WpXB0dwb7MStkk-51J5iRM6xSp8-2q9I4Zga09pzF5Y9P0H1ne9lx7R3pgZetUC3xVT6hdGWcXFPOmYRUz17CMbjc3F-QtZvPPLD20Lzg0sk4DByVxX_7a4okXLUn1gNqXvmwo7PidSqiNCwVDNyAUOgU07BoerX4ctrmEVomwj_XlzSzbi=w1144-h264-no" width="640" height="480" /></p>
+
+<p>Find where you downloaded OpenCV and drag it to where you want it to live. Make sure you’re not going to change the location often because it could break projects.</p>
+
+<p>Once you moved OpenCV to a directory you’re happy with, <strong>cd into this directory</strong> and <strong>create a folder called ‘build’</strong> with the mkdir command.</p>
+
+<p><strong>Cd into this new folder</strong> and run ‘<strong>cmake -G “Unix Makefiles” ..</strong>’</p>
+
+<p>This command will start installing what OpenCV needs to run.</p>
+
+<p>Once it’s done, run “<strong>make -j8</strong>” in your Terminal and ‘<strong>sudo make install</strong>’.</p>
+
+<p>Everything should now be installed. If you check inside your build &gt; lib folder, you should see all the frameworks that have been installed.</p>
+
+<h2 id="now-lets-setup-a-basic-project-in-xcode">Now, let’s setup a basic project in Xcode.</h2>
+
+<p>Open Xcode and create a new project by clicking on File &gt; New &gt; Project.</p>
+
+<p><img src="https://lh3.googleusercontent.com/x28BVcVztmhAdrjmkmAbrHIA-gJ7OB7jvz8Wkzx0PqOdUGQn-5LxkiEqifznoe8iL7PaiOvldYVlO3SAluPVLn-emP0id2D_Mm57gLMf8CJh-oiTREdKgT2n4FRQfk25ClK-ovC7O_9mt5v2gtfDb-LLh7Q9wDxQXNpjGS_7ShM7TxKXiLGOWZCNgWT_WJ1xXMU_2gygbg2cBPtJzqEUIZj7FUrlpW8a5CYRBZuqqe4Fskl17c2Ul5iVaQSdJPPZ9BildpZtPxSITYSVbkaW_ud3c6kQ08aCmxov2Ka6Dyf1BvtBkPCqizspQ1aTWeWk0KmRaECqs81GN-ZAW7OEiUMwNGDw09fYBWlzLSuDZOZ761veOi2oYJOImLoIy_s9YVHddyk39a08ZmaQsyDxC_aTWL6EkS9kEK9gmoY8y-bFXyKP6F637lhIgzCZCfMWdYX4yt3M56kIaI2FkkopbE5xzfiE9qbvlHDCpohUSJJbLF9hSZvosIxFePP7ePP4jv88rXPE2PlByNgcfBZYwmGlfAMdRb9ZGhkN=w1541-h1002-no" /></p>
+
+<p>Go to OSX &gt; Application and select ‘Command Line Tool’.</p>
+
+<p><img src="https://lh3.googleusercontent.com/zw-Xaj0AvxcNxe-ErR8mWCcLQY_Zqs2nucwcscKJhC7bTkifPg-z-1zda-G6Rs7SBfSn0Jjb6vyyUzAMWM2-vOYLRo401E37nvYp9oplwbc7EASF1x624jHoZet4qRSCCAlTJWIFyBPI39dCjz76l3LUR8A1VZ5JWO_NKj-rFwj-1lJkR5TsaHX1prjxpBQ1UckAMBbDj6BzHPETBS4-_CThHGXDfRJ3jGqH13UDP1VLAuVPxl1NEMhOzUWoeezmF7q-6lksSYLKQnk-uWgY2xkpw4b7Yc2twV62izoco3cNY46Qm0NP6WoJobKP4pc2V9v5vBkLma4uxUzo2PnlAJ7lmA7M-6JtUYWpCGPJybWK9scd41U2hJW1GgUrLwvdu7mGwQl_Wcy8MjsOZr8VivLjo24V_wOckR6DyJi6vx3vnXA2kkrDZqgEYEVzdkyphZw-uw_xVNzLaqzWyj3CR-RTIlhhZGb0VrQkTwqMF_FgcysHjC2Lx9WA_VkNk4x1-MOXBG6N2o21Dhky5En5f_tak8eqPgQYnnbF=w1464-h1042-no" /></p>
+
+<p>In the next window, make sure the language selected is C++ and enter the project name you’d like. For example ‘OpenCV Tutorial’.</p>
+
+<p>Your project window will then open, select the project file (the file at the top of your project), and follow these steps:</p>
+
+<ol>
+  <li>At the top, select <strong>Build Settings</strong> and search for <strong>Search Paths</strong></li>
+  <li>Change the <strong>Always Search User Paths</strong> to true.</li>
+  <li>Change the <strong>Header Search Paths</strong> to usr/local/include.</li>
+  <li>Change <strong>Library Search Paths</strong> to usr/local/lib.</li>
+  <li>In the search field, remove your previous search and scroll down until you find the <strong>Linking</strong> section.</li>
+  <li>Double click on <strong>Other Linker Flags</strong>, click on the + button and add:</li>
+</ol>
+
+<pre><code>
+  
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="lineno">1</span> <span class="o">-</span><span class="n">lopencv_calib3d</span> <span class="o">-</span><span class="n">lopencv_core</span> <span class="o">-</span><span class="n">lopencv_features2d</span> <span class="o">-</span><span class="n">lopencv_flann</span> <span class="o">-</span><span class="n">lopencv_highgui</span> <span class="o">-</span><span class="n">lopencv_imgcodecs</span> <span class="o">-</span><span class="n">lopencv_imgproc</span> <span class="o">-</span><span class="n">lopencv_ml</span> <span class="o">-</span><span class="n">lopencv_objdetect</span> <span class="o">-</span><span class="n">lopencv_photo</span> <span class="o">-</span><span class="n">lopencv_shape</span> <span class="o">-</span><span class="n">lopencv_stitching</span> <span class="o">-</span><span class="n">lopencv_superres</span> <span class="o">-</span><span class="n">lopencv_ts</span> <span class="o">-</span><span class="n">lopencv_video</span> <span class="o">-</span><span class="n">lopencv_videoio</span> <span class="o">-</span><span class="n">lopencv_videostab</span><span class="err">&#39;</span></code></pre></div>
+
+</code></pre>
+
+<p><img src="https://lh3.googleusercontent.com/OCAoOs9NCwdy3kT-4EgkwVA7deLehMCZE2M_a3-tIqQjD6_fCpAfDQjozghRaC4HiN-IFh2RRQMswyHy8bfkp8NouIByLEBhpGT45A32ynPcSstcrguZP0ZqHbLLSK64bTX1n-fNAr9e4yW0shgclFeGPEVPF0e7IhWeYer_uk79d-TVPqQ_PzMbZClhR5-Qy-SQG7r0lyrd9QOzYqA9OXV9kQCcI79_qdHgPRWadCJPvAHsB_ImiqVdkT4cxSHNbg9e2U0gdLFP46sotryRLse-Joo0yhOH_To2wWtARohUf4oAjexPlGSfGhqXQtiMgYaZCBFTmprtlbtwmkOvRabtgmYaGQVKcKq5f5YAPgNQirLNNgvuZvhjiSdkjy679uxK1uKpHnRMLosVZg_8D3RMHhO6dzx4Fz2iFLqf8mHfN36WHIUYqz60o7EkKsWrVJhPQ1U_GurMs7AqzqFKrjIJAcDPoSqSebWb0FArL650VZSlcgQVWtrP9I6OGL5Txuk3dhPZDZbHtJG2OYsTeW3RFhop1BMVxujV=w2558-h1510-no" /></p>
+
+<p>All of the previous steps will allow Xcode to know where to look for when you import a library in your code.</p>
+
+<p>Finally, go to your Xcode preferences, select <strong>Locations Tab</strong>, click <strong>Advanced</strong> and change the location button from <strong><em>Unique</em></strong> to <strong><em>Legacy</em></strong>.</p>
+
+<h2 id="writing-our-first-program">Writing our first program.</h2>
+
+<p>Click on ‘File &gt; Add Files to …’ and select the image processing library <em>(libopencv_imgproc.3.0.0.dylib)</em>, the core library <em>(libopencv_core.3.0.0.dylib)</em> and the gui library <em>(libopencv_highgui.3.0.0.dylib)</em>.</p>
+
+<p>Now we need to import them in our main.cpp file and write the rest of the code to open a basic webcam window.</p>
+
+<pre><code>
+    
+<div class="highlight"><pre><code class="language-c--" data-lang="c++"><span class="lineno"> 1</span> <span class="cp">#include &lt;iostream&gt;</span>
+<span class="lineno"> 2</span> <span class="cp">#include &quot;opencv2/imgproc.hpp&quot;</span>
+<span class="lineno"> 3</span> <span class="cp">#include &quot;opencv2/core.hpp&quot;</span>
+<span class="lineno"> 4</span> <span class="cp">#include &quot;opencv2/highgui.hpp&quot;</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="k">using</span> <span class="k">namespace</span> <span class="n">cv</span><span class="p">;</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span> <span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span>     <span class="n">VideoCapture</span> <span class="n">cap</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="lineno">11</span> 
+<span class="lineno">12</span>     <span class="k">while</span><span class="p">(</span><span class="nb">true</span><span class="p">){</span>
+<span class="lineno">13</span>         <span class="n">Mat</span> <span class="n">Webcam</span><span class="p">;</span>
+<span class="lineno">14</span>         <span class="n">cap</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">Webcam</span><span class="p">);</span>
+<span class="lineno">15</span>         <span class="n">imshow</span><span class="p">(</span><span class="s">&quot;Webcam&quot;</span><span class="p">,</span> <span class="n">Webcam</span><span class="p">);</span>
+<span class="lineno">16</span>     <span class="p">}</span>
+<span class="lineno">17</span> 
+<span class="lineno">18</span> <span class="p">}</span></code></pre></div>
+
+</code></pre>
+
+<p><img src="https://lh3.googleusercontent.com/d9ml--5VqHfjyX1OhIO8FuR_6q3ScQDdPqrhh9yqDjeDimNXv3AzYKvTGLsUxB2FMtbwIguSlEd1AlFGnA1JfBwTDN2-A72JImwuw1VfOGqwPlo10H0i63ghFE7zfR2QJhSaaWl7T-s28PtMUGNJ3yJE677SfnqRcsEuRXJO1BMqAS6_W6Ytvh_UfYHXfpuTuuJJw3EFNhYZAUSpIdXeLBQC5PjwyFORQ1giH80h8b3_4sjJR6ek_wYUK_lp9mGuaYGvk5JobSdECpC3I7MgEujCcy11h15ocl5OK7iE7nErGsQvGb5qubkwd2XtwQUVOOUzKLrvGgVW3c850w2iS8QXuiSFFxl6exFvPUlpW6istJMtNFQIMPL2iXFxZDPQW1C8b-Us9bAgub5VRvMN4GumvfNJofmw7vpl8iOCHM2tVfvGuI9tXHHvqGTphp-iZraWjc10ujPxp3vPEeg8h_alfa6AWNmCsh5LsVhr6-PpvSke72XnCe06PWUtgTPIpw5syK86yFW-Nhbqc6rH4o7G3NPJ3XNpCbuO=w1480-h676-no" /></p>
+
+<p>You project should build successfully and a webcam window should open.</p>
+
+<p>You’re done!</p>
+
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=http://charliegerard.github.io/blog/Installing-OpenCV/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://charliegerard.github.io/blog/Installing-OpenCV/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=http://charliegerard.github.io/blog/Installing-OpenCV/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>How to install OpenCV 3 on Mac</strong> was published on <time datetime="2015-10-20T00:00:00+11:00">October 20, 2015</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+    <section id="disqus_thread"></section><!-- /#disqus_thread -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="http://charliegerard.github.io/blog/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="http://charliegerard.github.io/blog/Turning-MakeyMakey-Capacitive-Sensor/" title="Turning the Makey Makey Into a Capacitive Sensor">Turning the Makey Makey Into a Capacitive Sensor</a></li>
+    
+      <li><a href="http://charliegerard.github.io/blog/Control-Sphero-Myo-Node/" title="Control the Sphero with the Myo Armband in Node.js">Control the Sphero with the Myo Armband in Node.js</a></li>
+    
+      <li><a href="http://charliegerard.github.io/blog/Control-Drone-Myo-Node/" title="Controlling the Parrot AR Drone with the Myo Armband in Node.js">Controlling the Parrot AR Drone with the Myo Armband in Node.js</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 Charlie Gerard. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://charliegerard.github.io/blog/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://charliegerard.github.io/blog/assets/js/scripts.min.js"></script>
+
+
+  
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'charliegerardblog'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-67921849-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+</body>
+</html>
