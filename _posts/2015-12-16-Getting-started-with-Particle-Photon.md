@@ -2,7 +2,7 @@
 layout: post
 title: "Getting started with the Particle Photon"
 author: charlie_gerard
-excerpt: ""
+excerpt: "I received my Particle Photon a few weeks ago so I thought I'd write about how I got started with it..."
 tags: [technology, innovation, electronics, hardware, DIY, IoT]
 comments: true
 ---
@@ -159,4 +159,4 @@ If you decide to start tinkering with more than an LED and writing your own func
 
 That's it! That's the basics to get started doing some IoT with the Photon! :)
 
-If you want to find some ideas of projects to build with the Photon, go check out the [Hackster.io page](https://www.hackster.io/particle/products/photon) 
+If you want to find some ideas of projects to build with the Photon, go check out the [Hackster.io page](https://www.hackster.io/particle/products/photon)
