@@ -136,12 +136,7 @@ Your view needs to respond to this change event:
   {% endhighlight %}
 </code></pre>
 
-
 Resources used for this post:
 (http://blog.andrewray.me/flux-for-stupid-people/?utm_source=devmag.io)
 (https://facebook.github.io/flux/docs/actions-and-the-dispatcher.html#content)
 (https://devmag.io/post/1232/why-does-react-emphasize-on-unidirectional-data-flow-and-flux-architecture)
-
-
-
-
