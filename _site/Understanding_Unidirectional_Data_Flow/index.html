@@ -1,0 +1,381 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Understanding Unidirectional Data Flow with Flux &#8211; Charlie Gerard</title>
+<meta name="description" content="I started using React.js on a project I am working on at the moment and while I am trying to have a better understanding of how everything works, I've done some research around the difference between two-way data binding and unidirectional data flow (or one-way data binding)...">
+<meta name="keywords" content="technology, react.js, javascript, programming">
+
+  
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Understanding Unidirectional Data Flow with Flux">
+<meta name="twitter:description" content="I started using React.js on a project I am working on at the moment and while I am trying to have a better understanding of how everything works, I've done some research around the difference between two-way data binding and unidirectional data flow (or one-way data binding)...">
+<meta name="twitter:site" content="@charlie__gerard">
+<meta name="twitter:creator" content="@charlie__gerard">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://charliegerard.github.io/blog/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Understanding Unidirectional Data Flow with Flux">
+<meta property="og:description" content="I started using React.js on a project I am working on at the moment and while I am trying to have a better understanding of how everything works, I've done some research around the difference between two-way data binding and unidirectional data flow (or one-way data binding)...">
+<meta property="og:url" content="http://charliegerard.github.io/blog/Understanding_Unidirectional_Data_Flow/">
+<meta property="og:site_name" content="Charlie Gerard">
+
+<meta property="og:image" content="http://charliegerard.github.io/blog/images/default-thumb.png">
+
+
+
+
+
+
+<link rel="canonical" href="http://charliegerard.github.io/blog/Understanding_Unidirectional_Data_Flow/">
+<link href="http://charliegerard.github.io/blog/feed.xml" type="application/atom+xml" rel="alternate" title="Charlie Gerard Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://charliegerard.github.io/blog/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="http://charliegerard.github.io/blog/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="http://charliegerard.github.io/blog/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="http://charliegerard.github.io/blog/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://charliegerard.github.io/blog/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://charliegerard.github.io/blog/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://charliegerard.github.io/blog/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://charliegerard.github.io/blog/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://charliegerard.github.io/blog/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://charliegerard.github.io/blog/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="http://charliegerard.github.io/blog/">Charlie Gerard</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="http://charliegerard.github.io/blog/about" >About</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="http://charliegerard.github.io/blog/posts" >All Posts</a></li>
+				
+				    
+				        
+				        
+				    <li><a href="http://charliegerard.github.io" target="_blank">Portfolio</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/4/005/048/342/17f9554.jpg" class="bio-photo" alt="Charlie Gerard bio photo">
+
+
+  <h3 itemprop="name">Charlie Gerard</h3>
+  <p>Software Developer & Creative technologist, I am passionate about the mix of science, art and technology</p>
+  <a href="mailto:charlie.a.gerard@gmail.com" class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+  <a href="http://twitter.com/charlie__gerard" class="author-social" target="_blank"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a>
+  
+  <a href="http://plus.google.com/+CharlieGerard" class="author-social" target="_blank"><i class="fa fa-fw fa-google-plus-square"></i> Google+</a>
+  
+  
+  
+  
+  <a href="http://github.com/charliegerard" class="author-social" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="http://charliegerard.github.io/blog/Understanding_Unidirectional_Data_Flow/" rel="bookmark" title="Understanding Unidirectional Data Flow with Flux">Understanding Unidirectional Data Flow with Flux</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <p>I started using React.js on a project I am working on at the moment and while I am trying to have a better understanding of how everything works, I’ve done some research around how unidirectional data flow (or one-way binding) works.</p>
+
+<p>Flux is the application architecture we’re using with React to be able to use this one-way binding and to understand how it works, here’s a simple graph:</p>
+
+<p><img src="https://facebook.github.io/flux/img/flux-simple-f8-diagram-explained-1300w.png" /></p>
+
+<p>Basically, the flow goes this way: Actions -&gt; Store -&gt; View</p>
+
+<p>Your view generates actions from the user’s interaction (ex: a user clicks on a button).
+Actions can be defined as new data entering the system in the form of packages containing the new data and the action type.
+Then this action triggers the dispatcher that registers a callback. As each store registers a callback with the dispatcher, when new data comes in it, the dispatcher uses these callbacks to propagate this data to all of the stores.
+When the stores receives these actions, they can use the action type to determine if they should respond to it and how.
+Invoking these callbacks is made using the dispatch() method.</p>
+
+<p>You can use Facebook’s dispatcher library which is pretty easy to use. If we follow the example found in the Flux documentation:</p>
+
+<pre><code>
+  
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno"> 1</span> <span class="kd">var</span> <span class="nx">flightDispatcher</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dispatcher</span><span class="p">();</span>
+<span class="lineno"> 2</span> 
+<span class="lineno"> 3</span>     <span class="c1">//The CityStore keeps track of which city is selected</span>
+<span class="lineno"> 4</span>     <span class="kd">var</span> <span class="nx">CityStore</span> <span class="o">=</span> <span class="p">{</span><span class="nx">city</span><span class="o">:</span> <span class="kc">null</span><span class="p">};</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span>     <span class="c1">//When the user selects a city, the dispatcher dispatches the payload</span>
+<span class="lineno"> 7</span>     <span class="nx">flightDispatcher</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">({</span>
+<span class="lineno"> 8</span>       <span class="nx">actionType</span><span class="o">:</span> <span class="s1">&#39;city-update&#39;</span><span class="p">,</span>
+<span class="lineno"> 9</span>       <span class="nx">selectedCity</span><span class="o">:</span> <span class="s1">&#39;Paris&#39;</span>
+<span class="lineno">10</span>     <span class="p">})</span>
+<span class="lineno">11</span> 
+<span class="lineno">12</span>     <span class="c1">//The payload is then digested by the CityStore</span>
+<span class="lineno">13</span>     <span class="nx">flightDispatcher</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">payload</span><span class="p">){</span>
+<span class="lineno">14</span>       <span class="k">if</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">actionType</span> <span class="o">===</span> <span class="s1">&#39;city-update&#39;</span><span class="p">){</span>
+<span class="lineno">15</span>         <span class="nx">CityStore</span><span class="p">.</span><span class="nx">city</span> <span class="o">=</span> <span class="nx">payload</span><span class="p">.</span><span class="nx">selectedCity</span><span class="p">;</span>
+<span class="lineno">16</span>       <span class="p">}</span>
+<span class="lineno">17</span>     <span class="p">})</span></code></pre></div>
+
+</code></pre>
+
+<p>The dispatcher is useful to deal with dependencies between stores. As an app gets bigger, you often need an update made in store A before doing it in store B. This situation can be dealt with using waitFor();
+Also, the dispatch() method runs callbacks in a synchronous way so it will wait for events to be finished before running the following ones. If we use waitFor() inside these callbacks, the execution of the callback will stop and the waitFor() function will run. The callback will continue running once the waitFor() block has been executed.</p>
+
+<p>Now if we look at our previous example but adding dependencies, here is what it could look like:</p>
+
+<pre><code>
+  
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno"> 1</span> <span class="kd">var</span> <span class="nx">flightDispatcher</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dispatcher</span><span class="p">();</span>
+<span class="lineno"> 2</span> 
+<span class="lineno"> 3</span>     <span class="kd">var</span> <span class="nx">CityStore</span> <span class="o">=</span> <span class="p">{</span><span class="nx">city</span><span class="o">:</span> <span class="kc">null</span><span class="p">};</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span>     <span class="kd">var</span> <span class="nx">CountryStore</span> <span class="o">=</span> <span class="p">{</span><span class="nx">country</span><span class="o">:</span> <span class="kc">null</span><span class="p">};</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span>     <span class="c1">//The user changes the country selected</span>
+<span class="lineno"> 8</span>     <span class="nx">flightDispatcher</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">({</span>
+<span class="lineno"> 9</span>       <span class="nx">actionType</span><span class="o">:</span> <span class="s1">&#39;country-update&#39;</span><span class="p">,</span>
+<span class="lineno">10</span>       <span class="nx">selectedCountry</span><span class="o">:</span> <span class="s1">&#39;Australia&#39;</span>
+<span class="lineno">11</span>     <span class="p">})</span>
+<span class="lineno">12</span> 
+<span class="lineno">13</span>     <span class="c1">//The payload will now have to be digested by both stores</span>
+<span class="lineno">14</span>     <span class="nx">CountryStore</span><span class="p">.</span><span class="nx">dispatchToken</span> <span class="o">=</span> <span class="nx">flightDispatcher</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">payload</span><span class="p">){</span>
+<span class="lineno">15</span>       <span class="k">if</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">actionType</span> <span class="o">===</span> <span class="s1">&#39;country-update&#39;</span><span class="p">){</span>
+<span class="lineno">16</span>         <span class="nx">CountryStore</span><span class="p">.</span><span class="nx">country</span> <span class="o">=</span> <span class="nx">payload</span><span class="p">.</span><span class="nx">selectedCountry</span>
+<span class="lineno">17</span>       <span class="p">}</span>
+<span class="lineno">18</span>     <span class="p">});</span>
+<span class="lineno">19</span> 
+<span class="lineno">20</span>     <span class="c1">//When the callback to update CountryStore is registered, we save a reference in a toen.</span>
+<span class="lineno">21</span>     <span class="c1">//Using this token in waitFor ensures that CountryStore will be updated before updating CityStore.</span>
+<span class="lineno">22</span>     <span class="nx">CityStore</span><span class="p">.</span><span class="nx">dispatchToken</span> <span class="o">=</span> <span class="nx">flightDispatcher</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">payload</span><span class="p">){</span>
+<span class="lineno">23</span>       <span class="k">if</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">actionType</span> <span class="o">===</span> <span class="s1">&#39;country-update&#39;</span><span class="p">){</span>
+<span class="lineno">24</span>         <span class="nx">flightDispatcher</span><span class="p">.</span><span class="nx">waitFor</span><span class="p">([</span><span class="nx">CountryStore</span><span class="p">.</span><span class="nx">dispatchToken</span><span class="p">]);</span>
+<span class="lineno">25</span> 
+<span class="lineno">26</span>         <span class="nx">CityStore</span><span class="p">.</span><span class="nx">city</span> <span class="o">=</span> <span class="nx">getDefaultCityForCountry</span><span class="p">(</span><span class="nx">CountryStore</span><span class="p">.</span><span class="nx">country</span><span class="p">);</span>
+<span class="lineno">27</span>       <span class="p">}</span>
+<span class="lineno">28</span>     <span class="p">});</span></code></pre></div>
+
+</code></pre>
+
+<p>You can find another good example in <a href="http://blog.andrewray.me/flux-for-stupid-people/?utm_source=devmag.io">this tutorial</a>.</p>
+
+<p>Now if we want to understand how the full circle works, we need our store to emit a ‘change’ event:</p>
+
+<pre><code>
+  
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno">1</span> <span class="nx">CityStore</span><span class="p">.</span><span class="nx">dispatchToken</span> <span class="o">=</span> <span class="nx">flightDispatcher</span><span class="p">.</span><span class="nx">register</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">payload</span><span class="p">){</span>
+<span class="lineno">2</span>       <span class="k">if</span><span class="p">(</span><span class="nx">payload</span><span class="p">.</span><span class="nx">actionType</span> <span class="o">===</span> <span class="s1">&#39;country-update&#39;</span><span class="p">){</span>
+<span class="lineno">3</span>         <span class="nx">flightDispatcher</span><span class="p">.</span><span class="nx">waitFor</span><span class="p">([</span><span class="nx">CountryStore</span><span class="p">.</span><span class="nx">dispatchToken</span><span class="p">]);</span>
+<span class="lineno">4</span> 
+<span class="lineno">5</span>         <span class="nx">CityStore</span><span class="p">.</span><span class="nx">city</span> <span class="o">=</span> <span class="nx">getDefaultCityForCountry</span><span class="p">(</span><span class="nx">CountryStore</span><span class="p">.</span><span class="nx">country</span><span class="p">);</span>
+<span class="lineno">6</span> 
+<span class="lineno">7</span>         <span class="nx">CountryStore</span><span class="p">.</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">);</span>
+<span class="lineno">8</span>       <span class="p">}</span>
+<span class="lineno">9</span>     <span class="p">});</span></code></pre></div>
+
+</code></pre>
+
+<p>Your view needs to respond to this change event:</p>
+
+<pre><code>
+  
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno"> 1</span> <span class="nx">componentDidMount</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno"> 2</span>         <span class="nx">CountryStore</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span> <span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">forceUpdate</span><span class="p">());</span>
+<span class="lineno"> 3</span>     <span class="p">},</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span>     <span class="nx">changeCountry</span><span class="o">:</span> <span class="kd">function</span><span class="p">(){</span>
+<span class="lineno"> 6</span>       <span class="nx">flightDispatcher</span><span class="p">.</span><span class="nx">dispatch</span><span class="p">({</span>
+<span class="lineno"> 7</span>         <span class="nx">actionType</span><span class="o">:</span> <span class="s1">&#39;country-update&#39;</span><span class="p">,</span>
+<span class="lineno"> 8</span>         <span class="nx">selectedCountry</span><span class="o">:</span> <span class="s1">&#39;Australia&#39;</span>
+<span class="lineno"> 9</span>       <span class="p">})</span>
+<span class="lineno">10</span>     <span class="p">},</span>
+<span class="lineno">11</span> 
+<span class="lineno">12</span>     <span class="nx">render</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno">13</span> 
+<span class="lineno">14</span>       <span class="c1">// Remember, ListStore is global!</span>
+<span class="lineno">15</span>       <span class="c1">// There&#39;s no need to pass it around</span>
+<span class="lineno">16</span>       <span class="kd">var</span> <span class="nx">countries</span> <span class="o">=</span> <span class="nx">CountryStore</span><span class="p">;</span>
+<span class="lineno">17</span> 
+<span class="lineno">18</span>       <span class="k">return</span> <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+<span class="lineno">19</span>           <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
+<span class="lineno">20</span>               <span class="p">{</span> <span class="nx">countries</span> <span class="p">}</span>
+<span class="lineno">21</span>           <span class="o">&lt;</span><span class="err">/ul&gt;</span>
+<span class="lineno">22</span> 
+<span class="lineno">23</span>           <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">changeCountry</span> <span class="p">}</span><span class="o">&gt;</span><span class="nx">Country</span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+<span class="lineno">24</span> 
+<span class="lineno">25</span>       <span class="o">&lt;</span><span class="err">/div&gt;;</span>
+<span class="lineno">26</span>     <span class="p">}</span></code></pre></div>
+
+</code></pre>
+
+<p>Resources used for this post:
+(http://blog.andrewray.me/flux-for-stupid-people/?utm_source=devmag.io)
+(https://facebook.github.io/flux/docs/actions-and-the-dispatcher.html#content)
+(https://devmag.io/post/1232/why-does-react-emphasize-on-unidirectional-data-flow-and-flux-architecture)</p>
+
+      <hr />
+      <footer role="contentinfo">
+        <div class="social-share">
+  <h4>Share on</h4>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=http://charliegerard.github.io/blog/Understanding_Unidirectional_Data_Flow/" class="twitter" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=http://charliegerard.github.io/blog/Understanding_Unidirectional_Data_Flow/" class="facebook" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=http://charliegerard.github.io/blog/Understanding_Unidirectional_Data_Flow/" class="google-plus" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+  </ul>
+</div><!-- /.social-share -->
+        <p class="byline"><strong>Understanding Unidirectional Data Flow with Flux</strong> was published on <time datetime="2015-12-01T00:00:00+11:00">December 01, 2015</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+  
+    <section id="disqus_thread"></section><!-- /#disqus_thread -->
+  
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>You might also enjoy <small class="pull-right">(<a href="http://charliegerard.github.io/blog/posts/">View all posts</a>)</small></h4>
+    <ul>
+    
+      <li><a href="http://charliegerard.github.io/blog/Experimenting-Creative-Technologies/" title="Experimenting with Creative Technologies">Experimenting with Creative Technologies</a></li>
+    
+      <li><a href="http://charliegerard.github.io/blog/Virtual-Reality-ThreeJs/" title="Virtual Reality In the Browser with Three.JS">Virtual Reality In the Browser with Three.JS</a></li>
+    
+      <li><a href="http://charliegerard.github.io/blog/Getting-started-with-Particle-Photon/" title="Getting started with the Particle Photon">Getting started with the Particle Photon</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2016 Charlie Gerard. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> using the <a href="http://mademistakes.com/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a> theme.</span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://charliegerard.github.io/blog/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://charliegerard.github.io/blog/assets/js/scripts.min.js"></script>
+
+
+  
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'charliegerardblog'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-67921849-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+</body>
+</html>
