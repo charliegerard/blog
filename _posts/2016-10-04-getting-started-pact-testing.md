@@ -2,7 +2,7 @@
 layout: post
 title: "Getting started with Pact testing"
 author: charlie_gerard
-excerpt: ""
+excerpt: "A few days ago, I had to run a brown bag session about Pact testing. I had absolutely no idea what it was but I had to prepare the workshop anyway so I started by..."
 tags: [technology, pact, testing, TDD]
 comments: true
 ---
