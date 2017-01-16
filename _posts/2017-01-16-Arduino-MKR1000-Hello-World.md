@@ -2,7 +2,7 @@
 layout: post
 title: "Hello World with the Arduino MKR1000 and Johnny-Five"
 author: charlie_gerard
-excerpt: ""
+excerpt: "This tutorial goes through the steps to setup a basic Node.js app to control the built-in LED of the Arduino MKR1000 using Johnny-Five"
 tags: [technology, Arduino, hardware, electronics, robotics, maker]
 comments: true
 ---
