@@ -217,5 +217,6 @@ board.on("ready", function() {
 
 <img src="../images/arduino.gif" style="width: 400px;">
 
+
 And you should see the Arduino's built-in LED blink! :)
 Now you can add more components and build more interesting projects using the Arduino MKR1000 and Johnny-five!
