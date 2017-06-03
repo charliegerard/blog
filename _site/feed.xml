@@ -4,7 +4,7 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://charliegerard.github.io/blog/feed.xml" />
 <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog" />
-<updated>2017-01-16T19:02:40+00:00</updated>
+<updated>2017-06-03T15:22:26+02:00</updated>
 <id>http://charliegerard.github.io/blog/</id>
 <author>
   <name>Charlie Gerard</name>
@@ -16,243 +16,11 @@
   
 
 <entry>
-  <title type="html"><![CDATA[Hello World with the Arduino MKR1000 and Johnny-Five]]></title>
-  <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Arduino-MKR1000-Hello-World/" />
-  <id>http://charliegerard.github.io/blog/Arduino-MKR1000-Hello-World</id>
-  <published>2017-01-16T00:00:00+00:00</published>
-  <updated>2017-01-16T00:00:00+00:00</updated>
-  <author>
-    <name>Charlie Gerard</name>
-    <uri>http://charliegerard.github.io/blog</uri>
-    <email>charlie.a.gerard@gmail.com</email>
-  </author>
-  <content type="html">
-    &lt;p&gt;The Arduino MKR1000 is one of the latest wi-fi boards by Arduino. It is designed for IoT projects and can run on battery power using a Li-Po battery or on external 5V, charging the battery while running on external power.&lt;/p&gt;
-
-&lt;p&gt;It provides low power wi-fi, a large number of Analog and Digital pins and has a compact format to fit in any IoT project.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;../images/arduino-mkr1000.jpg&quot; style=&quot;width: 300px;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This Arduino can be used with the Arduino IDE but the setup requires a little bit more steps as the wi-fi network needs to be configured.&lt;/p&gt;
-
-&lt;p&gt;In this tutorial, we’re gonna work on a basic app to control the built-in LED of the &lt;strong&gt;Arduino&lt;/strong&gt; in &lt;strong&gt;Node.js&lt;/strong&gt; using the &lt;strong&gt;Johnny-Five&lt;/strong&gt; framework.&lt;/p&gt;
-
-&lt;p&gt;If you want to follow along, you can find the code on my &lt;a href=&quot;https://github.com/charliegerard/arduino-projects/tree/master/arduino-mkr1000&quot;&gt;github repo&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;step-1-setting-up-the-wi-fi-on-the-arduino&quot;&gt;Step 1: Setting up the wi-fi on the Arduino&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Plug your Arduino to your computer.&lt;/li&gt;
-  &lt;li&gt;Open the Arduino IDE.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Once the Arduino IDE is launched, it may prompt you to install the correct package to use with the Arduino MKR1000. If not, follow these steps:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Go to &lt;code&gt;Tools &amp;gt; Board &amp;gt; Boards Manager&lt;/code&gt; and search for &lt;code&gt;Arduino SAMD Boards&lt;/code&gt; and install the package.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Once this is done, go to &lt;code&gt;File &amp;gt; Examples &amp;gt; Firmata&lt;/code&gt; and open the &lt;code&gt;StandardFirmataWifi&lt;/code&gt; sketch.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Have a look at the &lt;code&gt;wifiConfig.h&lt;/code&gt; file and update your network configurations:
-    &lt;ul&gt;
-      &lt;li&gt;Uncomment the line that says &lt;code&gt;#define WIFI_101&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;Scroll down and find the line that says &lt;code&gt;char ssid=[] &quot;your network name&quot;&lt;/code&gt; and replace the string with the name of your wi-fi network.&lt;/li&gt;
-      &lt;li&gt;Scroll down and find the line that says &lt;code&gt;char wpa_passphrase[] = &quot;your_wpa_passphrase&quot;;&lt;/code&gt; and edit your wi-fi password.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Next, check that your sketch compiles properly by clicking on the &lt;strong&gt;Verify&lt;/strong&gt; button.&lt;/li&gt;
-  &lt;li&gt;Upload it to the board:
-    &lt;ul&gt;
-      &lt;li&gt;Make sure your board is selected by going to &lt;code&gt;Tools &amp;gt; Board&lt;/code&gt; and select the Arduino MKR1000.&lt;/li&gt;
-      &lt;li&gt;Select the right port by going to &lt;code&gt;Tools &amp;gt; Port&lt;/code&gt; and select either &lt;code&gt;/dev/cu.usbmodem1&lt;/code&gt; or &lt;code&gt;/dev/cu.usbmodem1411&lt;/code&gt;.&lt;/li&gt;
-      &lt;li&gt;Click on the upload button.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Once your wi-fi is configured on the board, let’s create a basic Node.js app to blink the built-in LED of the Arduino.&lt;/p&gt;
-
-&lt;h3 id=&quot;step-2-setting-up-the-nodejs-app&quot;&gt;Step 2: Setting up the Node.js app&lt;/h3&gt;
-
-&lt;p&gt;If you’ve never built a Node.js app before, have a look at the &lt;a href=&quot;https://nodejs.org/en/&quot;&gt;Node.js website&lt;/a&gt; and follow the simple instructions.
-Once you have Node installed, you will also need the &lt;a href=&quot;http://johnny-five.io/&quot;&gt;Johnny-Five framework&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;If you’re already familiar with Johnny-five, you’d expect to have a simple file like this:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;five&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;johnny-five&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;board&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;five&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;3&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;ready&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(){&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;5&lt;/span&gt;   &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;MKR1000 is ready&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;6&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;7&lt;/span&gt;   &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;led&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;five&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Led&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;8&lt;/span&gt;   &lt;span class=&quot;nx&quot;&gt;led&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;blink&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;9&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;})&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;But for some reason, this doesn’t work for me and I get a timeout error…&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;However, there is another solution that works!&lt;/strong&gt; \0/&lt;/p&gt;
-
-&lt;h3 id=&quot;extra-steps&quot;&gt;Extra steps:&lt;/h3&gt;
-
-&lt;p&gt;Go back to the Arduino IDE, create a new sketch and copy/paste the following code:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;lineno&quot;&gt;  1&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#include &amp;lt;SPI.h&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;  2&lt;/span&gt; &lt;span class=&quot;cp&quot;&gt;#include &amp;lt;WiFi101.h&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;  3&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;  4&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ssid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;your-network-name&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;//  your network SSID (name)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;  5&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;your-network-password&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// your network password&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;  6&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;keyIndex&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;                 &lt;span class=&quot;c1&quot;&gt;// your network key Index number (needed only for WEP)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;  7&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;  8&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;status&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WL_IDLE_STATUS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;  9&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WiFiServer&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;80&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 10&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 11&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 12&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9600&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// initialize serial communication&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 13&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;pinMode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;OUTPUT&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// set the LED pin mode&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 14&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 15&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// check for the presence of the shield:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 16&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WiFi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WL_NO_SHIELD&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 17&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;WiFi shield not present&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 18&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;       &lt;span class=&quot;c1&quot;&gt;// don&amp;#39;t continue&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 19&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 20&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 21&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// attempt to connect to Wifi network:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 22&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;status&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WL_CONNECTED&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 23&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Attempting to connect to Network named: &amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 24&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;                   &lt;span class=&quot;c1&quot;&gt;// print the network name (SSID);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 25&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 26&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// Connect to WPA/WPA2 network. Change this line if using open or WEP network:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 27&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;status&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WiFi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ssid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pass&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 28&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// wait 10 seconds for connection:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 29&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;delay&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10000&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 30&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 31&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;begin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;                           &lt;span class=&quot;c1&quot;&gt;// start the web server on port 80&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 32&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;printWifiStatus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;                        &lt;span class=&quot;c1&quot;&gt;// you&amp;#39;re connected now, so print out the status&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 33&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 34&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 35&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 36&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;loop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 37&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;WiFiClient&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;server&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;available&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// listen for incoming clients&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 38&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 39&lt;/span&gt;   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;                             &lt;span class=&quot;c1&quot;&gt;// if you get a client,&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 40&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;new client&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;           &lt;span class=&quot;c1&quot;&gt;// print a message out the serial port&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 41&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;currentLine&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;                &lt;span class=&quot;c1&quot;&gt;// make a String to hold incoming data from the client&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 42&lt;/span&gt;     &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;connected&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;            &lt;span class=&quot;c1&quot;&gt;// loop while the client&amp;#39;s connected&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 43&lt;/span&gt;       &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;available&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;             &lt;span class=&quot;c1&quot;&gt;// if there&amp;#39;s bytes to read from the client,&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 44&lt;/span&gt;         &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;             &lt;span class=&quot;c1&quot;&gt;// read a byte, then&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 45&lt;/span&gt;         &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;                    &lt;span class=&quot;c1&quot;&gt;// print it out the serial monitor&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 46&lt;/span&gt;         &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;&amp;#39;\n&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;                    &lt;span class=&quot;c1&quot;&gt;// if the byte is a newline character&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 47&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 48&lt;/span&gt;           &lt;span class=&quot;c1&quot;&gt;// if the current line is blank, you got two newline characters in a row.&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 49&lt;/span&gt;           &lt;span class=&quot;c1&quot;&gt;// that&amp;#39;s the end of the client HTTP request, so send a response:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 50&lt;/span&gt;           &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;currentLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 51&lt;/span&gt;             &lt;span class=&quot;c1&quot;&gt;// HTTP headers always start with a response code (e.g. HTTP/1.1 200 OK)&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 52&lt;/span&gt;             &lt;span class=&quot;c1&quot;&gt;// and a content-type so the client knows what&amp;#39;s coming, then a blank line:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 53&lt;/span&gt;             &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;HTTP/1.1 200 OK&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 54&lt;/span&gt;             &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Content-type:text/html&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 55&lt;/span&gt;             &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 56&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 57&lt;/span&gt;             &lt;span class=&quot;c1&quot;&gt;// the content of the HTTP response follows the header:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 58&lt;/span&gt;             &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Click &amp;lt;a href=&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/H&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;gt;here&amp;lt;/a&amp;gt; turn the LED on pin 9 on&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 59&lt;/span&gt;             &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Click &amp;lt;a href=&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/L&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\&amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;gt;here&amp;lt;/a&amp;gt; turn the LED on pin 9 off&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 60&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 61&lt;/span&gt;             &lt;span class=&quot;c1&quot;&gt;// The HTTP response ends with another blank line:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 62&lt;/span&gt;             &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 63&lt;/span&gt;             &lt;span class=&quot;c1&quot;&gt;// break out of the while loop:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 64&lt;/span&gt;             &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 65&lt;/span&gt;           &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 66&lt;/span&gt;           &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// if you got a newline, then clear currentLine:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 67&lt;/span&gt;             &lt;span class=&quot;n&quot;&gt;currentLine&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 68&lt;/span&gt;           &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 69&lt;/span&gt;         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 70&lt;/span&gt;         &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;&amp;#39;\r&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;    &lt;span class=&quot;c1&quot;&gt;// if you got anything else but a carriage return character,&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 71&lt;/span&gt;           &lt;span class=&quot;n&quot;&gt;currentLine&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;c&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;      &lt;span class=&quot;c1&quot;&gt;// add it to the end of the currentLine&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 72&lt;/span&gt;         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 73&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 74&lt;/span&gt;         &lt;span class=&quot;c1&quot;&gt;// Check to see if the client request was &amp;quot;GET /H&amp;quot; or &amp;quot;GET /L&amp;quot;:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 75&lt;/span&gt;         &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;currentLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endsWith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;GET /H&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 76&lt;/span&gt;           &lt;span class=&quot;n&quot;&gt;digitalWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;HIGH&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;               &lt;span class=&quot;c1&quot;&gt;// GET /H turns the LED on&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 77&lt;/span&gt;         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 78&lt;/span&gt;         &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;currentLine&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;endsWith&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;GET /L&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 79&lt;/span&gt;           &lt;span class=&quot;n&quot;&gt;digitalWrite&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;LOW&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;                &lt;span class=&quot;c1&quot;&gt;// GET /L turns the LED off&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 80&lt;/span&gt;         &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 81&lt;/span&gt;       &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 82&lt;/span&gt;     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 83&lt;/span&gt;     &lt;span class=&quot;c1&quot;&gt;// close the connection:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 84&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stop&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 85&lt;/span&gt;     &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;client disonnected&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 86&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 87&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 88&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 89&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;printWifiStatus&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 90&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// print the SSID of the network you&amp;#39;re attached to:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 91&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;SSID: &amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 92&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;WiFi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SSID&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;());&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 93&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 94&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// print your WiFi shield&amp;#39;s IP address:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 95&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;IPAddress&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WiFi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;localIP&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 96&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;IP Address: &amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 97&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 98&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 99&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// print the received signal strength:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;100&lt;/span&gt;   &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rssi&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;WiFi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RSSI&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;101&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;signal strength (RSSI):&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;102&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rssi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;103&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot; dBm&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;104&lt;/span&gt;   &lt;span class=&quot;c1&quot;&gt;// print where to go in a browser:&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;105&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;To see this page in action, open a browser to http://&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;106&lt;/span&gt;   &lt;span class=&quot;n&quot;&gt;Serial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;107&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;Change the SSID and password&lt;/strong&gt; at the beginning of the file and upload the sketch to the Arduino.&lt;/p&gt;
-
-&lt;p&gt;Once it’s uploaded, open the Serial Monitor and &lt;strong&gt;make sure it is set to 9600 BAUD&lt;/strong&gt;. After a few seconds, it should print out the Arduino’s IP address. Copy it and keep it somewhere because we’re going to need it soon.&lt;/p&gt;
-
-&lt;p&gt;Make sure you re-upload the &lt;strong&gt;StandardFirmataWifi&lt;/strong&gt; sketch to your Arduino before switching back to your Node.js app.&lt;/p&gt;
-
-&lt;p&gt;To get the Arduino MKR1000 working with Johnny-five, we’re going to need the &lt;code&gt;etherport-client&lt;/code&gt; module, so, in your terminal, run &lt;code&gt;npm install etherport-client --save&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Then, we just need to require this module and set it up with the IP address and port of the Arduino, like this:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;lineno&quot;&gt; 1&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;EtherPortClient&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;etherport-client&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;EtherPortClient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 2&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;five&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;johnny-five&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 3&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt; 4&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;board&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;five&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 5&lt;/span&gt;   &lt;span class=&quot;nx&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;EtherPortClient&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 6&lt;/span&gt;     &lt;span class=&quot;nx&quot;&gt;host&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;192.168.43.36&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//Your IP goes here&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 7&lt;/span&gt;     &lt;span class=&quot;nx&quot;&gt;port&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3030&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 8&lt;/span&gt;   &lt;span class=&quot;p&quot;&gt;}),&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt; 9&lt;/span&gt;   &lt;span class=&quot;nx&quot;&gt;timeout&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;e5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;10&lt;/span&gt;   &lt;span class=&quot;nx&quot;&gt;repl&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;12&lt;/span&gt; 
-&lt;span class=&quot;lineno&quot;&gt;13&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;board&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;ready&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;14&lt;/span&gt;   &lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;READY!&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;15&lt;/span&gt;   &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;led&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;five&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Led&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;16&lt;/span&gt;   &lt;span class=&quot;nx&quot;&gt;led&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;blink&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;500&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-&lt;span class=&quot;lineno&quot;&gt;17&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;../images/arduino.gif&quot; style=&quot;width: 400px;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;And you should see the Arduino’s built-in LED blink! :)
-Now you can add more components and build more interesting projects using the Arduino MKR1000 and Johnny-five!&lt;/p&gt;
-
-    &lt;p&gt;&lt;a href=&quot;http://charliegerard.github.io/blog/Arduino-MKR1000-Hello-World/&quot;&gt;Hello World with the Arduino MKR1000 and Johnny-Five&lt;/a&gt; was originally published by Charlie Gerard at &lt;a href=&quot;http://charliegerard.github.io/blog&quot;&gt;Charlie Gerard&lt;/a&gt; on January 16, 2017.&lt;/p&gt;
-  </content>
-</entry>
-
-
-  
-
-<entry>
   <title type="html"><![CDATA[Getting started with Pact testing]]></title>
   <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/getting-started-pact-testing/" />
   <id>http://charliegerard.github.io/blog/getting-started-pact-testing</id>
-  <published>2016-10-04T00:00:00+01:00</published>
-  <updated>2016-10-04T00:00:00+01:00</updated>
+  <published>2016-10-04T00:00:00+02:00</published>
+  <updated>2016-10-04T00:00:00+02:00</updated>
   <author>
     <name>Charlie Gerard</name>
     <uri>http://charliegerard.github.io/blog</uri>
@@ -476,8 +244,8 @@ bundle exec pact-mock-service -p 1234 --pact-specification-version 2.0.0 -l log/
   <title type="html"><![CDATA[Control the Sphero and Parrot AR Drone with the Neurosky brain sensor in Cylon.js]]></title>
   <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Control-Sphero-Drone-Neurosky-Cylon/" />
   <id>http://charliegerard.github.io/blog/Control-Sphero-Drone-Neurosky-Cylon</id>
-  <published>2016-04-06T00:00:00+01:00</published>
-  <updated>2016-04-06T00:00:00+01:00</updated>
+  <published>2016-04-06T00:00:00+02:00</published>
+  <updated>2016-04-06T00:00:00+02:00</updated>
   <author>
     <name>Charlie Gerard</name>
     <uri>http://charliegerard.github.io/blog</uri>
@@ -575,8 +343,8 @@ bundle exec pact-mock-service -p 1234 --pact-specification-version 2.0.0 -l log/
   <title type="html"><![CDATA[Experimenting with Creative Technologies]]></title>
   <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Experimenting-Creative-Technologies/" />
   <id>http://charliegerard.github.io/blog/Experimenting-Creative-Technologies</id>
-  <published>2016-03-23T00:00:00+00:00</published>
-  <updated>2016-03-23T00:00:00+00:00</updated>
+  <published>2016-03-23T00:00:00+01:00</published>
+  <updated>2016-03-23T00:00:00+01:00</updated>
   <author>
     <name>Charlie Gerard</name>
     <uri>http://charliegerard.github.io/blog</uri>
@@ -628,8 +396,8 @@ So I got to create the first JS framework for the EPOC brain sensor and this by 
   <title type="html"><![CDATA[Virtual Reality In the Browser with Three.JS]]></title>
   <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Virtual-Reality-ThreeJs/" />
   <id>http://charliegerard.github.io/blog/Virtual-Reality-ThreeJs</id>
-  <published>2016-01-06T00:00:00+00:00</published>
-  <updated>2016-01-06T00:00:00+00:00</updated>
+  <published>2016-01-06T00:00:00+01:00</published>
+  <updated>2016-01-06T00:00:00+01:00</updated>
   <author>
     <name>Charlie Gerard</name>
     <uri>http://charliegerard.github.io/blog</uri>
@@ -821,8 +589,8 @@ Also, with a price of around $600, it is not going to be accessible to everyone.
   <title type="html"><![CDATA[Getting started with the Particle Photon]]></title>
   <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Getting-started-with-Particle-Photon/" />
   <id>http://charliegerard.github.io/blog/Getting-started-with-Particle-Photon</id>
-  <published>2015-12-16T00:00:00+00:00</published>
-  <updated>2015-12-16T00:00:00+00:00</updated>
+  <published>2015-12-16T00:00:00+01:00</published>
+  <updated>2015-12-16T00:00:00+01:00</updated>
   <author>
     <name>Charlie Gerard</name>
     <uri>http://charliegerard.github.io/blog</uri>
@@ -982,8 +750,8 @@ The ledToggle() function receives a command string as an argument that determine
   <title type="html"><![CDATA[Understanding Unidirectional Data Flow with Flux]]></title>
   <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Understanding_Unidirectional_Data_Flow/" />
   <id>http://charliegerard.github.io/blog/Understanding_Unidirectional_Data_Flow</id>
-  <published>2015-12-01T00:00:00+00:00</published>
-  <updated>2015-12-01T00:00:00+00:00</updated>
+  <published>2015-12-01T00:00:00+01:00</published>
+  <updated>2015-12-01T00:00:00+01:00</updated>
   <author>
     <name>Charlie Gerard</name>
     <uri>http://charliegerard.github.io/blog</uri>
@@ -1133,8 +901,8 @@ Also, the dispatch() method runs callbacks in a synchronous way so it will wait 
   <title type="html"><![CDATA[How to install OpenCV 3 on Mac]]></title>
   <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Installing-OpenCV/" />
   <id>http://charliegerard.github.io/blog/Installing-OpenCV</id>
-  <published>2015-10-20T00:00:00+01:00</published>
-  <updated>2015-10-20T00:00:00+01:00</updated>
+  <published>2015-10-20T00:00:00+02:00</published>
+  <updated>2015-10-20T00:00:00+02:00</updated>
   <author>
     <name>Charlie Gerard</name>
     <uri>http://charliegerard.github.io/blog</uri>
@@ -1247,8 +1015,8 @@ Then, go to the &lt;a href=&quot;https://www.macports.org/install.php&quot;&gt;M
   <title type="html"><![CDATA[Turning the Makey Makey Into a Capacitive Sensor]]></title>
   <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Turning-MakeyMakey-Capacitive-Sensor/" />
   <id>http://charliegerard.github.io/blog/Turning-MakeyMakey-Capacitive-Sensor</id>
-  <published>2015-09-25T00:00:00+01:00</published>
-  <updated>2015-09-25T00:00:00+01:00</updated>
+  <published>2015-09-25T00:00:00+02:00</published>
+  <updated>2015-09-25T00:00:00+02:00</updated>
   <author>
     <name>Charlie Gerard</name>
     <uri>http://charliegerard.github.io/blog</uri>
@@ -1381,8 +1149,8 @@ At first I thought it would not be possible but, after looking for a few days, I
   <title type="html"><![CDATA[Control the Sphero with the Myo Armband in Node.js]]></title>
   <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Control-Sphero-Myo-Node/" />
   <id>http://charliegerard.github.io/blog/Control-Sphero-Myo-Node</id>
-  <published>2015-09-21T00:00:00+01:00</published>
-  <updated>2015-09-21T00:00:00+01:00</updated>
+  <published>2015-09-21T00:00:00+02:00</published>
+  <updated>2015-09-21T00:00:00+02:00</updated>
   <author>
     <name>Charlie Gerard</name>
     <uri>http://charliegerard.github.io/blog</uri>
@@ -1479,8 +1247,8 @@ At first I thought it would not be possible but, after looking for a few days, I
   <title type="html"><![CDATA[Controlling the Parrot AR Drone with the Myo Armband in Node.js]]></title>
   <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Control-Drone-Myo-Node/" />
   <id>http://charliegerard.github.io/blog/Control-Drone-Myo-Node</id>
-  <published>2015-09-17T00:00:00+01:00</published>
-  <updated>2015-09-17T00:00:00+01:00</updated>
+  <published>2015-09-17T00:00:00+02:00</published>
+  <updated>2015-09-17T00:00:00+02:00</updated>
   <author>
     <name>Charlie Gerard</name>
     <uri>http://charliegerard.github.io/blog</uri>
@@ -1587,8 +1355,8 @@ At first I thought it would not be possible but, after looking for a few days, I
   <title type="html"><![CDATA[Controlling the Parrot AR Drone with the Leap Motion in Cylon.js]]></title>
   <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon/" />
   <id>http://charliegerard.github.io/blog/Control-Drone-Leap-Motion-Cylon</id>
-  <published>2015-09-16T00:00:00+01:00</published>
-  <updated>2015-09-16T00:00:00+01:00</updated>
+  <published>2015-09-16T00:00:00+02:00</published>
+  <updated>2015-09-16T00:00:00+02:00</updated>
   <author>
     <name>Charlie Gerard</name>
     <uri>http://charliegerard.github.io/blog</uri>
@@ -1685,8 +1453,8 @@ At first I thought it would not be possible but, after looking for a few days, I
   <title type="html"><![CDATA[Controlling the Sphero using the Leap Motion in Cylon.js]]></title>
   <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Control-Sphero-Leap-Motion-Cylon/" />
   <id>http://charliegerard.github.io/blog/Control-Sphero-Leap-Motion-Cylon</id>
-  <published>2015-09-15T00:00:00+01:00</published>
-  <updated>2015-09-15T00:00:00+01:00</updated>
+  <published>2015-09-15T00:00:00+02:00</published>
+  <updated>2015-09-15T00:00:00+02:00</updated>
   <author>
     <name>Charlie Gerard</name>
     <uri>http://charliegerard.github.io/blog</uri>
@@ -1775,8 +1543,8 @@ At first I thought it would not be possible but, after looking for a few days, I
   <title type="html"><![CDATA[The future of interaction is touch-free with ultrasound tech]]></title>
   <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Future-Interaction/" />
   <id>http://charliegerard.github.io/blog/Future-Interaction</id>
-  <published>2015-08-23T00:00:00+01:00</published>
-  <updated>2015-08-23T00:00:00+01:00</updated>
+  <published>2015-08-23T00:00:00+02:00</published>
+  <updated>2015-08-23T00:00:00+02:00</updated>
   <author>
     <name>Charlie Gerard</name>
     <uri>http://charliegerard.github.io/blog</uri>
@@ -1812,8 +1580,8 @@ At first I thought it would not be possible but, after looking for a few days, I
   <title type="html"><![CDATA[Controlling the Sphero using the Leap Motion]]></title>
   <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Controlling-Sphero-Leap-Motion/" />
   <id>http://charliegerard.github.io/blog/Controlling-Sphero-Leap-Motion</id>
-  <published>2015-08-20T00:00:00+01:00</published>
-  <updated>2015-08-20T00:00:00+01:00</updated>
+  <published>2015-08-20T00:00:00+02:00</published>
+  <updated>2015-08-20T00:00:00+02:00</updated>
   <author>
     <name>Charlie Gerard</name>
     <uri>http://charliegerard.github.io/blog</uri>
@@ -1901,8 +1669,8 @@ At first I thought it would not be possible but, after looking for a few days, I
   <title type="html"><![CDATA[Clouds: An Interactive Documentary About The Creative Coding Culture]]></title>
   <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Clouds-Interactive-Documentary-Creative-Coding-Culture/" />
   <id>http://charliegerard.github.io/blog/Clouds-Interactive-Documentary-Creative-Coding-Culture</id>
-  <published>2015-07-20T00:00:00+01:00</published>
-  <updated>2015-07-20T00:00:00+01:00</updated>
+  <published>2015-07-20T00:00:00+02:00</published>
+  <updated>2015-07-20T00:00:00+02:00</updated>
   <author>
     <name>Charlie Gerard</name>
     <uri>http://charliegerard.github.io/blog</uri>
@@ -1932,8 +1700,8 @@ At first I thought it would not be possible but, after looking for a few days, I
   <title type="html"><![CDATA['Snake Monster': A Spiderlike Robot Responding To Stimuli In Its Environment]]></title>
   <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Snake-Monster-Spider-Robot/" />
   <id>http://charliegerard.github.io/blog/Snake-Monster-Spider-Robot</id>
-  <published>2015-07-19T00:00:00+01:00</published>
-  <updated>2015-07-19T00:00:00+01:00</updated>
+  <published>2015-07-19T00:00:00+02:00</published>
+  <updated>2015-07-19T00:00:00+02:00</updated>
   <author>
     <name>Charlie Gerard</name>
     <uri>http://charliegerard.github.io/blog</uri>
@@ -1969,8 +1737,8 @@ At first I thought it would not be possible but, after looking for a few days, I
   <title type="html"><![CDATA[A Brain Computer Interface That Lasts For 2 Weeks]]></title>
   <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog/Brain-Computer-Interface-Lasts-2-Weeks/" />
   <id>http://charliegerard.github.io/blog/Brain-Computer-Interface-Lasts-2-Weeks</id>
-  <published>2015-05-10T00:00:00+01:00</published>
-  <updated>2015-05-10T00:00:00+01:00</updated>
+  <published>2015-05-10T00:00:00+02:00</published>
+  <updated>2015-05-10T00:00:00+02:00</updated>
   <author>
     <name>Charlie Gerard</name>
     <uri>http://charliegerard.github.io/blog</uri>
