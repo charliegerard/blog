@@ -228,4 +228,4 @@ You should see the message 'SUCCESS' being returned.
 
 That's it! If everything works fine you've just written your first Consumer and Provider Pact test! :)
 
-If you need more info, here's a <a href="http://techblog.newsweaver.com/why-should-you-use-consumer-driven-contracts-for-microservices-integration-tests/" target="_blank">good article</a> I found about Pact testing.
+If you need more info, here's a <a href="http://dius.com.au/2016/02/03/microservices-pact/" target="_blank">good article</a> I found about Pact testing.

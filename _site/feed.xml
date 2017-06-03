@@ -4,7 +4,7 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://charliegerard.github.io/blog/feed.xml" />
 <link rel="alternate" type="text/html" href="http://charliegerard.github.io/blog" />
-<updated>2017-06-03T15:22:26+02:00</updated>
+<updated>2017-06-03T15:31:57+02:00</updated>
 <id>http://charliegerard.github.io/blog/</id>
 <author>
   <name>Charlie Gerard</name>
@@ -231,7 +231,7 @@ bundle exec pact-mock-service -p 1234 --pact-specification-version 2.0.0 -l log/
 
 &lt;p&gt;That’s it! If everything works fine you’ve just written your first Consumer and Provider Pact test! :)&lt;/p&gt;
 
-&lt;p&gt;If you need more info, here’s a &lt;a href=&quot;http://techblog.newsweaver.com/why-should-you-use-consumer-driven-contracts-for-microservices-integration-tests/&quot; target=&quot;_blank&quot;&gt;good article&lt;/a&gt; I found about Pact testing.&lt;/p&gt;
+&lt;p&gt;If you need more info, here’s a &lt;a href=&quot;http://dius.com.au/2016/02/03/microservices-pact/&quot; target=&quot;_blank&quot;&gt;good article&lt;/a&gt; I found about Pact testing.&lt;/p&gt;
 
     &lt;p&gt;&lt;a href=&quot;http://charliegerard.github.io/blog/getting-started-pact-testing/&quot;&gt;Getting started with Pact testing&lt;/a&gt; was originally published by Charlie Gerard at &lt;a href=&quot;http://charliegerard.github.io/blog&quot;&gt;Charlie Gerard&lt;/a&gt; on October 04, 2016.&lt;/p&gt;
   </content>
